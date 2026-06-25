@@ -56,6 +56,19 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
+  # Pinwheel-stt - inhand displacements
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Slime/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Slime/displacement.rsi
+          state: hand_r
+  # Pinwheel-end - inhand displacements
   - type: InitialBody
     organs:
       Torso: OrganSlimePersonTorso
@@ -112,8 +125,10 @@
       Male: MaleSlime
       Female: FemaleSlime
       Unsexed: MaleSlime
-  - type: Damageable
-    damageModifierSet: Slime
+  # Pinwheel-stt - species standards
+  # type: Damageable
+  # damageModifierSet: Slime
+  # Pinwheel-stt - species standards
   - type: PassiveDamage # Around 8 damage a minute healed
     allowedStates:
     - Alive

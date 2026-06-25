@@ -108,6 +108,19 @@
           32:
             sprite: Mobs/Species/Moth/displacement.rsi
             state: shoes
+  # Pinwheel-stt - inhand displacements
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Moth/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Moth/displacement.rsi
+          state: hand_r
+  # Pinwheel-end - inhand displacements
   - type: InitialBody
     organs:
       Torso: OrganMothTorso
@@ -140,8 +153,10 @@
   id: MobMoth
   name: Urist McFluff
   components:
-  - type: Damageable
-    damageModifierSet: Moth
+  # Pinwheel-stt - species standards
+  # type: Damageable
+  # damageModifierSet: Moth
+  # Pinwheel-end - species standards
   - type: ZombieAccentOverride
     accent: zombieMoth
   - type: Speech
@@ -181,23 +196,6 @@
     damage:
       types:
         Heat: 2.5 # moths burn more easily
-  - type: Temperature
-    currentTemperature: 310.15
-    specificHeat: 46
-  - type: TemperatureDamage # Moths hate the heat and thrive in the cold.
-    heatDamageThreshold: 320
-    coldDamageThreshold: 230
-    coldDamage:
-      types:
-        Cold: 0.05 # per second, scales with temperature & other constants
-    heatDamage:
-      types:
-        Heat: 3 # per second, scales with temperature & other constants
-  - type: TemperatureSpeed
-    thresholds:
-      289: 0.9
-      275: 0.8
-      250: 0.7
 
 - type: entity
   parent: OrganBase

@@ -1,0 +1,271 @@
+## Servers
+
+- type: entity
+  abstract: true
+  parent: BaseMachinePowered
+  id: ExtractableServerBase
+  components:
+  # visual
+  - type: Sprite
+    sprite: _Pinwheel/Structures/Machines/server.rsi
+    layers:
+    - state: base
+    - state: disk
+      map: [ "enum.ExtractableServerVisualLayers.Disk" ]
+    - state: shell
+      map: [ "enum.ExtractableServerVisualLayers.Shell" ]
+    - state: lid
+      map: [ "enum.ExtractableServerVisualLayers.Lid" ]
+    - state: label-right
+      color: "#999"
+      map: [ "enum.ExtractableServerVisualLayers.Label" ]
+    - state: power-on
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: {visible: true}
+          False: {visible: false}
+      enum.ExtractableServerVisuals.LidConstruction:
+        enum.ExtractableServerVisualLayers.Label:
+          1: {visible: true}
+          0: {visible: false}
+        enum.ExtractableServerVisualLayers.Lid:
+          1: {visible: true}
+          0: {visible: false}
+      enum.ExtractableServerVisuals.ShellConstruction:
+        enum.ExtractableServerVisualLayers.Shell:
+          1: {visible: true}
+          0: {visible: false}
+      enum.ExtractableServerVisuals.Disk:
+        enum.ExtractableServerVisualLayers.Disk:
+          1: {visible: true}
+          0: {visible: false}
+  # audio
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/server_fans.ogg
+  # functional
+  - type: Anchorable
+    flags: [ Anchorable ]
+  - type: ExtensionCableReceiver
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ContainerContainer
+    containers:
+      server_disk: !type:Container
+  - type: Construction
+    graph: ExtractableServer
+    deconstructionTarget: null
+    node: lid
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: shell
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetPlastic1:
+              min: 4
+              max: 4
+    - trigger:
+        !type:DamageTrigger
+        damage: 600
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: bare
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel1:
+              min: 2
+              max: 2
+
+- type: entity
+  parent: ExtractableServerBase
+  id: ExtractableServerCrewMonitor
+  name: crew monitoring server
+  description: "Receives, processes, and broadcasts the station's suit sensor data. The lid can be unscrewed and pried off, but you probably shouldn't do that without a really good reason."
+  components:
+  # visual
+  - type: Sprite
+    layers: # ideally i wouldn't have to redefine the whole thing to just change the label sprite and color. but.
+    - state: base
+    - state: disk
+      map: [ "enum.ExtractableServerVisualLayers.Disk" ]
+    - state: shell
+      map: [ "enum.ExtractableServerVisualLayers.Shell" ]
+    - state: lid
+      map: [ "enum.ExtractableServerVisualLayers.Lid" ]
+    - state: label-right
+      map: [ "enum.ExtractableServerVisualLayers.Label" ]
+      color: "#4df"
+    - state: power-on
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  # functional
+  - type: SingletonDeviceNetServer
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    autoConnect: false
+    transmitFrequencyId: CrewMonitor
+    receiveFrequencyId: SuitSensor
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: StationLimitedNetwork
+  - type: CrewMonitoringServer
+  - type: ContainerFill
+    containers:
+      server_disk:
+      - ServerDiskCrewMonitor
+  - type: GuideHelp
+    guides:
+    - Medical
+
+- type: entity
+  parent: ExtractableServerBase
+  id: ExtractableServerResearch
+  name: research server
+  description: "Contains and processes Science's research data. The lid can be unscrewed and pried off, but you probably shouldn't do that without a really good reason."
+  components:
+  # visual
+  - type: Sprite
+    layers:
+    - state: base
+    - state: disk
+      map: [ "enum.ExtractableServerVisualLayers.Disk" ]
+    - state: shell
+      map: [ "enum.ExtractableServerVisualLayers.Shell" ]
+    - state: lid
+      map: [ "enum.ExtractableServerVisualLayers.Lid" ]
+    - state: label-leftright
+      map: [ "enum.ExtractableServerVisualLayers.Label" ]
+      color: "#92f"
+    - state: power-on
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  # functional
+  - type: ResearchServer
+  - type: TechnologyDatabase
+    supportedDisciplines:
+    - Industrial
+    - Arsenal
+    - Experimental
+    - CivilianServices
+  - type: ContainerFill
+    containers:
+      server_disk:
+      - ServerDiskResearch
+  - type: GuideHelp
+    guides:
+    - Science
+
+## Construction Graph
+
+- type: constructionGraph
+  id: ExtractableServer
+  start: lid
+  graph:
+  - node: lid
+    actions:
+    - !type:VisualizerDataInt
+      key: "enum.ExtractableServerVisuals.LidConstruction"
+      data: 1
+    edges:
+    - to: shell
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      - tool: Prying
+        doAfter: 1
+  - node: shell
+    actions:
+    - !type:VisualizerDataInt
+      key: "enum.ExtractableServerVisuals.LidConstruction"
+      data: 0
+    - !type:VisualizerDataInt
+      key: "enum.ExtractableServerVisuals.ShellConstruction"
+      data: 1
+    edges:
+    - to: bare
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 4
+      steps:
+      - tool: Welding
+        doAfter: 5
+      - tool: Prying
+        doAfter: 1
+  - node: bare
+    actions:
+    - !type:VisualizerDataInt
+      key: "enum.ExtractableServerVisuals.LidConstruction"
+      data: 0
+    - !type:VisualizerDataInt
+      key: "enum.ExtractableServerVisuals.ShellConstruction"
+      data: 0
+    edges:
+    - to: empty
+      steps:
+      - tool: Prying
+        doAfter: 1
+  - node: empty # easier than faffing with other components handling extraction and visuals
+    actions:
+    - !type:VisualizerDataInt
+      key: "enum.ExtractableServerVisuals.Disk"
+      data: 0
+    - !type:EmptyAllContainers
+      pickup: true
+
+## Disks
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: ServerDiskBase
+  components:
+  - type: Item
+    size: Normal
+
+- type: entity
+  parent: ServerDiskBase
+  id: ServerDiskCrewMonitor
+  name: 'server datadisk "Hippocrates"'
+  description: 'A NanoTrasen 32 TB high resilience data drive, built to withstand anything short of a nuclear detonation. This one contains compiled binaries of the "Hippocrates" analytical software, helping crew monitor servers process vital signs en-masse.'
+  components:
+  - type: Sprite
+    sprite: _Pinwheel/Objects/Devices/serverdisk.rsi
+    layers:
+    - state: icon
+    - state: label
+      color: "#4df"
+  - type: StealTarget
+    stealGroup: ServerDiskCrewMonitor
+
+- type: entity
+  parent: ServerDiskBase
+  id: ServerDiskResearch
+  name: 'server datadisk "Archimedes"'
+  description: 'A NanoTrasen 32 TB high resilience data drive, built to withstand anything short of a nuclear detonation. This one contains compiled binaries of the "Archimedes" analytical software, letting research servers process scientific data more efficiently.' # this will need some other effect when research points are axed. obviously
+  components:
+  - type: Sprite
+    sprite: _Pinwheel/Objects/Devices/serverdisk.rsi
+    layers:
+    - state: icon
+    - state: label
+      color: "#92f"
+  - type: StealTarget
+    stealGroup: ServerDiskResearch

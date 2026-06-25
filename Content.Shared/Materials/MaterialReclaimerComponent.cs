@@ -4,6 +4,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.Damage; // Pinwheel - survivable recycler
 
 namespace Content.Shared.Materials;
 
@@ -137,6 +138,15 @@ public sealed partial class MaterialReclaimerComponent : Component
     /// </remarks>
     [DataField, AutoNetworkedField]
     public int ItemsProcessed;
+
+    // Pinwheel-stt - survivable recycler
+    /// <summary>
+    /// Damage to deal to entities when emagged
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    [ViewVariables]
+    public DamageSpecifier Damage = new();
+    // Pinwheel-end - survivable recycler
 }
 
 [NetSerializable, Serializable]

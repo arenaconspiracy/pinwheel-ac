@@ -86,6 +86,19 @@
           32:
             sprite: Mobs/Species/Reptilian/displacement.rsi
             state: mask
+  # Pinwheel-stt - inhand displacements
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Reptilian/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Reptilian/displacement.rsi
+          state: hand_r
+  # Pinwheel-end - inhand displacements
   - type: InitialBody
     organs:
       Torso: OrganReptilianTorso
@@ -143,8 +156,10 @@
       Unsexed: MaleReptilian
   - type: BodyEmotes
     soundsId: ReptilianBodyEmotes
-  - type: Damageable
-    damageModifierSet: Scale
+  # Pinwheel-stt - species standards
+  # type: Damageable
+  # damageModifierSet: Scale
+  # Pinwheel-end - species standards
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw
@@ -157,7 +172,7 @@
     currentTemperature: 310.15
     specificHeat: 42
   - type: TemperatureDamage
-    heatDamageThreshold: 400
+    heatDamageThreshold: 343 # Pinwheel - species standards
     coldDamageThreshold: 285
     coldDamage:
       types:
@@ -183,7 +198,7 @@
   abstract: true
   components:
   - type: Metabolizer
-    metabolizerTypes: [ Animal ]
+    metabolizerTypes: [ Carnivore ] # Pinwheel - species standards
 
 - type: entity
   parent: OrganReptilian

@@ -1,5 +1,3 @@
-# Best job.
-
 - type: job
   id: ChiefMedicalOfficer
   name: job-name-cmo
@@ -7,14 +5,16 @@
   playTimeTracker: JobChiefMedicalOfficer
   requirements:
     - !type:RoleTimeRequirement
-      role: JobChemist
-      time: 2.5h
+      role: JobParamedic # Pinwheel - gooncave eviction
+      time: 1h # Pinwheel - easy unlock
     - !type:RoleTimeRequirement
       role: JobMedicalDoctor
-      time: 5h
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 10h
+      time: 1h # Pinwheel - easy unlocks
+    # Pinwheel-stt - easy unlocks
+    # !type:DepartmentTimeRequirement
+    # department: Medical
+    # time: 10h
+    # Pinwheel-end - easy unlocks
   weight: 10
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
