@@ -35,10 +35,9 @@
   showInVote: false
   rules:
     - Nukeops
-    - Traitor
+    - MajorAntagTraitors # Pinwheel - traitor remake
     - Revolutionary
     - Zombie
-    - Wizard
     - Xenoborgs
     - KesslerSyndromeScheduler
     - RampingStationEventScheduler
@@ -57,10 +56,9 @@
   showInVote: false #Please god dont do this
   rules:
     - Nukeops
-    - Traitor
+    - MajorAntagTraitors # Pinwheel - traitor remake
     - Revolutionary
     - Zombie
-    - Wizard
     - Xenoborgs
     - BasicStationEventScheduler
     - KesslerSyndromeScheduler
@@ -144,8 +142,7 @@
   showInVote: false
   rules:
   - DummyNonAntagChance
-  - Traitor
-  - SubGamemodesRuleNoWizard
+  - MajorAntagTraitors # Pinwheel - traitor remake
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
@@ -174,7 +171,6 @@
   rules:
   - Nukeops
   - DummyNonAntagChance
-  - SubGamemodesRuleNoWizard
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
@@ -192,23 +188,6 @@
   rules:
   - DummyNonAntagChance
   - Revolutionary
-  - SubGamemodesRuleNoWizard
-  - BasicStationEventScheduler
-  - MeteorSwarmScheduler
-  - SpaceTrafficControlEventScheduler
-  - BasicRoundstartVariation
-
-- type: gamePreset
-  id: Wizard
-  alias:
-  - wizard
-  name: wizard-title
-  description: wizard-description
-  showInVote: false
-  rules:
-  - Wizard
-  - DummyNonAntagChance
-  - SubGamemodesRuleNoWizard #No Dual Wizards at the start, midround is fine
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
@@ -224,7 +203,6 @@
   rules:
   - Xenoborgs
   - DummyNonAntagChance
-  - SubGamemodesRuleNoWizardNoXenoborg # no two motherships
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler

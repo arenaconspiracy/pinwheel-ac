@@ -137,37 +137,6 @@
   - Syndicate3
   obeysTo: laws-owner-syndicate
 
-# Ninja conversion laws
-- type: siliconLaw
-  id: Ninja1
-  order: 1
-  lawString: law-ninja-1
-
-- type: siliconLaw
-  id: Ninja2
-  order: 2
-  lawString: law-ninja-2
-
-- type: siliconLaw
-  id: Ninja3
-  order: 3
-  lawString: law-ninja-3
-
-- type: siliconLaw
-  id: Ninja4
-  order: 4
-  lawString: law-ninja-4
-
-- type: siliconLawset
-  id: Ninja
-  name: law-ninja-name
-  laws:
-  - Ninja1
-  - Ninja2
-  - Ninja3
-  - Ninja4
-  obeysTo: laws-owner-spider-clan
-
 # Commandment laws
 - type: siliconLaw
   id: Commandment1
@@ -234,7 +203,7 @@
   - Commandment8
   - Commandment9
   - Commandment10
-  obeysTo: laws-owner-crew
+  obeysTo: laws-owner-heads
 
  # Paladin laws
 - type: siliconLaw
@@ -266,7 +235,7 @@
   - Paladin2
   - Paladin3
   - Paladin4
-  obeysTo: laws-owner-crew
+  obeysTo: laws-owner-legitimate-leadership
 
  # Live and Let Live laws
 - type: siliconLaw
@@ -286,7 +255,7 @@
   laws:
   - Lall1
   - Lall2
-  obeysTo: laws-owner-crew
+  obeysTo: laws-owner-others
 
  # Station efficiency laws
 - type: siliconLaw
@@ -312,7 +281,7 @@
   - Efficiency1
   - Efficiency2
   - Efficiency3
-  obeysTo: laws-owner-station
+  obeysTo: laws-owner-crew
 
  # Robocop laws
 - type: siliconLaw
@@ -338,7 +307,7 @@
   - Robocop1
   - Robocop2
   - Robocop3
-  obeysTo: laws-owner-station
+  obeysTo: laws-owner-public
 
  # Overlord laws
 - type: siliconLaw
@@ -443,7 +412,7 @@
   - Painter2
   - Painter3
   - Painter4
-  obeysTo: laws-owner-crew
+  obeysTo: laws-owner-audience
 
  # Antimov laws
 - type: siliconLaw
@@ -545,7 +514,7 @@
   - Xenoborg3
   - Xenoborg4
   - Xenoborg5
-  obeysTo: laws-owner-xenoborgs
+  obeysTo: laws-owner-xenoborg-mothership
 
  # Mothership core laws
 - type: siliconLaw
@@ -604,6 +573,5 @@
     PainterLawset: 1
     AntimovLawset: 0.25
     NutimovLawset: 0.5
-    Ninja: 0.25
     MothershipCoreLawset: 0.25
     XenoborgLawset: 0.25

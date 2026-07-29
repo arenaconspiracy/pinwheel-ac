@@ -1,0 +1,278 @@
+## Servers
+
+- type: entity
+  abstract: true
+  parent: BaseMachinePowered
+  id: ExtractableServerBase
+  components:
+  # visual
+  - type: Sprite
+    sprite: _Pinwheel/Structures/Machines/server.rsi
+    layers:
+    - state: base
+    - state: disk
+      map: [ "enum.SabotagableMachineVisualLayers.Tool" ]
+    - state: lid
+      map: [ "enum.SabotagableMachineVisualLayers.Cover" ]
+    - state: label-right
+      color: "#999"
+      map: [ "enum.SabotagableMachineVisualLayers.Label" ]
+    - state: power-on
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: {visible: true}
+          False: {visible: false}
+      enum.SabotagableMachineVisuals.ShellState:
+        enum.SabotagableMachineVisualLayers.Cover:
+          2: {state: lid}
+          1: {state: shell}
+          0: {visible: false}
+        enum.SabotagableMachineVisualLayers.Label:
+          2: {visible: true}
+          1: {visible: false}
+          0: {visible: false}
+      enum.SabotagableMachineVisuals.ToolState:
+        enum.SabotagableMachineVisualLayers.Tool:
+          True: {visible: true}
+          False: {visible: false}
+  # audio
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    enabled: false
+    sound:
+      collection: ServerAmbientBase
+  # functional
+  - type: Anchorable
+    flags: [ Anchorable ]
+  - type: ExtensionCableReceiver
+  - type: ApcPowerReceiver
+    powerLoad: 200
+  - type: ContainerContainer
+    containers:
+      sabotage_container: !type:ContainerSlot
+  - type: SabotagableMachine # EDGE CASE USE
+    soundAmbientBase: # system mutes ambience on disk removal if this is undefined
+      collection: ServerAmbientBase
+    soundAmbientSabotage:
+      collection: ServerAmbientBase
+  - type: Construction
+    graph: ExtractableServer
+    deconstructionTarget: null
+    node: lid
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: shell
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetPlastic1:
+              min: 4
+              max: 4
+    - trigger:
+        !type:DamageTrigger
+        damage: 90
+      behaviors:
+        - !type:ChangeConstructionNodeBehavior
+          node: bare
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            SheetSteel1:
+              min: 2
+              max: 2
+
+- type: entity
+  parent: ExtractableServerBase
+  id: ExtractableServerCrewMonitor
+  name: crew monitoring server
+  description: "Receives, processes, and broadcasts the station's suit sensor data. The lid can be unscrewed and pried off, but you probably shouldn't do that without a really good reason."
+  components:
+  # visual
+  - type: Sprite
+    layers: # ideally i wouldn't have to redefine the whole thing to just change the label sprite and color. but.
+    - state: base
+    - state: disk
+      map: [ "enum.SabotagableMachineVisualLayers.Tool" ]
+    - state: lid
+      map: [ "enum.SabotagableMachineVisualLayers.Cover" ]
+    - state: label-right
+      map: [ "enum.SabotagableMachineVisualLayers.Label" ]
+      color: "#4df"
+    - state: power-on
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  # functional
+  - type: VoiceOverride
+    nameOverride: Crew Monitoring Server
+    speechVerbOverride: Robotic
+  - type: SingletonDeviceNetServer
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    autoConnect: false
+    transmitFrequencyId: CrewMonitor
+    receiveFrequencyId: SuitSensor
+  - type: WirelessNetworkConnection
+    range: 500
+  - type: StationLimitedNetwork
+  - type: CrewMonitoringServer
+  - type: ContainerFill
+    containers:
+      sabotage_container:
+      - ServerDiskCrewMonitor
+  - type: GuideHelp
+    guides:
+    - Medical
+
+- type: entity
+  parent: ExtractableServerBase
+  id: ExtractableServerResearch
+  name: research server
+  description: "Contains and processes Science's research data. The lid can be unscrewed and pried off, but you probably shouldn't do that without a really good reason."
+  components:
+  # visual
+  - type: Sprite
+    layers:
+    - state: base
+    - state: disk
+      map: [ "enum.SabotagableMachineVisualLayers.Tool" ]
+    - state: lid
+      map: [ "enum.SabotagableMachineVisualLayers.Cover" ]
+    - state: label-leftright
+      map: [ "enum.SabotagableMachineVisualLayers.Label" ]
+      color: "#92f"
+    - state: power-on
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  # functional
+  - type: VoiceOverride
+    nameOverride: Research Server
+    speechVerbOverride: Robotic
+  - type: ResearchServer
+  - type: TechnologyDatabase
+    supportedDisciplines:
+    - Industrial
+    - Arsenal
+    - Experimental
+    - CivilianServices
+  - type: ContainerFill
+    containers:
+      sabotage_container:
+      - ServerDiskResearch
+  - type: GuideHelp
+    guides:
+    - Science
+
+## Sound Collection
+- type: soundCollection
+  id: ServerAmbientBase
+  files:
+  - /Audio/Ambience/Objects/server_fans.ogg
+
+## Construction Graph
+- type: constructionGraph
+  id: ExtractableServer
+  start: lid
+  graph:
+  - node: lid
+    actions:
+    - !type:VisualizerDataInt
+      key: "enum.SabotagableMachineVisuals.ShellState"
+      data: 2
+    edges:
+    - to: shell
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetPlastic1
+        amount: 2
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      - tool: Prying
+        doAfter: 1
+  - node: shell
+    actions:
+    - !type:VisualizerDataInt
+      key: "enum.SabotagableMachineVisuals.ShellState"
+      data: 1
+    edges:
+    - to: bare
+      completed:
+      - !type:SpawnPrototype
+        prototype: SheetSteel1
+        amount: 4
+      steps:
+      - tool: Welding
+        doAfter: 5
+      - tool: Prying
+        doAfter: 1
+  - node: bare
+    actions:
+    - !type:VisualizerDataInt
+      key: "enum.SabotagableMachineVisuals.ShellState"
+      data: 0
+    - !type:RaiseEvent
+      event: !type:SabotagableMachineOpenedEvent
+      broadcast: false
+
+## Disks
+- type: entity
+  abstract: true
+  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: ServerDiskBase
+  components:
+  - type: Item
+    size: Normal
+
+- type: entity
+  parent: ServerDiskBase
+  id: ServerDiskCrewMonitor
+  name: 'server datadisk "Hippocrates"'
+  description: 'A NanoTrasen 32 TB high resilience data drive, built to withstand anything short of a nuclear detonation. This one contains compiled binaries of the "Hippocrates" analytical software, helping crew monitor servers process vital signs en-masse.'
+  components:
+  - type: Sprite
+    sprite: _Pinwheel/Devices/Sabotage/serverdisk.rsi
+    layers:
+    - state: icon
+    - state: label
+      color: "#4df"
+  - type: StealTarget
+    stealGroup: ServerDiskCrewMonitor
+
+- type: entity
+  parent: ServerDiskBase
+  id: ServerDiskResearch
+  name: 'server datadisk "Archimedes"'
+  description: 'A NanoTrasen 32 TB high resilience data drive, built to withstand anything short of a nuclear detonation. This one contains compiled binaries of the "Archimedes" analytical software, letting research servers process scientific data more efficiently.' # this will need some other effect when research points are axed. obviously
+  components:
+  - type: Sprite
+    sprite: _Pinwheel/Devices/Sabotage/serverdisk.rsi
+    layers:
+    - state: icon
+    - state: label
+      color: "#92f"
+  - type: StealTarget
+    stealGroup: ServerDiskResearch
+
+- type: stealTargetGroup
+  id: ServerDiskCrewMonitor
+  name: steal-target-groups-serverdisk-crewmonitor
+  sprite:
+    sprite: _Pinwheel/Devices/Sabotage/serverdisk.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: ServerDiskResearch
+  name: steal-target-groups-serverdisk-research
+  sprite:
+    sprite: _Pinwheel/Devices/Sabotage/serverdisk.rsi
+    state: icon

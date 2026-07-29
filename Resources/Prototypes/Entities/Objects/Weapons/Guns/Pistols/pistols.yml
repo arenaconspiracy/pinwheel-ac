@@ -78,6 +78,8 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Pistols/viper.rsi
+  - type: Gun
+    selectedMode: FullAuto # Override of BaseWeaponPistol to default to full-auto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -213,8 +215,6 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
-  - type: StealTarget
-    stealGroup: OfficerHandgun
 
 - type: entity
   name: N1984

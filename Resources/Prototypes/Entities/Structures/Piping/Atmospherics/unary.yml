@@ -300,8 +300,6 @@
       board: ThermomachineFreezerMachineCircuitBoard
     - type: DeviceNetwork
       prefix: device-address-prefix-freezer
-    - type: StealTarget
-      stealGroup: FreezerHeater
 
 - type: entity
   parent: GasThermoMachineFreezer
@@ -345,8 +343,6 @@
       board: ThermomachineHeaterMachineCircuitBoard
     - type: DeviceNetwork
       prefix: device-address-prefix-heater
-    - type: StealTarget
-      stealGroup: FreezerHeater
 
 - type: entity
   parent: GasThermoMachineHeater
@@ -441,12 +437,6 @@
   - type: WiresVisuals
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 100

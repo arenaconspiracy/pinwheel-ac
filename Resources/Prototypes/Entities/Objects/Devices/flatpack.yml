@@ -87,8 +87,6 @@
     guides:
     - AME
     - Power
-  - type: StealTarget
-    stealGroup: AmePartFlatpack
 
 - type: entity
   parent: BaseFlatpack
@@ -255,15 +253,6 @@
 
 - type: entity
   parent: BaseFlatpack
-  id: CrewMonitoringServerFlatpack
-  name: crew monitoring server flatpack
-  description: A flatpack used for constructing a crew monitoring server.
-  components:
-  - type: Flatpack
-    entity: CrewMonitoringServer
-
-- type: entity
-  parent: BaseFlatpack
   id: CrewMonitoringComputerFlatpack
   name: crew monitoring computer flatpack
   description: A flatpack used for constructing a crew monitoring console.
@@ -300,3 +289,21 @@
   - type: GuideHelp
     guides:
     - FoodRecipes
+
+- type: entity
+  parent: BaseFlatpack
+  id: MachineAnomalyVesselFlatpack
+  name: anomaly vessel flatpack
+  description: A flatpack used for constructing an anomaly vessel.
+  components:
+  - type: Flatpack
+    entity: MachineAnomalyVessel
+  - type: GuideHelp
+    guides:
+    - ScannersAndVessels
+  - type: Sprite
+    layers:
+    - state: base
+    - state: overlay
+      color: "#D381C9"
+    - state: icon-default

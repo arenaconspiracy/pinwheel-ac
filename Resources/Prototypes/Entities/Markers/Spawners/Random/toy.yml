@@ -39,6 +39,8 @@
     - id: PlushieArachind
     - id: PlushiePenguin
     - id: PlushieVulp
+    - id: PlushieSheep
+    - id: PlushieSpaceSheep
     - !type:GroupSelector
       children:
       - id: PlushieBee
@@ -77,7 +79,6 @@
       weight: 0.002 # 1 in >10,500
       children:
       - id: PlushieThrongler
-      - id: PlushieGhostRevenant # You got the god roll, and failed
 
 # Weh!
 - type: entityTable

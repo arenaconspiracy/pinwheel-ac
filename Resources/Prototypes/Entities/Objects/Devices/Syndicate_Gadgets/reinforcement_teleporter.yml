@@ -18,24 +18,6 @@
 
 - type: entity
   parent: ReinforcementRadio
-  id: ReinforcementRadioSyndicate
-  name: syndicate reinforcement radio
-  description: Call in a syndicate agent of questionable quality, instantly!
-  components:
-  - type: GhostRole
-    name: ghost-role-information-syndicate-reinforcement-spy-name
-    description: ghost-role-information-syndicate-reinforcement-spy-description
-    rules: ghost-role-information-syndicate-reinforcement-rules
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
-    raffle:
-      settings: default
-  - type: GhostRoleMobSpawner
-    prototype: MobHumanSyndicateAgentSpy
-    selectablePrototypes: ["SyndicateAgentMedic", "SyndicateAgentSpy", "SyndicateAgentThief"]
-
-- type: entity
-  parent: ReinforcementRadio
   id: ReinforcementRadioSyndicateNukeops # Reinforcement radio exclusive to nukeops uplink
   name: nuclear operative radio
   description: Call in a nuclear operative of questionable quality, instantly! Basic nukeop equipment provided.
@@ -53,30 +35,22 @@
     prototype: MobHumanSyndicateAgentNukeops
 
 - type: entity
-  parent: ReinforcementRadio
-  id: ReinforcementRadioSyndicateAncestor
+  parent: ReinforcementRadio # Pinwheel
+  id: ReinforcementRadioSyndicateAncestorNukeops # Reinforcement radio exclusive to nukeops uplink
   name: syndicate genetic ancestor reinforcement radio
   description: Calls in a specially trained ancestor of your choosing to assist you.
+  suffix: NukeOps
   components:
   - type: GhostRole
+    # Pinwheel-stt
     name: ghost-role-information-syndicate-monkey-reinforcement-name
     description: ghost-role-information-syndicate-monkey-reinforcement-description
-    rules: ghost-role-information-syndicate-reinforcement-rules
+    rules: ghost-role-information-nukeop-reinforcement-rules
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
-  - type: GhostRoleMobSpawner
-    prototype: MobMonkeySyndicateAgent
-    selectablePrototypes: ["SyndicateMonkey", "SyndicateKobold"]
-
-- type: entity
-  parent: ReinforcementRadioSyndicateAncestor
-  id: ReinforcementRadioSyndicateAncestorNukeops # Reinforcement radio exclusive to nukeops uplink
-  suffix: NukeOps
-  components:
-  - type: GhostRole
-    rules: ghost-role-information-nukeop-reinforcement-rules
+    # Pinwheel-end
   - type: GhostRoleMobSpawner
     prototype: MobMonkeySyndicateAgentNukeops
     selectablePrototypes: ["SyndicateMonkeyNukeops", "SyndicateKoboldNukeops"]

@@ -38,9 +38,6 @@ ghost-role-information-cancer-mouse-description = An irradiated mouse, spread yo
 ghost-role-information-mothroach-name = Mothroach
 ghost-role-information-mothroach-description = A cute but mischievous mothroach.
 
-ghost-role-information-moproach-name = Moproach
-ghost-role-information-moproach-description = A cute mothroach with more cute moplike shoes on its feet.
-
 ghost-role-information-snail-name = Snail
 ghost-role-information-snail-description = A little snail who doesn't mind a bit of space. Just stay on grid!
 
@@ -78,9 +75,6 @@ ghost-role-information-punpun-description = An honorable member of the monkey so
 ghost-role-information-xeno-name = Xeno
 ghost-role-information-xeno-description = You are a xeno, co-operate with your hive to kill all crewmembers!
 ghost-role-information-xeno-rules = You are a [color={role-type-team-antagonist-color}][bold]{role-type-team-antagonist-name}[/bold][/color] with all other xenos.
-
-ghost-role-information-revenant-name = Revenant
-ghost-role-information-revenant-description = You are a Revenant. Use your powers to harvest souls and unleash chaos upon the crew. Unlock new abilities with the essence you harvest.
 
 ghost-role-information-kangaroo-name = Kangaroo
 ghost-role-information-kangaroo-description = You're a kangaroo! Do whatever kangaroos do.
@@ -214,9 +208,6 @@ ghost-role-information-Cak-description = You are the chef's favorite child. You'
 ghost-role-information-BreadDog-name = BreadDog
 ghost-role-information-BreadDog-description = You are the chef's favorite child. You're a living bread dog.
 
-ghost-role-information-space-ninja-name = Space Ninja
-ghost-role-information-space-ninja-description = Use stealth and deception to sabotage the station.
-
 ghost-role-information-paradox-clone-name = Paradox Clone
 ghost-role-information-paradox-clone-description = A freak space-time anomaly has teleported you into another reality! Now you have to find your counterpart and kill and replace them.
 
@@ -344,9 +335,6 @@ ghost-role-information-mothership-core-desc = You are the core of the xenoborg m
 
 ghost-role-information-xenoborg-name = Xenoborg
 ghost-role-information-xenoborg-desc = A strange cyborg made to replicate itself and take over the station by turning any sentient being into xenoborgs.
-
-ghost-role-information-wizard-name = Wizard
-ghost-role-information-wizard-desc = YER A WIZARD! Show the station what your magic is made of.
 
 ghost-role-information-emotional-support-scurret-name = Emotional Support Scurret
 ghost-role-information-emotional-support-scurret-description = Support the crew, be adorable, say "wa" a lot.

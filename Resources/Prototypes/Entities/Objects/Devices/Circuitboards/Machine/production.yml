@@ -123,8 +123,6 @@
         GlassBeaker:
           amount: 2
           defaultPrototype: Beaker
-    - type: StealTarget
-      stealGroup: MedicalTechFabCircuitboard
 
 - type: entity
   id: CircuitImprinterMachineCircuitboard
@@ -177,20 +175,6 @@
   - type: GuideHelp
     guides:
     - Robotics
-
-# yes i know this prototype name is long i'm just following conventions
-- type: entity
-  id: ResearchAndDevelopmentServerMachineCircuitboard
-  parent: BaseMachineCircuitboard
-  name: R&D server machine board
-  description: A machine printed circuit board for the R&D server.
-  components:
-  - type: Sprite
-    state: science
-  - type: MachineBoard
-    prototype: ResearchAndDevelopmentServer
-    stackRequirements:
-      Plasma: 5
 
 - type: entity
   id: BiogeneratorMachineCircuitboard
@@ -490,18 +474,6 @@
         Manipulator: 1
         Glass: 5
         Cable: 1
-
-- type: entity
-  id: CrewMonitoringServerMachineCircuitboard
-  parent: BaseMachineCircuitboard
-  name: crew monitoring server machine board
-  description: A machine printed circuit board for a crew monitoring server.
-  components:
-    - type: MachineBoard
-      prototype: CrewMonitoringServer
-      stackRequirements:
-        Steel: 1
-        Cable: 2
 
 - type: entity
   id: CryoPodMachineCircuitboard
@@ -1220,20 +1192,6 @@
         Steel: 5
 
 - type: entity
-  id: MailTeleporterMachineCircuitboard
-  parent: BaseMachineCircuitboard
-  name: mail teleporter machine board
-  description: A machine printed circuit board for a mail teleporter.
-  components:
-  - type: Sprite
-    state: supply
-  - type: MachineBoard
-    prototype: CargoMailTeleporter
-    stackRequirements:
-      Manipulator: 2
-      Steel: 5
-
-- type: entity
   id: SodaDispenserMachineCircuitboard
   parent: BaseMachineCircuitboard
   name: soda dispenser machine board
@@ -1289,7 +1247,7 @@
   - type: Sprite
     state: supply
   - type: MachineBoard
-    prototype: GravityGeneratorMini
+    prototype: MachineGravityGeneratorMiniUncharged # Pinwheel
     stackRequirements:
       Manipulator: 7
       Steel: 5

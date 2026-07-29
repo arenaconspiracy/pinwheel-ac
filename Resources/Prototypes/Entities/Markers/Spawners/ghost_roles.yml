@@ -161,43 +161,6 @@
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
-  id: SpawnPointGhostDragon
-  components:
-  - type: GhostRole
-    name: ghost-role-information-space-dragon-name
-    description: ghost-role-information-space-dragon-description
-    rules: ghost-role-information-space-dragon-rules
-    mindRoles:
-    - MindRoleDragon
-  - type: Sprite
-    layers:
-    - state: green
-    - sprite: Mobs/Aliens/Carps/dragon.rsi
-      state: alive
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  parent: BaseAntagSpawner
-  id: SpawnPointGhostSpaceNinja
-  components:
-  - type: GhostRole
-    name: ghost-role-information-space-ninja-name
-    description: ghost-role-information-space-ninja-description
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleNinja
-    raffle:
-      settings: default
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: Objects/Weapons/Melee/energykatana.rsi
-      state: icon
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  parent: BaseAntagSpawner
   id: SpawnPointGhostParadoxClone
   components:
   - type: GhostRole
@@ -338,25 +301,3 @@
     rules: ghost-role-information-silicon-rules
     raffle:
       settings: default
-
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  parent: BaseAntagSpawner
-  id: SpawnPointGhostWizard
-  name: ghost role spawn point
-  suffix: wizard
-  components:
-  - type: GhostRole
-    name: ghost-role-information-wizard-name
-    description: ghost-role-information-wizard-desc
-    rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleWizard
-    raffle:
-      settings: default
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-    - sprite: Clothing/Head/Hats/wizardhat.rsi
-      state: icon

@@ -129,7 +129,6 @@ food-sequence-cotton-burger-content-cotton-bol = cotton
 food-sequence-cotton-burger-content-pyrotton-bol = pyro
 food-sequence-cotton-burger-content-plushie-throngler = throngle
 food-sequence-cotton-burger-content-plushie-ghost = spooky
-food-sequence-cotton-burger-content-plushie-revenant = spookier
 food-sequence-cotton-burger-content-plushie-bee = buzzzy
 food-sequence-cotton-burger-content-plushie-hamptr = hampt
 food-sequence-cotton-burger-content-plushie-nukie = nukie
@@ -159,6 +158,8 @@ food-sequence-cotton-burger-content-plushie-moth = fluff
 food-sequence-cotton-burger-content-plushie-vulp = vulp
 food-sequence-cotton-burger-content-plushie-ian = corgi
 food-sequence-cotton-burger-content-among-pequeno = sus
+food-sequence-cotton-burger-content-plushie-sheep = wooly
+food-sequence-cotton-burger-content-plushie-sheepspace = cosmicwooly
 
 # TACO
 

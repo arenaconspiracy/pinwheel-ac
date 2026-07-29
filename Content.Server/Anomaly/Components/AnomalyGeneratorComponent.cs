@@ -69,4 +69,42 @@ public sealed partial class AnomalyGeneratorComponent : Component
     /// </summary>
     [DataField("generatingFinishedSound")]
     public SoundSpecifier? GeneratingFinishedSound;
+
+    // Pinwheel-stt - traitor sabotage
+    /// <summary>
+    /// Message to use when the sabotage doodad is jammed in
+    /// </summary>
+    [DataField]
+    public LocId MessageInsert = "sabotage-message-start-anomaly";
+
+    /// <summary>
+    /// Message to use when the sabotage doohickey is removed
+    /// </summary>
+    [DataField]
+    public LocId MessageRemove = "sabotage-message-stop-anomaly";
+
+    /// <summary>
+    /// Message to use when the sabotage macguffin does its thing
+    /// </summary>
+    [DataField]
+    public LocId MessageComplete = "sabotage-message-complete-anomaly";
+
+    /// <summary>
+    /// Sound played with sabotage announcement
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? SabotageAnnouncementSound;
+
+    /// <summary>
+    /// Anomalies to spawn on complete sabotage
+    /// </summary>
+    [DataField]
+    public int SabotageAnomalyCount = 4;
+
+    /// <summary>
+    /// Is the sabotage complete. Checked by the objective
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool SabotageComplete = false;
+    // Pinwheel-end - traitor sabotage
 }

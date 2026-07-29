@@ -19,13 +19,11 @@
     slots:
       item:
         name: clothing-boots-sidearm
+        ejectOnBreak: true
         whitelist:
           tags:
-          - Knife
+          - ToyKnife
           - ToySidearm
-        blacklist:
-          components:
-          - Sharp
 
 - type: entity
   parent: ClothingShoesClownBase
@@ -122,25 +120,6 @@
     maxContactWalkSlowdown: 0.7
 
 - type: entity
-  parent: [ClothingShoesBaseButcherable, BaseHighlyIllegalContraband]
-  id: ClothingShoesSpaceNinja
-  name: space ninja shoes
-  description: A pair of nano-enhanced boots with built-in magnetic suction cups.
-  components:
-  - type: Sprite
-    sprite: Clothing/Shoes/Specific/spaceninja.rsi
-  - type: Clothing
-    sprite: Clothing/Shoes/Specific/spaceninja.rsi
-  - type: NoSlip
-  - type: Magboots # always have gravity because le suction cups
-  - type: ClothingSpeedModifier
-    # ninja are masters of sneaking around relatively quickly, won't break cloak
-    walkModifier: 1.3
-    sprintModifier: 1.3
-  - type: FootstepModifier
-    footstepSoundCollection: null
-
-- type: entity
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesSwat
   name: swat shoes
@@ -154,8 +133,8 @@
 - type: entity
   parent: ClothingShoesBaseButcherable
   id: ClothingShoesWizard
-  name: wizard shoes
-  description: A pair of magic shoes.
+  name: sandals # Pinwheel
+  description: Socks not included. # Pinwheel
   components:
   - type: Sprite
     sprite: Clothing/Shoes/Specific/wizard.rsi
@@ -203,7 +182,7 @@
 - type: entity
   parent: ClothingShoesChameleon
   id: ClothingShoesChameleonNoSlips
-  name: black shoes #actual name and description in uplink_catalog.yml
+  name: black shoes #actual name and description in wearables.yml
   suffix: No-slip, Chameleon
   description: Stylish black shoes.
   components:

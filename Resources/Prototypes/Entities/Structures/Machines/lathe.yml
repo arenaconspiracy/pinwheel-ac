@@ -486,11 +486,10 @@
     - Chemistry
   - type: Machine
     board: MedicalTechFabCircuitboard
-  - type: StealTarget
-    stealGroup: MedicalTechFabCircuitboard
   - type: OreSiloClient
   - type: LatheAnnouncing
     channels: [Medical]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseLathe

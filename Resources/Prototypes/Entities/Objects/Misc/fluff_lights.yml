@@ -51,8 +51,6 @@
   - type: Appearance
   - type: Physics
     canCollide: false
-  - type: StealTarget
-    stealGroup: LAMP
 
 - type: entity
   name: lamp
@@ -270,12 +268,6 @@
     damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 40
-      behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20

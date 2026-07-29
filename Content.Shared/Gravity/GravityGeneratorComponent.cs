@@ -1,6 +1,11 @@
 using Content.Shared.Power;
 using Robust.Shared.GameStates;
-using Robust.Shared.Timing; // Pinwheel - gravity drift
+// Pinwheel-stt
+using Content.Shared.Radio;
+using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+// Pinwheel-end
 
 namespace Content.Shared.Gravity;
 
@@ -66,6 +71,112 @@ public sealed partial class GravityGeneratorComponent : Component
     /// </summary>
     [DataField]
     [ViewVariables(VVAccess.ReadOnly)]
-    public TimeSpan NextDrift;
+    public TimeSpan DriftNext;
     // Pinwheel-end - gravity drift
+
+    // Pinwheel-stt - traitor sabotage
+    /// <summary>
+    /// The radio channel to whine on when something goes wrong
+    /// </summary>
+    [DataField]
+    public ProtoId<RadioChannelPrototype> MessageChannel = "Engineering";
+
+    /// <summary>
+    /// Message to use when the maintenance panel is taken off
+    /// </summary>
+    [DataField]
+    public LocId MessageOpen = "sabotage-message-open-gravity";
+
+    /// <summary>
+    /// Message to use when the sabotage doodad is jammed in
+    /// </summary>
+    [DataField]
+    public LocId MessageStart = "sabotage-message-start-gravity";
+
+    /// <summary>
+    /// Message to use when the sabotage doohickey is removed
+    /// </summary>
+    [DataField]
+    public LocId MessageStop = "sabotage-message-stop-gravity";
+
+    /// <summary>
+    /// Message to use when the sabotage macguffin does its thing
+    /// </summary>
+    [DataField]
+    public LocId MessageComplete = "sabotage-message-complete-gravity";
+
+    /// <summary>
+    /// Message to use when warning of an imminent quake
+    /// </summary>
+    [DataField]
+    public LocId MessageQuake = "sabotage-message-quake-gravity";
+
+    /// <summary>
+    /// Sound played with sabotage announcement
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? SabotageAnnouncementSound;
+
+    /// <summary>
+    /// Is the sabotage complete. Checked by the objective
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool SabotageComplete = false;
+
+    /// <summary>
+    /// How many seconds in advance to warn of a quake
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan QuakeWarning = TimeSpan.FromSeconds(2);
+
+    /// <summary>
+    /// Have we warned of the quake yet
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public bool QuakeWarned = false;
+
+    /// <summary>
+    /// When the next quake will happen
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan QuakeNext;
+
+    /// <summary>
+    /// Minimum time between quakes
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan QuakeMin = TimeSpan.FromMinutes(2);
+
+    /// <summary>
+    /// Maximum time between quakes
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan QuakeMax = TimeSpan.FromMinutes(20);
+
+    /// <summary>
+    /// Strength of quake throw
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float QuakeStrength = 4.0f;
+
+    /// <summary>
+    /// Distance, in tiles, to throw objects
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public float QuakeDistance = 3.0f;
+
+    /// <summary>
+    /// Length of time to stun mobs thrown
+    /// </summary>
+    [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
+    public TimeSpan QuakeStunLength = TimeSpan.FromSeconds(3);
+    // Pinwheel-end - traitor sabotage
 }
