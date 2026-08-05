@@ -1,0 +1,6 @@
+- type: entityTable
+  id: AlienRockNodeTable
+  rolls: 6 # TODO: figure out a good value
+  table: !type:GroupSelector
+    children:
+    - id: Wrench

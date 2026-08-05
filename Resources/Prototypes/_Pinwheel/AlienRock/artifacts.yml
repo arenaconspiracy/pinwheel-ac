@@ -1,0 +1,43 @@
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: BaseAlienRock
+  name: alien artifact
+  description: sample text
+  components:
+  # visual
+  - type: Sprite
+    sprite: Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi # PLACEHOLDER
+    noRot: true
+    layers:
+    - state: ano30
+  - type: InteractionOutline
+  # physics
+  - type: Physics
+    bodyType: Dynamic
+  - type: Transform
+    noRot: true
+    anchored: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 300
+        mask: [ MachineMask ]
+        layer: [ Opaque ]
+  - type: Anchorable
+    flags: [ None ]
+  # function
+  - type: ContainerContainer
+    containers:
+      nodes: !type:Container
+  - type: AlienRock
+    nodeTable: !type:NestedSelector
+      tableId: AlienRockNodeTable
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockMundane # rock with no passive ill effects, never to be seen during a real round
+  suffix: Debug
