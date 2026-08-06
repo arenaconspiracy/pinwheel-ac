@@ -3,4 +3,13 @@
   rolls: 6 # TODO: figure out a good value
   table: !type:GroupSelector
     children:
-    - id: Wrench
+    - id: AlienNodeDebug
+    # id: Wrench
+    # id: PowerCellMedium
+
+- type: entity
+  id: AlienNodeDebug
+  name: alien node - debug
+  description: DEBUG
+  components:
+  - type: AlienNodeDebug

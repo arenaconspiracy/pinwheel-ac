@@ -4,12 +4,33 @@ using Robust.Shared.Containers;
 namespace Content.Shared._Pinwheel.AlienRock;
 
 /// <summary>
-/// TBA
+/// Fills a container with node entities, and relays events to them.
+/// Anchors & unanchors self based on presence of nodes.
 /// </summary>
 public sealed partial class AlienRockSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EntityTableSystem _entityTable = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        InitializeRelay();
+    }
+
+    private void CheckAnchor(Entity<AlienRockComponent> ent)
+    {
+        var xform = Transform(ent);
+
+        if (ent.Comp.Nodes!.Count == 0)
+        {
+            _xform.Unanchor(ent.Owner, xform);
+            return;
+        }
+
+        _xform.AnchorEntity((ent.Owner, xform));
+    }
 
     /// <summary>
     /// Ensures node container from ID,
@@ -26,12 +47,13 @@ public sealed partial class AlienRockSystem : EntitySystem
 
         foreach (var node in spawns)
         {
-            Log.Info($"{node} - {spawns}");
             PredictedTrySpawnInContainer(
                 protoName: node,
                 containerUid: ent.Comp.Nodes.Owner,
                 containerId: AlienRockComponent.ContainerId,
                 uid: out _);
         }
+
+        CheckAnchor(ent);
     }
 }
