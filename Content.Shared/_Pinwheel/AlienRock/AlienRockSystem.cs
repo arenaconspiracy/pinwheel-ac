@@ -23,7 +23,10 @@ public sealed partial class AlienRockSystem : EntitySystem
     {
         var xform = Transform(ent);
 
-        if (ent.Comp.Nodes!.Count == 0)
+        if (!_container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes))
+            return;
+
+        if (nodes.Count == 0)
         {
             _xform.Unanchor(ent.Owner, xform);
             return;
@@ -32,11 +35,6 @@ public sealed partial class AlienRockSystem : EntitySystem
         _xform.AnchorEntity((ent.Owner, xform));
     }
 
-    /// <summary>
-    /// Ensures node container from ID,
-    /// Fills container with nodes from table,
-    /// Anchors itself to the floor
-    /// </summary>
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<AlienRockComponent> ent, ref MapInitEvent args)
     {
@@ -54,6 +52,12 @@ public sealed partial class AlienRockSystem : EntitySystem
                 uid: out _);
         }
 
+        CheckAnchor(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnEntRemovedFromContainer(Entity<AlienRockComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
         CheckAnchor(ent);
     }
 }

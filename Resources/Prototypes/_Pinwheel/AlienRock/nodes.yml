@@ -1,7 +1,8 @@
 - type: entityTable
   id: AlienRockNodeTable
-  rolls: 6 # TODO: figure out a good value
   table: !type:GroupSelector
+    rolls: !type:ConstantNumberSelector
+      value: 6 # TODO: figure out a good number
     children:
     - id: AlienNodeDebug
     # id: Wrench

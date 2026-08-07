@@ -2,6 +2,7 @@
   abstract: true
   parent: BaseStructure
   id: BaseAlienRock
+  categories: [ DoNotMap ]
   name: alien artifact
   description: sample text
   components:
@@ -24,7 +25,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.5
-        density: 300
+        density: 75
         mask: [ MachineMask ]
         layer: [ Opaque ]
   - type: Anchorable

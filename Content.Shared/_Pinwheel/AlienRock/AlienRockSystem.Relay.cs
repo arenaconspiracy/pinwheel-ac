@@ -26,12 +26,13 @@ public sealed partial class AlienRockSystem
     {
         var ev = new AlienRockRelayedEvent<T>(args);
 
-        // fetching it like this because ent.Comp.Nodes doesn't work w/ foreach
         _container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes);
 
-        foreach (var node in nodes!.ContainedEntities)
+        // clone the list so the foreach doesn't get modified while enumerating
+        var nodesCopy = new List<EntityUid>(nodes!.ContainedEntities);
+
+        foreach (var node in nodesCopy)
         {
-            Log.Info($"{node}");
             RaiseLocalEvent(node, ref ev);
         }
 
