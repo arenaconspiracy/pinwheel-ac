@@ -37,6 +37,13 @@
   - type: AlienRock
     nodeTable: !type:NestedSelector
       tableId: AlienRockNodeTable
+  - type: Damageable
+  - type: Injurable
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+      Acidic: [Touch]
 
 - type: entity
   parent: BaseAlienRock

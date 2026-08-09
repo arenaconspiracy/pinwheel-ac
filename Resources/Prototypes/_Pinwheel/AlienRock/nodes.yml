@@ -4,13 +4,93 @@
     rolls: !type:ConstantNumberSelector
       value: 6 # TODO: figure out a good number
     children:
-    - id: AlienNodeDebug
-    # id: Wrench
-    # id: PowerCellMedium
+    - id: AlienNodeDamage
+    - id: AlienNodeReactiveBlood # PRO-TEM: this is gaudy and sourcing new blood is inconvenient and arguably roleplay nonconductive
+    - id: AlienNodeReactiveWater
+    - id: AlienNodeToolSawing
+    - id: AlienNodeToolAnchoring # PRO-TEM: science gear shouldn't overlap w/ engineering
+    - id: AlienNodeToolPrying # PRO-TEM: ditto
+    - id: AlienNodeToolScrewing # PRO-TEM: ditto
+    - id: AlienNodeToolWelding # PRO-TEM: ditto
 
 - type: entity
-  id: AlienNodeDebug
-  name: alien node - debug
-  description: DEBUG
+  id: AlienNodeDamage
+  categories: [ HideSpawnMenu ]
+  name: damage
+  description: corporeal damage
   components:
-  - type: AlienNodeDebug
+  - type: AlienNodeDamage
+
+- type: entity
+  id: AlienNodeReactiveBlood
+  categories: [ HideSpawnMenu ]
+  name: reactive, blood
+  description: blood reaction # this needs a better name
+  components:
+  - type: AlienNodeReactive
+    reagents:
+    - AmmoniaBlood
+    - Blood
+    - CopperBlood
+    - InsectBlood
+    - Sap
+    - Slime
+    - SulfurBlood
+    - ZombieBlood
+
+- type: entity
+  id: AlienNodeReactiveWater
+  categories: [ HideSpawnMenu ]
+  name: reactive, water
+  description: water reaction # hydrophobia?
+  components:
+  - type: AlienNodeReactive
+    reagents:
+    - Water
+    - Holywater # why is it capitalized like this
+
+- type: entity
+  id: AlienNodeToolSawing
+  categories: [ HideSpawnMenu ]
+  name: tool use, sawing
+  description: sample text
+  components:
+  - type: AlienNodeToolUse
+    quality: Sawing
+
+- type: entity
+  id: AlienNodeToolAnchoring
+  categories: [ HideSpawnMenu ]
+  name: tool use, anchoring
+  description: sample text
+  components:
+  - type: AlienNodeToolUse
+    quality: Anchoring
+
+- type: entity
+  id: AlienNodeToolPrying
+  categories: [ HideSpawnMenu ]
+  name: tool use, prying
+  description: sample text
+  components:
+  - type: AlienNodeToolUse
+    quality: Prying
+
+- type: entity
+  id: AlienNodeToolScrewing
+  categories: [ HideSpawnMenu ]
+  name: tool use, screwing
+  description: sample text
+  components:
+  - type: AlienNodeToolUse
+    quality: Screwing
+
+- type: entity
+  id: AlienNodeToolWelding
+  categories: [ HideSpawnMenu ]
+  name: tool use, welding
+  description: sample text
+  components:
+  - type: AlienNodeToolUse
+    quality: Welding
+    fuel: 10

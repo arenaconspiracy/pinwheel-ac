@@ -1,4 +1,7 @@
+using Content.Shared.Chemistry;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Tools;
 using Content.Shared.Interaction;
 
 namespace Content.Shared._Pinwheel.AlienRock;
@@ -7,8 +10,12 @@ public sealed partial class AlienRockSystem
 {
     private void InitializeRelay()
     {
+        SubscribeLocalEvent<AlienRockComponent, AlienNodeToolUseDoAfterEvent>(RelayEvent);
         SubscribeLocalEvent<AlienRockComponent, ExaminedEvent>(RelayEvent);
         SubscribeLocalEvent<AlienRockComponent, InteractUsingEvent>(RelayEvent);
+
+        SubscribeLocalEvent<AlienRockComponent, DamageDealtEvent>(RefRelayEvent);
+        SubscribeLocalEvent<AlienRockComponent, ReactionEntityEvent>(RefRelayEvent);
     }
 
     private void RelayEvent<T>(Entity<AlienRockComponent> ent, ref T args) where T : EntityEventArgs
@@ -24,7 +31,7 @@ public sealed partial class AlienRockSystem
 
     private AlienRockRelayedEvent<T> CoreRelayEvent<T>(Entity<AlienRockComponent> ent, ref T args)
     {
-        var ev = new AlienRockRelayedEvent<T>(args);
+        var ev = new AlienRockRelayedEvent<T>(args, ent.Owner);
 
         _container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes);
 
@@ -45,8 +52,11 @@ public sealed class AlienRockRelayedEvent<TEvent> : EntityEventArgs
 {
     public TEvent Args;
 
-    public AlienRockRelayedEvent(TEvent args)
+    public EntityUid Artifact;
+
+    public AlienRockRelayedEvent(TEvent args, EntityUid artifact)
     {
         Args = args;
+        Artifact = artifact;
     }
 }

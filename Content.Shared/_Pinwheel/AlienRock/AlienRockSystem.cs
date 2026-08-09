@@ -16,7 +16,7 @@ public sealed partial class AlienRockSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        InitializeRelay();
+        InitializeRelay(); // AlienRockSystem.Relay.cs
     }
 
     private void CheckAnchor(Entity<AlienRockComponent> ent)
@@ -44,7 +44,7 @@ public sealed partial class AlienRockSystem : EntitySystem
         var spawns = _entityTable.GetSpawns(ent.Comp.NodeTable);
 
         foreach (var node in spawns)
-        {
+        { // TODO: this can currently spawn duplicate nodes, which get abated at the same time, which is bad
             PredictedTrySpawnInContainer(
                 protoName: node,
                 containerUid: ent.Comp.Nodes.Owner,
