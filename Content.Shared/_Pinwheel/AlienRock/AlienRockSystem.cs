@@ -1,5 +1,6 @@
 using Content.Shared.EntityTable;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
 
 namespace Content.Shared._Pinwheel.AlienRock;
 
@@ -11,6 +12,7 @@ public sealed partial class AlienRockSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private EntityTableSystem _entityTable = default!;
+    [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
 
     public override void Initialize()
@@ -19,7 +21,7 @@ public sealed partial class AlienRockSystem : EntitySystem
         InitializeRelay(); // AlienRockSystem.Relay.cs
     }
 
-    private void CheckAnchor(Entity<AlienRockComponent> ent)
+    private void AdjustAnchor(Entity<AlienRockComponent> ent)
     {
         var xform = Transform(ent);
 
@@ -33,6 +35,17 @@ public sealed partial class AlienRockSystem : EntitySystem
         }
 
         _xform.AnchorEntity((ent.Owner, xform));
+    }
+
+    private void AdjustLight(Entity<AlienRockComponent> ent)
+    {
+        if (!_container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes))
+            return;
+
+        // BAD: magic numbers city
+        var radius = ((Math.Pow(nodes.Count, 0.7)) + 1.5); // adding 1.5 because lights with a smaller radius become increasingly imperceptible
+
+        _light.SetRadius(ent.Owner, (float)radius);
     }
 
     [SubscribeLocalEvent]
@@ -52,12 +65,14 @@ public sealed partial class AlienRockSystem : EntitySystem
                 uid: out _);
         }
 
-        CheckAnchor(ent);
+        AdjustLight(ent);
+        AdjustAnchor(ent);
     }
 
     [SubscribeLocalEvent]
     private void OnEntRemovedFromContainer(Entity<AlienRockComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        CheckAnchor(ent);
+        AdjustLight(ent);
+        AdjustAnchor(ent);
     }
 }

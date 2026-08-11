@@ -8,10 +8,15 @@
   components:
   # visual
   - type: Sprite
-    sprite: Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi # PLACEHOLDER
+    sprite: _Pinwheel/AlienRock/artifacts.rsi
     noRot: true
     layers:
-    - state: ano30
+    - state: radiation
+  - type: PointLight
+    castShadows: false
+    radius: 6 # set based on the number of nodes dynamically
+    energy: 3
+    falloff: 5
   - type: InteractionOutline
   # physics
   - type: Physics
@@ -49,3 +54,33 @@
   parent: BaseAlienRock
   id: AlienRockMundane # rock with no passive ill effects, never to be seen during a real round
   suffix: Debug
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockFire
+  components:
+  - type: Sprite
+    layers:
+    - state: fire
+  - type: PointLight
+    color: "#F80"
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockIce
+  components:
+  - type: Sprite
+    layers:
+    - state: ice
+  - type: PointLight
+    color: "#2Af"
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockRadiation
+  components:
+  - type: Sprite
+    layers:
+    - state: radiation
+  - type: PointLight
+    color: "#2f2"
