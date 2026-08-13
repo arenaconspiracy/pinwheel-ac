@@ -70,7 +70,8 @@ public sealed partial class AlienRockSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnEntRemovedFromContainer(Entity<AlienRockComponent> ent, ref EntRemovedFromContainerMessage args)
+    private void OnEntRemovedFromContainer(Entity<AlienRockComponent> ent,
+        ref EntRemovedFromContainerMessage args)
     {
         AdjustLight(ent);
         AdjustAnchor(ent);

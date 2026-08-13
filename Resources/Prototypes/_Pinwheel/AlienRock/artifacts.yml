@@ -13,8 +13,7 @@
     layers:
     - state: radiation
   - type: PointLight
-    castShadows: false
-    radius: 6 # set based on the number of nodes dynamically
+    radius: 6 # set dynamically based on the number of nodes
     energy: 3
     falloff: 5
   - type: InteractionOutline
@@ -45,10 +44,6 @@
   - type: Damageable
   - type: Injurable
   - type: Reactive
-    groups:
-      Flammable: [Touch]
-      Extinguish: [Touch]
-      Acidic: [Touch]
 
 - type: entity
   parent: BaseAlienRock
@@ -64,6 +59,7 @@
     - state: fire
   - type: PointLight
     color: "#F80"
+  - type: AlienEffectGasTemperature
 
 - type: entity
   parent: BaseAlienRock
@@ -74,6 +70,8 @@
     - state: ice
   - type: PointLight
     color: "#2Af"
+  - type: AlienEffectGasTemperature
+    heating: false
 
 - type: entity
   parent: BaseAlienRock
@@ -84,3 +82,6 @@
     - state: radiation
   - type: PointLight
     color: "#2f2"
+  - type: RadiationSource
+    slope: 0.8 # intensity is dynamic
+  - type: AlienEffectRadiation
