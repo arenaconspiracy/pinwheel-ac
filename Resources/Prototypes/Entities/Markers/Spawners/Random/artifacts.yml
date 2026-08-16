@@ -2,9 +2,11 @@
   id: RandomArtifactTable
   table: !type:GroupSelector
     children:
-    - id: ComplexXenoArtifact
-      weight: 2
-    - id: ComplexXenoArtifactItem
+    # Pinwheel-stt # TODO: this should be a visible portal looking thing that extrudes the artifact over 5 ish seconds
+    - id: AlienRockFire
+    - id: AlienRockIce
+    - id: AlienRockRadiation
+    # Pinwheel-end
 
 - type: entity
   parent: MarkerBase
