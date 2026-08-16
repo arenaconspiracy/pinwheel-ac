@@ -1,7 +1,6 @@
 using Content.Shared.Inventory.Events;
 using Content.Shared.Overlays;
 using Robust.Client.Graphics;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client.Overlays;
 
@@ -11,7 +10,6 @@ namespace Content.Client.Overlays;
 public sealed partial class ShowHealthBarsSystem : EquipmentHudSystem<ShowHealthBarsComponent>
 {
     [Dependency] private IOverlayManager _overlayMan = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
 
     private EntityHealthBarOverlay _overlay = default!;
     private Content.Client._Offbrand.Overlays.HeartrateOverlay _heartrate = default!; // Offbrand
@@ -22,7 +20,7 @@ public sealed partial class ShowHealthBarsSystem : EquipmentHudSystem<ShowHealth
 
         SubscribeLocalEvent<ShowHealthBarsComponent, AfterAutoHandleStateEvent>(OnHandleState);
 
-        _overlay = new(EntityManager, _prototype);
+        _overlay = new(EntityManager, ProtoMan);
         _heartrate = new();
     }
 

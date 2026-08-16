@@ -11,47 +11,13 @@
     prototypes: [SyndicateOperativeGearExtremelyBasic]
     roleLoadout: [ RoleSurvivalSyndicate ]
   - type: RandomMetadata
-    nameSegments: [NamesDeathCommando]
+    nameSegments:
+    - NamesDeathCommandoFirst
+    - NamesDeathCommandoLast
+    nameFormat: name-format-standard
   - type: NpcFactionMember
     factions:
     - Syndicate
-
-- type: entity
-  parent: MobHumanSyndicateAgentBase
-  id: MobHumanSyndicateAgent
-  name: syndicate agent
-  suffix: Human, Traitor
-  components:
-  # make the player a traitor once its taken
-  - type: AutoTraitor
-    profile: TraitorReinforcement
-
-- type: entity
-  parent: MobHumanSyndicateAgent
-  id: MobHumanSyndicateAgentMedic
-  name: syndicate medic
-  components:
-  - type: Loadout
-    prototypes: [SyndicateReinforcementMedic]
-    roleLoadout: [ RoleSurvivalSyndicate ]
-
-- type: entity
-  parent: MobHumanSyndicateAgent
-  id: MobHumanSyndicateAgentSpy
-  name: syndicate spy
-  components:
-  - type: Loadout
-    prototypes: [SyndicateReinforcementSpy]
-    roleLoadout: [ RoleSurvivalSyndicate ]
-
-- type: entity
-  parent: MobHumanSyndicateAgent
-  id: MobHumanSyndicateAgentThief
-  name: syndicate thief
-  components:
-  - type: Loadout
-    prototypes: [SyndicateReinforcementThief]
-    roleLoadout: [ RoleSurvivalSyndicate ]
 
 - type: entity
   parent: MobHumanSyndicateAgentBase
@@ -75,18 +41,9 @@
   components:
   - type: NukeOperative
   - type: RandomHumanoidAppearance
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: MobHuman
-  id: MobHumanLoneNuclearOperative
-  name: Lone Operative
-  components:
-  - type: RandomHumanoidAppearance
     randomizeName: false
-  - type: NukeOperative
   - type: Loadout
-    prototypes: [SyndicateLoneOperativeGearFull]
+    prototypes: [ SyndicateOperativeGearFull ]
     roleLoadout: [ RoleSurvivalSyndicate ]
   - type: RandomMetadata
     nameSegments:
@@ -96,15 +53,3 @@
   - type: NpcFactionMember
     factions:
     - Syndicate
-
-# Wizard
-- type: entity
-  categories: [ HideSpawnMenu ]
-  name: Wizard
-  parent: MobHuman
-  id: MobHumanWizard
-  components:
-  - type: RandomHumanoidAppearance
-  - type: NpcFactionMember
-    factions:
-    - Wizard

@@ -1,0 +1,140 @@
+# This is a basic dictionary that maps old entity prototype ids to new ids. This only works for entity prototypes, and
+# is intended to allow maps to load without having to manually edit them. An empty or "null" string results in the
+# entity getting deleted.
+
+# e.g., you can swap all walls with windows and delete all tables by adding lines like:
+#
+# Window: WallSolid
+# WallSolid: Window
+# Table: null
+
+# 2026-07-23
+ClockworkShield: null
+MirrorShield: null
+
+SuitStorageWizard: null
+ClothingBeltWand: null
+ClothingBeltWandFilled: null
+ClothingHeadsetAltWizard: null
+ClothingHeadsetWizard: null
+WizardIDCard: null
+WizardPDA: null
+
+RubberStampWizard: null
+SpawnPointWizard: null
+
+WeaponForceGunAdmin: null
+WeaponStaffHealing: null
+WeaponTetherGunAdmin: null
+WeaponLauncherMultipleRocket: null
+
+RGBStaff: null
+Mjollnir: null
+SingularityHammer: null
+WeaponStaffPolymorphDoor: null
+WeaponWandCluwne: null
+WeaponWandDeath: null
+WeaponWandFireball: null
+WeaponWandLocker: null
+WeaponWandPolymorphBread: null
+WeaponWandPolymorphCarp: null
+WeaponWandPolymorphDoor: null
+WeaponWandPolymorphMonkey: null
+
+VendingMachineMagivend: null
+WizardCommsComputerCircuitBoard: null
+WizardComputerComms: null
+
+# 2026-07-26
+AlertEssenceSpriteView: null # this should not have been serializable in the first place
+
+# 2026-07-28
+FoodMeatDragon: null
+FoodMeatDragonCooked: null
+FoodMeatDragonCutlet: null
+FoodMeatDragonCutletCooked: null
+FoodTacoDragon: null
+
+# 2026-07-29
+CrateCargoGambling: null
+
+# 2026-07-31
+ExtractableServerCrewMonitor: MachineServerCrewmonitor
+ExtractableServerResearch: null
+
+Biogenerator: MachineLatheBiogenerator
+CutterMachine: MachineLatheCutter
+ExosuitFabricator: MachineLatheRobotics
+MedicalTechFab: MachineLatheMedical
+Protolathe: MachineLatheScience
+SecurityTechFab: MachineLatheSecurity
+UniformPrinter: MachineLatheUniform
+AmmoTechFab: null
+Autolathe: null
+AutolatheHyperConvection: null
+Biofabricator: null
+OreProcessor: null
+OreProcessorIndustrial: null
+ProtolatheHyperConvection: null
+CircuitImprinter: null
+CircuitImprinterHyperConvection: null
+MachineFlatpacker: null
+
+AutolatheMachineCircuitboard: null
+CircuitImprinterMachineCircuitboard: null
+ProtolatheMachineCircuitboard: null
+
+ResearchComputerCircuitboard: null
+TechDiskComputerBoard: null
+
+DiseaseDiagnoser: null
+ComputerResearchAndDevelopment: null
+ComputerTechnologyDiskTerminal: null
+Vaccinator: null
+
+BookHowToRockAndStone: null
+BlueprintFulton: null
+BlueprintSeismicCharge: null
+CrateSalvageEquipment: null
+CrateSalvageHardsuit: null
+
+ResearchDisk: null
+ResearchDisk5000: null
+ResearchDisk10000: null
+ResearchDiskDebug: null
+
+TechnologyDisk: null
+TechnologyDiskT1: null
+TechnologyDiskT2: null
+TechnologyDiskT3: null
+TechnologyDiskArsenal: null
+TechnologyDiskCivilianServices: null
+TechnologyDiskExperimental: null
+TechnologyDiskIndustrial: null
+TechnologyDiskRare: null
+
+SalvageCanisterSpawner: null
+SalvageFleshSpawner: null
+SalvageLivingLightSpawner: null
+SalvageLootSpawner: null
+SalvageMaterialCrateSpawner: null
+SalvageMobSpawner: null
+SalvageMobSpawner75: null
+SalvageSpawnerEquipment: null
+SalvageSpawnerEquipmentValuable: null
+SalvageSpawnerMobMagnet: null
+SalvageSpawnerMobMagnet100: null
+SalvageSpawnerMobMiningAsteroid: null
+SalvageSpawnerMobShark: null
+SalvageSpawnerScrapCommon: null
+SalvageSpawnerScrapCommon75: null
+SalvageSpawnerScrapValuable: null
+SalvageSpawnerScrapValuable75: null
+SalvageSpawnerTreasure: null
+SalvageSpawnerTreasureValuable: null
+
+SpaceTickSpawner: null
+SpawnMobBearSalvage: null
+SpawnMobCobraSalvage: null
+SpawnMobKangarooSalvage: null
+SpawnMobSpiderSalvage: null

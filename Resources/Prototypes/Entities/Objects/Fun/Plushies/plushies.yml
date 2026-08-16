@@ -80,10 +80,10 @@
     noRot: true
   - type: Item
   - type: Physics
-    angularDamping: 0.02
-    linearDamping: 0.02
     fixedRotation: true
     bodyType: Dynamic
+  - type: MovementIgnoreGravity
+    weightless: true
   - type: Fixtures
     fixtures:
       fix1:
@@ -110,27 +110,6 @@
     - PlushieGhost
     - Payload
     - ClothMade
-
-- type: entity
-  parent: PlushieGhost
-  id: PlushieGhostRevenant
-  categories: [ DoNotMap ]
-  name: revenant soft toy
-  description: So soft it almost makes you want to take a nap...
-  components:
-  - type: Sprite
-    sprite: Mobs/Ghosts/revenant.rsi
-    state: icon
-    noRot: true
-  - type: Item
-    size: Normal
-  - type: MultiHandedItem
-  - type: Construction
-    graph: PlushieGhostRevenant
-    node: plushie
-  - type: FoodSequenceElement
-    entries:
-      CottonBurger: RevenantPlushie
 
 - type: entity
   parent: BasePlushie

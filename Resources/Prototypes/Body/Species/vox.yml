@@ -124,12 +124,12 @@
     leftHandDisplacement:
       sizeMaps:
         32:
-          sprite: Mobs/Species/Vox/displacement.rsi
+          sprite: _Pinwheel/Mobs/Species/Vox/displacement.rsi
           state: hand_l
     rightHandDisplacement:
       sizeMaps:
         32:
-          sprite: Mobs/Species/Vox/displacement.rsi
+          sprite: _Pinwheel/Mobs/Species/Vox/displacement.rsi
           state: hand_r
   - type: InitialBody
     organs:
@@ -163,8 +163,10 @@
   id: MobVox
   name: Urist McVox
   components:
-  - type: Damageable
-    damageModifierSet: Vox
+  # Pinwheel-stt - species standards
+  # type: Damageable
+  # damageModifierSet: Vox
+  # Pinwheel-stt - species standards
   - type: Speech
     speechVerb: Vox
     speechSounds: Vox
@@ -176,53 +178,52 @@
       sprite: Effects/creampie.rsi
       state: creampie_vox
   - type: Vocal
-    sounds:
-      Male: UnisexVox
-      Female: UnisexVox
-      Unsexed: UnisexVox
+    emoteSounds: UnisexVox
   - type: Butcherable
     spawned:
     - id: FoodMeatChicken
       amount: 5
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibBehavior { }
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Heat
-        damage: 1500
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawnInContainer: true
-        spawn:
-          FoodMeatChickenFriedVox:
-            min: 3
-            max: 5
-      - !type:BurnBodyBehavior
-        popupMessage: bodyburn-vox-text-others
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MeatLaserImpact
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Radiation
-        damage: 15
-      behaviors:
-      - !type:PopupBehavior
-        popup: mouth-taste-metal
-        popupType: LargeCaution
-        targetOnly: true
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Radiation
-        damage: 40
-      behaviors:
-      - !type:VomitBehavior
+  # Pinwheel-stt - no species gibbing
+  # type: Destructible
+  # thresholds:
+  # trigger:
+  #   !type:DamageTypeTrigger
+  #   damageType: Blunt
+  #   damage: 400
+  # behaviors:
+  # - !type:GibBehavior { }
+  # trigger:
+  #   !type:DamageTypeTrigger
+  #   damageType: Heat
+  #   damage: 1500
+  # behaviors:
+  # - !type:SpawnEntitiesBehavior
+  #   spawnInContainer: true
+  #   spawn:
+  #     FoodMeatChickenFriedVox:
+  #       min: 3
+  #       max: 5
+  # - !type:BurnBodyBehavior
+  #   popupMessage: bodyburn-vox-text-others
+  # - !type:PlaySoundBehavior
+  #   sound:
+  #     collection: MeatLaserImpact
+  # trigger:
+  #   !type:DamageTypeTrigger
+  #   damageType: Radiation
+  #   damage: 15
+  # behaviors:
+  # - !type:PopupBehavior
+  #   popup: mouth-taste-metal
+  #   popupType: LargeCaution
+  #   targetOnly: true
+  # trigger:
+  #   !type:DamageTypeTrigger
+  #   damageType: Radiation
+  #   damage: 40
+  # behaviors:
+  # - !type:VomitBehavior
+  # Pinwheel-end - no species gibbing
   - type: PassiveDamage
     # Augment normal health regen to be able to tank some Poison damage
     # This allows Vox to take their mask off temporarily to eat something without needing a trip to medbay afterwards.
@@ -265,7 +266,7 @@
   # End Offbrand Additions
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganVox
   abstract: true
   suffix: Vox
@@ -307,6 +308,10 @@
 - type: entity
   parent: [ OrganBaseTorso, OrganVoxExternal ]
   id: OrganVoxTorso
+  components:
+  - type: VisualOrganMarkings
+    hideableLayers:
+    - enum.HumanoidVisualLayers.Tail
 
 - type: entity
   parent: [ OrganBaseHead, OrganVoxExternal ]

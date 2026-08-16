@@ -4,15 +4,19 @@
   description: job-description-ce
   playTimeTracker: JobChiefEngineer
   requirements:
-    - !type:RoleTimeRequirement
-      role: JobAtmosphericTechnician
-      time: 2.5h
+    # Pinwheel-stt - gooncave eviction
+    # !type:RoleTimeRequirement
+    # role: JobAtmosphericTechnician
+    # time: 1h # Pinwheel - easy unlocks
+    # Pinwheel-end - gooncave eviction
     - !type:RoleTimeRequirement
       role: JobStationEngineer
-      time: 5h
-    - !type:DepartmentTimeRequirement
-      department: Engineering
-      time: 10h
+      time: 1h # Pinwheel - easy unlocks
+    # Pinwheel-stt - easy unlocks
+    # !type:DepartmentTimeRequirement
+    # department: Engineering
+    # time: 10h
+    # Pinwheel-end - easy unlocks
   weight: 10
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"

@@ -1,4 +1,6 @@
+using Content.Shared.Radio; // Pinwheel - traitor sabotage
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes; // Pinwheel - traitor sabotage
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -42,6 +44,32 @@ public sealed partial class ResearchServerComponent : Component
 
     [DataField("researchConsoleUpdateTime"), ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan ResearchConsoleUpdateTime = TimeSpan.FromSeconds(1);
+
+    // Pinwheel-stt - traitor sabotage
+    /// <summary>
+    /// Has this server been sabotaged
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public bool Sabotaged = false;
+
+    /// <summary>
+    /// The radio channel to whine on when something goes wrong
+    /// </summary>
+    [DataField]
+    public ProtoId<RadioChannelPrototype> MessageChannel = "Science";
+
+    /// <summary>
+    /// Message to send when the server's shell is removed
+    /// </summary>
+    [DataField]
+    public LocId MessageOpen = "sabotage-message-open-servers";
+
+    /// <summary>
+    /// Message to use when the disk is removed
+    /// </summary>
+    [DataField]
+    public LocId MessageRemove = "sabotage-message-stop-servers";
+    // Pinwheel-end - traitor sabotage
 }
 
 /// <summary>

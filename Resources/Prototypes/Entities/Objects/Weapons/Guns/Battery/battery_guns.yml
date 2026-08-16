@@ -99,6 +99,7 @@
   - type: ContainerContainer
     containers:
       cell_slot: !type:ContainerSlot
+  - type: NoSmartEquipRecurse # Pinwheel - smartequip recurse stop
 
 - type: entity
   id: BaseWeaponBatterySmall
@@ -277,8 +278,14 @@
     price: 300
   - type: BatteryAmmoProvider
     proto: RedLaserPractice
-    fireCost: 62.5
+    fireCost: 20 # Pinwheel - practice visuals
   - type: PacifismAllowedGun
+  # Pinwheel-stt - practice visuals
+  # this has nothing to do with visuals because the visual changes are in the laser protype. but. you know
+  - type: Battery
+    maxCharge: 320
+    startingCharge: 320
+  # Pinwheel-end - practice visuals
 
 - type: entity
   name: pulse pistol
@@ -344,7 +351,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
   - type: Gun
-    selectedMode: SemiAuto
+    selectedMode: FullAuto
     fireRate: 3
     availableModes:
       - SemiAuto
@@ -497,7 +504,7 @@
   name: practice disabler
   parent: BaseWeaponBatterySmall
   id: WeaponDisablerPractice
-  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse. This one has been undertuned for cadets making it mostly harmless.
+  description: A practice model with a massively undertuned energy output and capacity; making for a faster recharge between firing, in turn being practicaly useless. # Pinwheel - disabler nerf
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/practice_disabler.rsi
@@ -522,24 +529,29 @@
   - type: StaticPrice
     price: 100
   - type: Gun
-    fireRate: 2
+    fireRate: 3 # Pinwheel - disabler nerf
     projectileSpeed: 35 # any higher and this causes issues in lag
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
   - type: BatteryAmmoProvider
     proto: BulletDisablerPractice
-    fireCost: 62.5
+    fireCost: 20 # Pinwheel - disabler nerf
   - type: Tag
     tags:
     - Taser
     - Sidearm
   - type: PacifismAllowedGun
+  # Pinwheel-stt - disabler nerf
+  - type: Battery
+    maxCharge: 200
+    startingCharge: 200
+  # Pinwheel-end - disabler nerf
 
 - type: entity
   name: disabler
   parent: [WeaponDisablerPractice, BaseSecurityCommandContraband]
   id: WeaponDisabler
-  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
+  description: A battery weapon firing bolts of energy that exhaust muscles on impact, helping control the distance between you and a target. # Pinwheel - disabler nerf
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/disabler.rsi
@@ -556,13 +568,18 @@
       - suitStorage
       - Belt
   - type: BatteryAmmoProvider
-    proto: BulletDisabler
-    fireCost: 62.5
+    proto: BulletDisablerSmg # Pinwheel - disabler nerf
+    fireCost: 100 # Pinwheel - disabler nerf
   - type: GuideHelp
     guides:
     - Security
     - Antagonists
   - type: PacifismAllowedGun
+  # Pinwheel-stt - disabler nerf
+  - type: Battery
+    maxCharge: 1000
+    startingCharge: 1000
+  # Pinwheel-end - disabler nerf
 
 - type: entity
   name: disabler SMG
@@ -842,7 +859,7 @@
   name: energy shotgun
   parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponEnergyShotgun
-  description: A one-of-a-kind prototype energy weapon that uses various shotgun configurations. It offers the possibility of both lethal and non-lethal shots, making it a versatile weapon.
+  description: An energy weapon in limited production issued to NanoTrasen security forces. Draws from a hypercapacitive power cell in concentrated bursts to fire window piercing projectile volleys. Capable of longer sustained fire than most kinetic shotguns. # Pinwheel - streamlined eshotgun
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
@@ -860,27 +877,29 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
   - type: Gun
-    fireRate: 2
+    fireRate: 1 # Pinwheel - streamlined eshotgun
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
+  # Pinwheel-stt - streamlined eshotgun
   - type: BatteryAmmoProvider
-    proto: BulletLaserSpreadNarrow
-    fireCost: 80
-  - type: BatteryWeaponFireModes
-    fireModes:
-    - proto: BulletLaserSpreadNarrow
-      fireCost: 80
-    - proto: BulletDisablerSmgSpread
-      fireCost: 48
-      pacifismAllowedMode: true
+    proto: BulletLaserSpreadPiercing
+    fireCost: 100
+  # type: BatteryWeaponFireModes
+  # fireModes:
+  # - proto: BulletLaserSpreadNarrow
+  #   fireCost: 80
+  # - proto: BulletDisablerSmgSpread
+  #   fireCost: 48
+  #   pacifismAllowedMode: true
+  # Pinwheel-end - streamlined eshotgun
   - type: Item
     size: Large
     sprite: Objects/Weapons/Guns/Battery/inhands_64x.rsi
     heldPrefix: energy
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Battery
-    maxCharge: 480
-    startingCharge: 480
+    maxCharge: 1200 # Pinwheel - streamlined eshotgun
+    startingCharge: 1200 # Pinwheel - streamlined eshotgun
 
 - type: entity
   name: energy magnum

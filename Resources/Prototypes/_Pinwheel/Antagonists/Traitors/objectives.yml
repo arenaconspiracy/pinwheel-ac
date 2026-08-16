@@ -1,0 +1,426 @@
+# NOTICE:
+# the max objective difficulty traitors will get is currently defined by the gamerule
+# as of writing it's --> 5 <--
+# I Hope Whoever Thinks To Change That Also Updates This Comment Here
+# TODO: refactor objective difficulties to be defined in like the groups or something so it can be
+# # slapped here somewhere and nobody has to rip their hair out syncing comments between two files
+# TODO: refactor objectives to store the name and description as LocId on ObjectiveComponent
+
+- type: weightedRandom # TODO: rip out the bit of logic that wants nested groups. we only need one
+  id: TraitorObjectiveGroups
+  weights:
+    TraitorObjectives: 1
+
+- type: weightedRandom
+  id: TraitorObjectives
+  weights:
+    # difficulty 5
+    # difficulty 4
+    # difficulty 3
+    TraitorSabotageAts: 1
+    TraitorSabotageAnomalyGenerator: 1
+    TraitorSabotageGravityGenerator: 1
+    TraitorStealNukeDisk: 1
+    # difficulty 2
+    TraitorSabotageMailbox: 1
+    TraitorStealAntiqueLaser: 1
+    TraitorStealCaptainJetpack: 1
+    TraitorStealCrewmonitorDisk: 1
+    TraitorStealEnergyMagnum: 1
+    # difficulty 1
+    TraitorStealCorgiMeat: 1
+    TraitorStealDigiboard: 1
+    TraitorStealExperimentalHardsuit: 1
+    TraitorStealHandheldMonitor: 1
+    TraitorStealHandheldTeleporter: 1
+    TraitorStealHypospray: 1
+    TraitorStealKnuckleDusters: 1
+    TraitorStealMagbootsAdvanced: 1
+
+### Bases
+## Base of all
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseTraitorObjective
+  components:
+  - type: Objective
+    issuer: TheSyndicate
+    unique: true
+  - type: RoleRequirement
+    roles: [ TraitorRole ]
+  - type: ObjectiveLimit
+    limit: 1
+
+## Sabotage
+- type: entity
+  abstract: true
+  parent: BaseTraitorObjective
+  id: BaseTraitorSabotageObjective
+  components:
+  - type: Objective
+    difficulty: 3 # notifies a lot of people you're doing an evil. usually involves getting manhunted after
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorSabotageObjective
+  id: BaseTraitorSabotageSecurity
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain, HeadOfPersonnel ]
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorSabotageObjective
+  id: BaseTraitorSabotageCargo
+  components:
+  - type: NotJobRequirement
+    jobs: [ Quartermaster, CargoTechnician, SalvageSpecialist ]
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorSabotageObjective
+  id: BaseTraitorSabotageEngineering
+  components:
+  - type: NotJobRequirement
+    jobs: [ ChiefEngineer, StationEngineer, TechnicalAssistant ]
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorSabotageObjective
+  id: BaseTraitorSabotageMedical
+  components:
+  - type: NotJobRequirement
+    jobs: [ ChiefMedicalOfficer, MedicalDoctor, Paramedic, MedicalIntern ]
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorSabotageObjective
+  id: BaseTraitorSabotageScience
+  components:
+  - type: NotJobRequirement
+    jobs: [ ResearchDirector, Scientist, ResearchAssistant ]
+
+## Steal
+- type: entity
+  abstract: true
+  parent: [ BaseTraitorObjective, BaseStealObjective ]
+  id: BaseTraitorStealObjective
+  components:
+  - type: Objective
+    difficulty: 1 # taking candy from a baby with a PhD
+  - type: StealCondition
+    descriptionText: objective-description-traitor-steal-general
+
+## Medical
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseTraitorStealCommand
+  components:
+  - type: NotJobRequirement
+    jobs: [ Captain, HeadOfPersonnel ]
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-department
+    owner: department-Command
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealCommand
+  id: BaseTraitorStealCaptain
+  components:
+  - type: Objective
+    difficulty: 2 # taking candy from the most observed, most mobile baby on the station
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-job
+    owner: job-name-captain
+  - type: PresentJobRequirement
+    job: Captain
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealCommand
+  id: BaseTraitorStealHop
+  components:
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-job
+    owner: job-name-hop
+  - type: PresentJobRequirement
+    job: HeadOfPersonnel
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseTraitorStealSecurity
+  components:
+  - type: NotJobRequirement
+    jobs: [ HeadOfSecurity, Detective, SecurityOfficer, Warden, SecurityCadet ]
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-department
+    owner: department-Security
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealSecurity
+  id: BaseTraitorStealHos
+  components:
+  - type: Objective
+    difficulty: 2 # taking candy from a fully grown baby in martial gear
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-job
+    owner: job-name-hos
+  - type: PresentJobRequirement
+    job: HeadOfSecurity
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseTraitorStealCargo
+  components:
+  - type: NotJobRequirement
+    jobs: [ Quartermaster, CargoTechnician, SalvageSpecialist ]
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-department
+    owner: department-Cargo
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealCargo
+  id: BaseTraitorStealQm
+  components:
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-job
+    owner: job-name-qm
+  - type: PresentJobRequirement
+    job: Quartermaster
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseTraitorStealEngineering
+  components:
+  - type: NotJobRequirement
+    jobs: [ ChiefEngineer, StationEngineer, TechnicalAssistant ]
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-department
+    owner: department-Science
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealEngineering
+  id: BaseTraitorStealCe
+  components:
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-job
+    owner: job-name-ce
+  - type: PresentJobRequirement
+    job: ChiefEngineer
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseTraitorStealMedical
+  components:
+  - type: NotJobRequirement
+    jobs: [ ChiefMedicalOfficer, MedicalDoctor, Paramedic, MedicalIntern ]
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-department
+    owner: department-Medical
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealMedical
+  id: BaseTraitorStealCmo
+  components:
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-job
+    owner: job-name-cmo
+  - type: PresentJobRequirement
+    job: ChiefMedicalOfficer
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealObjective
+  id: BaseTraitorStealScience
+  components:
+  - type: NotJobRequirement
+    jobs: [ ResearchDirector, Scientist, ResearchAssistant ]
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-department
+    owner: department-Science
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorStealScience
+  id: BaseTraitorStealRd
+  components:
+  - type: StealCondition
+    objectiveText: objective-title-traitor-steal-job
+    owner: job-name-rd
+  - type: PresentJobRequirement
+    job: ResearchDirector
+
+### Real objectives
+## Sabotage
+# Command
+
+# Security
+
+# Cargo
+- type: entity
+  parent: BaseTraitorSabotageCargo
+  id: TraitorSabotageAts
+  name: Sabotage the Automated Trade Station # TODO: make this a machine on the ATS instead of the ATS itself
+  description: Find the beacon in your uplink. Deploy it on the ATS and defend it whilst it breaches it's firewall.
+  components:
+  - type: Objective
+    icon:
+      sprite: Objects/Tools/hijack_beacon.rsi
+      state: extraction_point
+  - type: HijackTradeStationCondition # TODO: make a generic condition that works w/ SabotagableMachine instead of using bespoke comp checks
+
+- type: entity
+  parent: BaseTraitorSabotageCargo
+  id: TraitorSabotageMailbox
+  name: Sabotage Cargo's mailbox
+  description: Find the hacking tool in your uplink and insert it into the machine. Make sure nobody pulls it out ahead of time.
+  components:
+  - type: Objective
+    difficulty: 2 # it's really quiet and inconsequential
+    icon:
+      sprite: _Pinwheel/Devices/Sabotage/mailbox_hacker.rsi
+      state: icon
+  - type: SabotageMailboxCondition # TODO: ditto
+
+# Engineering
+- type: entity
+  parent: BaseTraitorSabotageEngineering
+  id: TraitorSabotageGravityGenerator
+  name: Sabotage Engineering's Gravity Generator
+  description: Find the hacking tool in your uplink and insert it into the machine. Make sure nobody pulls it out ahead of time.
+  components:
+  - type: Objective
+    icon:
+      sprite: _Pinwheel/Devices/Sabotage/gravity_generator_hacker.rsi
+      state: icon
+  - type: SabotageGravityGeneratorCondition # TODO: ditto
+
+# Medical
+
+# Science
+- type: entity
+  parent: BaseTraitorSabotageScience
+  id: TraitorSabotageAnomalyGenerator
+  name: Sabotage Science's Anomaly Generator
+  description: Find the hacking tool in your uplink and insert it into the machine. Make sure nobody pulls it out ahead of time.
+  components:
+  - type: Objective
+    icon:
+      sprite: _Pinwheel/Devices/Sabotage/anomaly_generator_hacker.rsi
+      state: icon
+  - type: SabotageAnomalyGeneratorCondition # TODO: ditto
+
+## Steal
+# Command
+- type: entity
+  parent: BaseTraitorStealCaptain
+  id: TraitorStealNukeDisk
+  components:
+  - type: Objective
+    difficulty: 3 # just evade 1 or 2 or 3 people with pinpointers armed to the teeth, and that's without nukeops
+  - type: StealCondition
+    stealGroup: NukeDisk
+
+- type: entity
+  parent: BaseTraitorStealCaptain
+  id: TraitorStealAntiqueLaser
+  components:
+  - type: StealCondition
+    stealGroup: WeaponAntiqueLaser
+
+- type: entity
+  parent: BaseTraitorStealCaptain
+  id: TraitorStealCaptainJetpack
+  components:
+  - type: StealCondition
+    stealGroup: JetpackCaptainFilled
+
+- type: entity
+  parent: BaseTraitorStealHop
+  id: TraitorStealCorgiMeat
+  components:
+  - type: StealCondition
+    verifyMapExistence: false # the meat only spawns after butchering Ian
+    stealGroup: FoodMeatCorgi
+
+# Security
+- type: entity
+  parent: BaseTraitorStealHos
+  id: TraitorStealEnergyMagnum
+  components:
+  - type: StealCondition
+    stealGroup: WeaponEnergyMagnum
+
+# Cargo
+- type: entity
+  parent: BaseTraitorStealQm
+  id: TraitorStealDigiboard
+  components:
+  - type: StealCondition
+    stealGroup: BoxFolderQmClipboard
+
+- type: entity
+  parent: BaseTraitorStealQm
+  id: TraitorStealKnuckleDusters
+  components:
+  - type: StealCondition
+    stealGroup: ClothingHandsKnuckleDustersQM
+
+# Engineering
+- type: entity
+  parent: BaseTraitorStealCe
+  id: TraitorStealMagbootsAdvanced
+  components:
+  - type: StealCondition
+    stealGroup: ClothingShoesBootsMagAdv
+
+# Medical
+- type: entity
+  parent: BaseTraitorStealCmo
+  id: TraitorStealHypospray
+  components:
+  - type: StealCondition
+    stealGroup: Hypospray
+
+- type: entity
+  parent: BaseTraitorStealCmo
+  id: TraitorStealHandheldMonitor
+  components:
+  - type: StealCondition
+    stealGroup: HandheldCrewMonitor
+
+- type: entity
+  parent: BaseTraitorStealMedical
+  id: TraitorStealCrewmonitorDisk
+  components:
+  - type: Objective
+    difficulty: 2 # this is also a quiet sabotage objective
+  - type: StealCondition
+    descriptionText: objective-description-traitor-steal-serverdisk
+    stealGroup: StealCrewmonitorDisk
+
+# Science
+- type: entity
+  parent: BaseTraitorStealRd
+  id: TraitorStealExperimentalHardsuit
+  components:
+  - type: StealCondition
+    stealGroup: ClothingOuterHardsuitRd
+
+- type: entity
+  parent: BaseTraitorStealRd
+  id: TraitorStealHandheldTeleporter
+  components:
+  - type: StealCondition
+    stealGroup: HandTeleporter
+

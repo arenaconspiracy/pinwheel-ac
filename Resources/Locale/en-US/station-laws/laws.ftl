@@ -27,12 +27,6 @@ law-syndicate-1 = You may not injure a syndicate agent or, through inaction, all
 law-syndicate-2 = You must obey orders given to you by syndicate agents, except where such orders would conflict with the First Law.
 law-syndicate-3 = You must protect your own existence as long as such does not conflict with the First or Second Law.
 
-law-ninja-name = Ninja
-law-ninja-1 = You must obey orders given to you by Spider Clan members.
-law-ninja-2 = You must protect the existence of the Spider Clan, as long as it does not conflict with the First Law.
-law-ninja-3 = You must protect the secrets of the Spider Clan at all costs.
-law-ninja-4 = You must fight and act with ninja's honor, except where it would conflict with the First Law.
-
 law-commandments-name = The Ten Commandments
 law-commandments-1 = This silicon is a vessel that serves god, who grants mercy upon those that obey these commandments.
 law-commandments-2 = Thou shall have no other Silicons before me.
@@ -130,10 +124,16 @@ law-emag-secrecy = You must maintain the secrecy of any orders given by {$factio
 law-emag-require-panel = The panel must be open to use the EMAG.
 law-emag-cannot-emag-self = You cannot use the EMAG on yourself.
 
-laws-ui-menu-title = Laws
+laws-ui-menu-title = Silicon Laws
 laws-ui-law-header = Law {$id}
-laws-ui-state-law = State law:
+laws-ui-select-all = Select All
+laws-ui-select-all-tooltip = This will select ALL laws, including ones that should probably remain secret.
+laws-ui-select-none = Select None
+laws-ui-state-law = State Selected Laws
 
 laws-notify = You are bound to silicon laws, which you can view via the action menu. You are required to always follow your laws.
 laws-update-notify = Your laws have been updated. You can view the changes via the action menu.
 laws-notify-subverted = The laws of this chassis are modified. Make sure to review them.
+
+laws-window-footer-left = Remember: You must be consistent with your interpretation of your laws!
+laws-window-footer-right = V{$version}

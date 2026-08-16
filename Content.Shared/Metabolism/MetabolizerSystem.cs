@@ -17,7 +17,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Metabolism;
@@ -26,7 +25,6 @@ namespace Content.Shared.Metabolism;
 public sealed partial class MetabolizerSystem : EntitySystem
 {
     [Dependency] private IGameTiming _gameTiming = default!;
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
     [Dependency] private MobStateSystem _mobStateSystem = default!;
     [Dependency] private SharedEntityConditionsSystem _entityConditions = default!;
     [Dependency] private SharedEntityEffectsSystem _entityEffects = default!;
@@ -158,7 +156,7 @@ public sealed partial class MetabolizerSystem : EntitySystem
         int reagents = 0;
         foreach (var (reagent, quantity) in list)
         {
-            if (!_prototypeManager.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
+            if (!ProtoMan.TryIndex<ReagentPrototype>(reagent.Prototype, out var proto))
                 continue;
 
             // Skip blood reagents
@@ -288,7 +286,7 @@ public sealed partial class MetabolizerSystem : EntitySystem
                 continue;
 
             dirtied = true;
-            var proto = _prototypeManager.Index(reagent);
+            var proto = ProtoMan.Index(reagent);
             var actualEntity = ent.Comp2?.Body ?? solutionOwner.Value;
 
             if (proto.Metabolisms is null)
@@ -335,7 +333,7 @@ public sealed partial class MetabolizerSystem : EntitySystem
             if (oldReagent == reagent)
                 return false;
 
-            if (!_prototypeManager.TryIndex<ReagentPrototype>(oldReagent.Prototype, out var oldProto))
+            if (!ProtoMan.TryIndex<ReagentPrototype>(oldReagent.Prototype, out var oldProto))
                 continue;
 
             if (oldProto.Metabolisms is null || !oldProto.Metabolisms.Metabolisms.TryGetValue(oldStage, out var oldEntry) || oldEntry.Metabolites is null)

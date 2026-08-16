@@ -1,7 +1,10 @@
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Medical.SuitSensors;
+using Content.Server.Radio.EntitySystems; // Pinwheel - traitor sabotage
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.Power.EntitySystems; // Pinwheel - traitor sabotage
+using Content.Shared._Pinwheel.Sabotage; // Pinwheel - traitor sabotage
 using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.Timing;
 using Content.Shared.DeviceNetwork.Components;
@@ -10,6 +13,8 @@ namespace Content.Server.Medical.CrewMonitoring;
 
 public sealed partial class CrewMonitoringServerSystem : EntitySystem
 {
+    [Dependency] private SharedPowerReceiverSystem _power = default!; // Pinwheel - traitor sabotage
+    [Dependency] private RadioSystem _radio = default!; // Pinwheel - traitor sabotage
     [Dependency] private SuitSensorSystem _sensors = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
     [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
@@ -24,6 +29,10 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
         SubscribeLocalEvent<CrewMonitoringServerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<CrewMonitoringServerComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<CrewMonitoringServerComponent, DeviceNetServerDisconnectedEvent>(OnDisconnected);
+        // Pinwheel-stt - traitor sabotage
+        SubscribeLocalEvent<CrewMonitoringServerComponent, SabotagableMachineOpenedEvent>(OnMachineOpened);
+        SubscribeLocalEvent<CrewMonitoringServerComponent, SabotageStopEvent>(OnSabotageStop); // technically true
+        // Pinwheel-end - traitor sabotage
     }
 
     public override void Update(float frameTime)
@@ -56,6 +65,16 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
         var sensorStatus = _sensors.PacketToSuitSensor(args.Data);
         if (sensorStatus == null)
             return;
+
+        // Pinwheel-stt - traitor sabotage
+        /* // TODO
+        if (component.Sabotaged)
+        {
+            sensorStatus.TotalDamage = null;
+            sensorStatus.TotalDamageThreshold = null;
+        }
+        */
+        // Pinwheel-end - traitor sabotage
 
         sensorStatus.Timestamp = _gameTiming.CurTime;
         component.SensorStatus[args.SenderAddress] = sensorStatus;
@@ -109,4 +128,26 @@ public sealed partial class CrewMonitoringServerSystem : EntitySystem
     {
         component.SensorStatus.Clear();
     }
+
+    // Pinwheel-stt - traitor sabotage
+    private void OnMachineOpened(Entity<CrewMonitoringServerComponent> ent, ref SabotagableMachineOpenedEvent args)
+    {
+        if (!_power.IsPowered(ent.Owner))
+            return; // cancel if unpowered
+
+        string message = Loc.GetString(ent.Comp.MessageOpen);
+        _radio.SendRadioMessage(ent, message, ent.Comp.MessageChannel, ent);
+    }
+
+    private void OnSabotageStop(Entity<CrewMonitoringServerComponent> ent, ref SabotageStopEvent args)
+    {
+        ent.Comp.Sabotaged = true;
+
+        if (!_power.IsPowered(ent.Owner))
+            return; // cancel if unpowered
+
+        string message = Loc.GetString(ent.Comp.MessageRemove);
+        _radio.SendRadioMessage(ent, message, ent.Comp.MessageChannel, ent);
+    }
+    // Pinwheel-end - traitor sabotage
 }

@@ -46,6 +46,19 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
+  # Pinwheel-stt - inhand displacements
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Diona/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Diona/displacement.rsi
+          state: hand_r
+  # Pinwheel-end - inhand displacements
   - type: InitialBody
     organs:
       Torso: OrganDionaTorso
@@ -83,8 +96,10 @@
     baseDecayRate: 0.0083
   - type: Thirst
     baseDecayRate: 0.0083
-  - type: Damageable
-    damageModifierSet: Diona
+  # Pinwheel-stt - species standards
+  # type: Damageable
+  # damageModifierSet: Diona
+  # Pinwheel-end - species standards
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
@@ -153,10 +168,7 @@
     speechVerb: Plant
     allowedEmotes: ['Chirp']
   - type: Vocal
-    sounds:
-      Male: UnisexDiona
-      Female: UnisexDiona
-      Unsexed: UnisexDiona
+    emoteSounds: UnisexDiona
   - type: TypingIndicator
     proto: diona
   - type: BodyEmotes
@@ -172,7 +184,7 @@
   - type: Rootable
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganDiona
   abstract: true
   suffix: Diona
@@ -281,7 +293,16 @@
     stages: [ Digestion, Bloodstream, Metabolites ]
 
 - type: entity
-  parent: OrganDionaBrain
+  abstract: true
+  id: BaseNymphingOrgan
+  components:
+  - type: Nymph
+    blacklist:
+      components:
+      - ChangelingTransform
+
+- type: entity
+  parent: [ OrganDionaBrain, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaBrainNymphing
   components:
@@ -290,7 +311,7 @@
     entityPrototype: OrganDionaNymphBrain
 
 - type: entity
-  parent: OrganDionaLungs
+  parent: [ OrganDionaLungs, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaLungsNymphing
   components:
@@ -298,7 +319,7 @@
     entityPrototype: OrganDionaNymphLungs
 
 - type: entity
-  parent: OrganDionaStomach
+  parent: [ OrganDionaStomach, BaseNymphingOrgan ]
   suffix: "Diona, Nymphing"
   id: OrganDionaStomachNymphing
   components:

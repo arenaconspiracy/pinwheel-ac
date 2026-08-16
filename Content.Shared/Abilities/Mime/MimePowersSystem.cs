@@ -1,15 +1,10 @@
 using Content.Shared.Popups;
-using Content.Shared.Actions;
-using Content.Shared.Actions.Events;
 using Content.Shared.Alert;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Maps;
 using Content.Shared.Paper;
 using Content.Shared.Physics;
 using Content.Shared.Speech.Muting;
-using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Abilities.Mime;
@@ -17,11 +12,7 @@ namespace Content.Shared.Abilities.Mime;
 public sealed partial class MimePowersSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popupSystem = default!;
-    [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private AlertsSystem _alertsSystem = default!;
-    [Dependency] private TurfSystem _turf = default!;
-    [Dependency] private IMapManager _mapMan = default!;
-    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
@@ -29,10 +20,7 @@ public sealed partial class MimePowersSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MimePowersComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<MimePowersComponent, ComponentShutdown>(OnComponentShutdown);
-        SubscribeLocalEvent<MimePowersComponent, InvisibleWallActionEvent>(OnInvisibleWall);
-
-        SubscribeLocalEvent<MimePowersComponent, BreakVowAlertEvent>(OnBreakVowAlert);
+	SubscribeLocalEvent<MimePowersComponent, BreakVowAlertEvent>(OnBreakVowAlert);
         SubscribeLocalEvent<MimePowersComponent, RetakeVowAlertEvent>(OnRetakeVowAlert);
     }
 
@@ -52,7 +40,7 @@ public sealed partial class MimePowersSystem : EntitySystem
 
             mime.ReadyToRepent = true;
             Dirty(uid, mime);
-            _popupSystem.PopupClient(Loc.GetString("mime-ready-to-repent"), uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("mime-ready-to-repent"), uid, uid);
         }
     }
 
@@ -68,48 +56,6 @@ public sealed partial class MimePowersSystem : EntitySystem
         }
 
         _alertsSystem.ShowAlert(ent.Owner, ent.Comp.VowAlert);
-        _actionsSystem.AddAction(ent, ref ent.Comp.InvisibleWallActionEntity, ent.Comp.InvisibleWallAction);
-    }
-
-    private void OnComponentShutdown(Entity<MimePowersComponent> ent, ref ComponentShutdown args)
-    {
-        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.InvisibleWallActionEntity);
-    }
-
-    /// <summary>
-    /// Creates an invisible wall in a free space after some checks.
-    /// </summary>
-    private void OnInvisibleWall(Entity<MimePowersComponent> ent, ref InvisibleWallActionEvent args)
-    {
-        if (!ent.Comp.Enabled)
-            return;
-
-        if (_container.IsEntityOrParentInContainer(ent))
-            return;
-
-        var xform = Transform(ent);
-        // Get the tile in front of the mime
-        var offsetValue = xform.LocalRotation.ToWorldVec();
-        var coords = xform.Coordinates.Offset(offsetValue).SnapToGrid(EntityManager, _mapMan);
-        var tile = _turf.GetTileRef(coords);
-        if (tile == null)
-            return;
-
-        // Check if the tile is blocked by a wall or mob, and don't create the wall if so
-        if (_turf.IsTileBlocked(tile.Value, CollisionGroup.Impassable | CollisionGroup.Opaque))
-        {
-            _popupSystem.PopupClient(Loc.GetString("mime-invisible-wall-failed"), ent, ent);
-            return;
-        }
-
-        var messageSelf = Loc.GetString("mime-invisible-wall-popup-self", ("mime", Identity.Entity(ent.Owner, EntityManager)));
-        var messageOthers = Loc.GetString("mime-invisible-wall-popup-others", ("mime", Identity.Entity(ent.Owner, EntityManager)));
-        _popupSystem.PopupPredicted(messageSelf, messageOthers, ent, ent);
-
-        // Make sure we set the invisible wall to despawn properly
-        PredictedSpawnAtPosition(ent.Comp.WallPrototype, _turf.GetTileCenter(tile.Value));
-        // Handle args so cooldown works
-        args.Handled = true;
     }
 
     private void OnBreakVowAlert(Entity<MimePowersComponent> ent, ref BreakVowAlertEvent args)
@@ -151,7 +97,6 @@ public sealed partial class MimePowersSystem : EntitySystem
 
         _alertsSystem.ClearAlert(uid, mimePowers.VowAlert);
         _alertsSystem.ShowAlert(uid, mimePowers.VowBrokenAlert);
-        _actionsSystem.RemoveAction(uid, mimePowers.InvisibleWallActionEntity);
     }
 
     /// <summary>
@@ -164,7 +109,7 @@ public sealed partial class MimePowersSystem : EntitySystem
 
         if (!mimePowers.ReadyToRepent)
         {
-            _popupSystem.PopupClient(Loc.GetString("mime-not-ready-repent"), uid, uid);
+            _popupSystem.PopupEntity(Loc.GetString("mime-not-ready-repent"), uid, uid);
             return;
         }
 
@@ -182,6 +127,5 @@ public sealed partial class MimePowersSystem : EntitySystem
 
         _alertsSystem.ClearAlert(uid, mimePowers.VowBrokenAlert);
         _alertsSystem.ShowAlert(uid, mimePowers.VowAlert);
-        _actionsSystem.AddAction(uid, ref mimePowers.InvisibleWallActionEntity, mimePowers.InvisibleWallAction, uid);
     }
 }

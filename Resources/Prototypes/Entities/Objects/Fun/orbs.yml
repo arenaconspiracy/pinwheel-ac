@@ -63,7 +63,7 @@
         volume: -10
 
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem, BaseHighlyIllegalContraband ] # Pinwheel
   id: PonderingOrb
   name: pondering orb
   description: Ponderous, man... Really ponderous.
@@ -151,12 +151,6 @@
       collection: GlassBreak
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 20

@@ -3,7 +3,7 @@
   parent: BaseVariationPass
   components:
   - type: SupplyNearLatheVariationPass
-    lathePrototype: MedicalTechFab
+    lathePrototype: MachineLatheMedical
     entityToSpawn: CrateOffbrandMedicalSupplies
 
 - type: entity

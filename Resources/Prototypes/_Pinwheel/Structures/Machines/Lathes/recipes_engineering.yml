@@ -1,0 +1,162 @@
+# Cables
+- type: latheRecipe
+  abstract: true
+  id: BaseRecipeCable
+  completetime: 0.2s
+  materials:
+    Steel: 20
+
+- type: latheRecipe
+  parent: BaseRecipeCable
+  id: RecipeCableLv
+  result: CableApcStack1
+
+- type: latheRecipe
+  parent: BaseRecipeCable
+  id: RecipeCableMv
+  result: CableMVStack1
+
+- type: latheRecipe
+  parent: BaseRecipeCable
+  id: RecipeCableHv
+  result: CableHVStack1
+
+# Tools
+- type: latheRecipe
+  abstract: true
+  id: BaseRecipeTool
+  completetime: 5s
+  materials:
+    Steel: 600
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeEngineeringGrenadeAir
+  result: AirGrenade # this isn't a tool but who cares
+  materials:
+    Plastic: 200
+    Steel: 600
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeEngineeringGrenadeFoam
+  result: MetalFoamGrenade # ditto
+  materials:
+    Plastic: 200
+    Steel: 600
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeEngineeringWeldingMask
+  result: ClothingHeadHatWelding # ditto
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeToolCrowbar
+  result: Crowbar
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeToolMultitool
+  result: Multitool
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeToolScrewdriver
+  result: Screwdriver
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeToolWrench
+  result: Wrench
+
+- type: latheRecipe
+  parent: BaseRecipeTool
+  id: RecipeToolWirecutter
+  result: Wirecutter
+
+# I'm Too Tired To Classify This
+- type: latheRecipe
+  id: RecipeEngineeringConveyor
+  completetime: 3s
+  result: ConveyorBeltAssembly
+  materials:
+    Steel: 200
+
+- type: latheRecipe
+  id: RecipeEngineeringFloodlight
+  completetime: 3s
+  result: FloodlightEmpty
+  materials:
+    Glass: 500
+    Steel: 200
+
+- type: latheRecipe
+  id: RecipeEngineeringHandheldMap
+  completetime: 3s
+  result: HandheldStationMapEmpty
+  materials:
+    Steel: 300
+
+- type: latheRecipe
+  id: RecipeEngineeringWarningCone
+  completetime: 2s
+  result: ClothingHeadHatCone # why is this
+  materials:
+    Plastic: 200
+
+# Boards
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringPowerApc
+  result: APCElectronics
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringPowerSubstation
+  result: SubstationMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringPowerSmes
+  result: SMESMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringPowerSmesAdvanced
+  result: SMESAdvancedMachineCircuitboard
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringIntercom
+  result: IntercomElectronics
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringStationMap
+  result: StationMapCircuitboard
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringAirAlarm
+  result: AirAlarmElectronics
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringAirlock
+  result: DoorElectronics
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringCondenser
+  result: CondenserMachineCircuitBoard
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringFireAlarm
+  result: FireAlarmElectronics
+
+- type: latheRecipe
+  parent: BaseRecipeBoard
+  id: RecipeBoardEngineeringFirelock
+  result: FirelockElectronics

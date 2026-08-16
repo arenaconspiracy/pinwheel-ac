@@ -67,13 +67,12 @@
   - type: Appearance
   - type: StaticPrice
     price: 40
-  - type: StealTarget
-    stealGroup: LAMP
   - type: Clothing
     sprite: Objects/Tools/flashlight.rsi
     quickEquip: false
     slots:
       - Belt
+  - type: NoSmartEquipRecurse # Pinwheel - smartequip recurse stop
 
 - type: entity
   name: seclite

@@ -5,6 +5,7 @@ using Content.Server.Popups;
 using Content.Server.Stack;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.Emag.Components;
@@ -19,15 +20,14 @@ using Content.Shared.Repairable;
 using Content.Shared.Stacks;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using System.Linq;
 
 namespace Content.Server.Materials;
 
 /// <inheritdoc/>
 public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSystem
 {
-    [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private GhostSystem _ghostSystem = default!;
     [Dependency] private MaterialStorageSystem _materialStorage = default!;
@@ -38,6 +38,8 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
     [Dependency] private StackSystem _stack = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -156,22 +158,32 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         if (component.ReclaimMaterials)
             SpawnMaterialsFromComposition(uid, item, completion * component.Efficiency, xform: xform);
 
-        if (CanGib(uid, item, component))
-        {
-            var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
-            _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was gibbed by {ToPrettyString(uid):entity} ");
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, false, component, xform);
-            _gibbing.Gib(item);
-            _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
-        }
-        else
-        {
-            if (component.ReclaimSolutions)
-                SpawnChemicalsFromComposition(uid, item, completion, true, component, xform);
-        }
+        // Pinhweel-stt - nerfed recyclers
+        bool destroy = true;
 
-        QueueDel(item);
+        if (CanDamageAndGib(uid, item, component))
+        {
+            if (_destructible.CanDestroy(item) && component.DamageOnEmag is not null)
+            {
+                var logImpact = HasComp<HumanoidProfileComponent>(item) ? LogImpact.Extreme : LogImpact.Medium;
+                _adminLogger.Add(LogType.Gib, logImpact, $"{ToPrettyString(item):victim} was minced by {ToPrettyString(uid):entity}");
+
+                _damage.TryChangeDamage(item, component.DamageOnEmag);
+
+                _appearance.SetData(uid, RecyclerVisuals.Bloody, true);
+
+                destroy = false;
+            }
+        }
+        // Pinhweel-end - nerfed recyclers
+
+        if (_destructible.CanDestroy(item) && component.ReclaimSolutions)
+            SpawnChemicalsFromComposition(uid, item, completion, true, component, xform);
+
+        // Pinhweel-stt - nerfed recyclers
+        if (destroy)
+            _destructible.DestroyEntity(item);
+        // Pinhweel-end - nerfed recyclers
     }
 
     private void SpawnMaterialsFromComposition(EntityUid reclaimer,
@@ -219,10 +231,14 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
         TransformComponent? xform = null,
         PhysicalCompositionComponent? composition = null)
     {
-        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform) || reclaimerComponent.SolutionContainerId == null)
+        if (!Resolve(reclaimer, ref reclaimerComponent, ref xform))
             return;
 
         efficiency *= reclaimerComponent.Efficiency;
+
+        // Solution will be empty, nothing to do.
+        if (efficiency <= 0)
+            return;
 
         var totalChemicals = new Solution();
 
@@ -242,7 +258,7 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
             // Are we a recycler? Only use drainable solution.
             if (_solutionContainer.TryGetDrainableSolution(item, out _, out var drainableSolution))
             {
-                totalChemicals.AddSolution(drainableSolution, _prototype);
+                totalChemicals.AddSolution(drainableSolution, ProtoMan);
             }
         }
         else
@@ -250,13 +266,17 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
             // Are we an industrial reagent grinder? Use extractable solution.
             if (_solutionContainer.TryGetExtractableSolution(item, out _, out var extractableSolution))
             {
-                totalChemicals.AddSolution(extractableSolution, _prototype);
+                totalChemicals.AddSolution(extractableSolution, ProtoMan);
             }
         }
 
-        if (!_solutionContainer.TryGetSolution(reclaimer, reclaimerComponent.SolutionContainerId, out var outputSolution) ||
-            !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume) ||
-            totalChemicals.Volume > 0)
+        // Transfer or spill the solution if there's anything to move.
+        if (totalChemicals.Volume <= 0)
+            return;
+
+        if (reclaimerComponent.SolutionContainerId == null ||
+            !_solutionContainer.TryGetSolution(reclaimer, reclaimerComponent.SolutionContainerId, out var outputSolution) ||
+            !_solutionContainer.TryTransferSolution(outputSolution.Value, totalChemicals, totalChemicals.Volume))
         {
             _puddle.TrySpillAt(reclaimer, totalChemicals, out _, sound, transformComponent: xform);
         }

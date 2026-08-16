@@ -5,6 +5,7 @@
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
+      weight: 1
     enum.HumanoidVisualLayers.FacialHair:
       limit: 1
       required: false
@@ -56,6 +57,19 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
+  # Pinwheel-stt - inhand displacements
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Slime/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Slime/displacement.rsi
+          state: hand_r
+  # Pinwheel-end - inhand displacements
   - type: InitialBody
     organs:
       Torso: OrganSlimePersonTorso
@@ -69,6 +83,7 @@
       FootLeft: OrganSlimePersonFootLeft
       FootRight: OrganSlimePersonFootRight
       Brain: OrganSlimePersonCore
+      Eyes: OrganSlimePersonEyes
       Lungs: OrganSlimePersonLungs
   - type: HumanoidProfile
     species: SlimePerson
@@ -110,12 +125,7 @@
   - type: TypingIndicator
     proto: slime
   - type: Vocal
-    sounds:
-      Male: MaleSlime
-      Female: FemaleSlime
-      Unsexed: MaleSlime
-  - type: Damageable
-    damageModifierSet: Slime
+    emoteSounds: MaleSlime
   - type: PassiveDamage # Around 8 damage a minute healed
     allowedStates:
     - Alive
@@ -184,7 +194,7 @@
   # End Offbrand Additions
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganSlimePerson
   abstract: true
   suffix: slime person
@@ -271,6 +281,14 @@
     maxReagents: 6
     metabolizerTypes: [ Slime ]
     stages: [ Digestion, Bloodstream, Metabolites ]
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganSlimePersonInternal, OrganSlimePersonExternal ]
+  id: OrganSlimePersonEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
 
 - type: entity
   parent: [ OrganBaseLungs, OrganBaseHeart, OrganSlimePersonInternal, OrganSlimePersonMetabolizer ]

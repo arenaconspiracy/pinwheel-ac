@@ -367,49 +367,6 @@
       - state: plain-inhand-right
 
 - type: entity
-  parent: [FoodMeatBase, BaseSlicingRefinableFood]
-  id: FoodMeatDragon
-  name: dragon flesh
-  description: The dense meat of the space-era apex predator is oozing with its mythical ichor. Ironically, best eaten raw.
-  components:
-  - type: Tag
-    tags:
-    - Raw
-    - Meat
-  - type: Sprite
-    layers:
-    - state: dragon
-    - state: dragon_veins
-      shader: unshaded
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Protein
-        Quantity: 20
-      - ReagentId: Ichor
-        Quantity: 10
-  - type: Extractable
-    juiceSolution:
-      reagents:
-      - ReagentId: Ichor
-        Quantity: 10
-  - type: ToolRefinable
-    refineResult:
-    - id: FoodMeatDragonCutlet
-      amount: 5
-  - type: Construction
-    graph: DragonSteak
-    node: start
-    defaultTarget: dragon steak
-  - type: Item
-    storedOffset: -2,1
-    inhandVisuals:
-      left:
-      - state: dragon-inhand-left
-      right:
-      - state: dragon-inhand-right
-
-- type: entity
   parent: [SolutionVeryTiny, FoodMeatRawBase, BaseSlicingRefinableFood]
   id: FoodMeatRat
   name: raw rat meat
@@ -1424,48 +1381,6 @@
       right:
       - state: plain-cooked-inhand-right
 
-- type: entity
-  parent: [FoodMeatCookedBase, BaseSlicingRefinableFood]
-  id: FoodMeatDragonCooked
-  name: dragon steak
-  description: Pouring ketchup on this is considered a capital crime on most stations.
-  components:
-  - type: Tag
-    tags:
-    - Cooked
-    - Meat
-    - Steak
-  - type: Sprite
-    layers:
-    - state: dragon-cooked
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Ichor
-        Quantity: 5
-      - ReagentId: Nutriment
-        Quantity: 15
-      - ReagentId: Protein
-        Quantity: 15
-  - type: ToolRefinable
-    refineResult:
-    - id: FoodMeatDragonCutletCooked
-      amount: 5
-  - type: Construction
-    graph: DragonSteak
-    node: dragon steak
-  - type: FoodSequenceElement
-    entries:
-      Burger: DragonSteak
-      Taco: DragonSteak
-  - type: Item
-    storedOffset: 0,-1
-    inhandVisuals:
-      left:
-      - state: dragon-cooked-inhand-left
-      right:
-      - state: dragon-cooked-inhand-right
-
 # Cutlets
 
 # Raw
@@ -1695,37 +1610,6 @@
   - type: Sprite
     state: salami-slice
 
-- type: entity
-  parent: FoodMeatCutletBase
-  id: FoodMeatDragonCutlet
-  name: raw dragon cutlet
-  description: A raw dragon meat cutlet.
-  components:
-  - type: Sprite
-    layers:
-    - state: dragoncutlet
-    - state: dragoncutlet_veins
-      shader: unshaded
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Protein
-        Quantity: 4
-      - ReagentId: Ichor
-        Quantity: 2
-  - type: Construction
-    graph: DragonCutlet
-    node: start
-    defaultTarget: dragon cutlet
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: generic-pink-inhand-left
-        color: "#D127A7"
-      right:
-      - state: generic-pink-inhand-right
-        color: "#D127A7"
-
 # Cooked
 
 - type: entity
@@ -1953,37 +1837,3 @@
       right:
       - state: generic-pink-inhand-right
         color: "#153F06"
-
-- type: entity
-  parent: FoodMeatCutletCookedBase
-  id: FoodMeatDragonCutletCooked
-  name: dragon cutlet
-  description: It's a meal for kings!
-  components:
-  - type: Sprite
-    state: dragoncutlet-cooked
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Ichor
-        Quantity: 1
-      - ReagentId: Nutriment
-        Quantity: 3
-      - ReagentId: Protein
-        Quantity: 3
-  - type: Construction
-    graph: DragonCutlet
-    node: dragon cutlet
-  - type: FoodSequenceElement
-    entries:
-      Burger: DragonCutlet
-      Taco: DragonCutlet
-  - type: Item
-    storedOffset: -1,1
-    inhandVisuals:
-      left:
-      - state: generic-pink-inhand-left
-        color: "#7A1763"
-      right:
-      - state: generic-pink-inhand-right
-        color: "#7A1763"

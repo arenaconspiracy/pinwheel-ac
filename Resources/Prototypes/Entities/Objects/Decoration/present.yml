@@ -184,6 +184,8 @@
         orGroup: GiftPool
       - id: BassGuitarInstrument
         orGroup: GiftPool
+      - id: FretlessBassGuitarInstrument
+        orGroup: GiftPool
       - id: OcarinaInstrument
         orGroup: GiftPool
       - id: PanFluteInstrument
@@ -235,8 +237,6 @@
       - id: ClothingBeltUtilityFilled
         orGroup: GiftPool
       - id: WeaponFlareGun
-        orGroup: GiftPool
-      - id: ResearchDisk
         orGroup: GiftPool
       - id: Machete
         orGroup: GiftPool
@@ -377,8 +377,6 @@
       - id: ToyRubberDuck
         orGroup: GiftPool
       - id: BalloonSyn
-        orGroup: GiftPool
-      - id: RGBStaff
         orGroup: GiftPool
     sound:
       path: /Audio/Effects/unwrap.ogg

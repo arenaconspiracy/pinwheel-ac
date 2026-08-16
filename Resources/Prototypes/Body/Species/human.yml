@@ -8,6 +8,7 @@
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
+      weight: 1
     enum.HumanoidVisualLayers.FacialHair:
       limit: 1
       required: false
@@ -61,6 +62,19 @@
           32:
             sprite: Mobs/Species/Human/displacement.rsi
             state: jumpsuit-female
+  # Pinwheel-stt - inhand displacements
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Human/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Human/displacement.rsi
+          state: hand_r
+  # Pinwheel-end - inhand displacements
   - type: InitialBody
     organs:
       Torso: OrganHumanTorso
@@ -99,7 +113,7 @@
       amount: 5
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganHuman
   abstract: true
   suffix: human
@@ -145,6 +159,7 @@
     hideableLayers:
     - enum.HumanoidVisualLayers.Hair
     - enum.HumanoidVisualLayers.Snout
+    - enum.HumanoidVisualLayers.FacialHair
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganHumanExternal ]

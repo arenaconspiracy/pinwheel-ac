@@ -66,3 +66,4 @@
     guides:
     - OffbrandCryostasis # Offbrand
   - type: PowerSwitch
+  - type: AmbientMusicMarkerMedical

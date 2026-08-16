@@ -108,8 +108,6 @@
   - type: Storage
     grid:
     - 0,0,9,1
-  - type: StealTarget
-    stealGroup: ChiefEngineerToolBelt
 
 - type: entity
   parent: ClothingBeltStorageBase
@@ -135,7 +133,7 @@
       - WetFloorSign
       - HolosignProjector
       - Plunger
-      - TrashBagBlue
+      - TrashBagHolding
       - GoldenPlunger
       - WireBrush
       - LightReplacer
@@ -159,10 +157,10 @@
         whitelist:
           tags:
           - TrashBag
-      trashbag_blue:
+      trashbag_holding:
         whitelist:
           tags:
-          - TrashBagBlue
+          - TrashBagHolding
       wetfloorsign:
         whitelist:
           tags:

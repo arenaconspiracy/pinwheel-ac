@@ -34,10 +34,6 @@
           2: { state: alert-1 }
           3: { state: alert-2 }
           4: { state: alert-2 }
-      enum.WiresVisuals.MaintenancePanelState:
-        enum.WiresVisualLayers.MaintenancePanel:
-          True: { visible: false }
-          False: { visible: true }
   - type: AtmosAlertsComputer
   - type: ActivatableUI
     singleUser: true
@@ -52,6 +48,7 @@
     guides:
     - AtmosphericAlertsComputer
     - DeviceMonitoringAndControl
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -234,8 +231,6 @@
     color: "#43ccb5"
   - type: Computer
     board: CargoShuttleConsoleCircuitboard
-  - type: StealTarget
-    stealGroup: CargoShuttleConsoleCircuitboard
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -332,6 +327,7 @@
         type: PowerMonitoringConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -357,6 +353,7 @@
     color: "#1f8c28"
   - type: Computer
     board: MedicalRecordsComputerCircuitboard
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -460,57 +457,7 @@
     receiveFrequencyId: CrewMonitor
   - type: WirelessNetworkConnection
     range: 1200
-
-- type: entity
-  parent: BaseComputerAiAccess
-  id: ComputerResearchAndDevelopment
-  name: R&D computer
-  description: A computer used to interface with R&D tools.
-  components:
-  - type: Sprite
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      state: rdcomp
-    - map: ["computerLayerKeys"]
-      state: rd_key
-    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      state: generic_panel_open
-  - type: ResearchClient
-  - type: ResearchConsole
-  - type: ActiveRadio
-    channels:
-    - Science
-  - type: TechnologyDatabase
-  - type: ActivatableUI
-    key: enum.ResearchConsoleUiKey.Key
-  - type: UserInterface
-    interfaces:
-      enum.ResearchConsoleUiKey.Key:
-        type: ResearchConsoleBoundUserInterface
-      enum.ResearchClientUiKey.Key:
-        type: ResearchClientBoundUserInterface
-      enum.WiresUiKey.Key:
-        type: WiresBoundUserInterface
-  - type: ApcPowerReceiver
-    powerLoad: 50
-  - type: PowerState
-    idlePowerDraw: 50
-    workingPowerDraw: 1000
-  - type: Computer
-    board: ResearchComputerCircuitboard
-  - type: AccessReader
-    access: [["Research"]]
-  - type: PointLight
-    radius: 1.5
-    energy: 4.0
-    color: "#b53ca1"
-  - type: GuideHelp
-    guides:
-    - Science
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -639,6 +586,7 @@
     radius: 1.5
     energy: 4.0
     color: "#1f8c28"
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   parent: BaseComputerAiAccess
@@ -707,7 +655,7 @@
   - type: CommunicationsConsole
     title: comms-console-announcement-title-nukie
     color: "#ff0000"
-    canShuttle: false
+    # canShuttle: false # Pinwheel - rigid evac
     global: true #announce to everyone they're about to fuck shit up
     announceSentBy: false # The title already says who they are.
     sound: /Audio/Announcements/war.ogg
@@ -717,40 +665,6 @@
     radius: 1.5
     energy: 4.0
     color: "#f71713"
-
-- type: entity
-  parent: ComputerComms
-  id: WizardComputerComms
-  name: wizard communications computer
-  description: A computer capable of magically projecting your speech to the station. Using this to make an announcement will alert the station to your presence.
-  components:
-  - type: Sprite
-    layers:
-    - map: ["computerLayerBody"]
-      state: computer
-    - map: ["computerLayerKeyboard"]
-      state: generic_keyboard
-    - map: ["computerLayerScreen"]
-      state: comm_wizard
-    - map: ["computerLayerKeys"]
-      state: wizard_key
-    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
-      state: generic_panel_open
-  - type: AccessReader
-    access: [[ "Wizard" ]]
-  - type: CommunicationsConsole
-    title: comms-console-announcement-title-wizard
-    color: "#ff00ff"
-    canShuttle: false
-    global: true #announce to everyone they're about to fuck shit up
-    announceSentBy: false
-    sound: /Audio/Announcements/war.ogg
-  - type: Computer
-    board: WizardCommsComputerCircuitboard
-  - type: PointLight
-    radius: 1.5
-    energy: 4.0
-    color: "#F317F3"
 
 - type: entity
   parent: ComputerComms
@@ -775,7 +689,7 @@
   - type: CommunicationsConsole
     title: comms-console-announcement-title-centcom
     color: "#1d8bad"
-    canShuttle: false
+    # canShuttle: false # Pinwheel - rigid evac
     global: true
   - type: Computer
     board: CentcommCommsComputerCircuitboard
@@ -941,6 +855,7 @@
     color: "#c9c042"
   - type: AccessReader
     access: [["Engineering"]]
+  - type: AmbientMusicMarkerEngineering
 
 - type: entity
   id: ComputerCargoOrdersMedical
@@ -974,6 +889,7 @@
     color: "#41e0fc"
   - type: AccessReader
     access: [["Medical"]]
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   id: ComputerCargoOrdersScience
@@ -1267,10 +1183,6 @@
           computerLayerKeys:
             True: { visible: true, shader: unshaded }
             False: { visible: true }
-        enum.WiresVisuals.MaintenancePanelState:
-          enum.WiresVisualLayers.MaintenancePanel:
-            True: { visible: false }
-            False: { visible: true }
     - type: SalvageExpeditionConsole
     - type: ActivatableUI
       key: enum.SalvageConsoleUiKey.Expedition
@@ -1289,8 +1201,6 @@
       color: "#b89f25"
     - type: AccessReader
       access: [["Salvage"]]
-    - type: StealTarget
-      stealGroup: SalvageExpeditionsComputerCircuitboard
 
 - type: entity
   parent: BaseComputer
@@ -1696,10 +1606,6 @@
           Occupied: { state: ai-fixer-full }
           Rebooting: { state: ai-fixer-404 }
           Dead: { state: ai-fixer-404 }
-      enum.WiresVisuals.MaintenancePanelState:
-        enum.WiresVisualLayers.MaintenancePanel:
-          True: { visible: false }
-          False: { visible: true }
   - type: ApcPowerReceiver
     powerLoad: 50
   - type: PowerState

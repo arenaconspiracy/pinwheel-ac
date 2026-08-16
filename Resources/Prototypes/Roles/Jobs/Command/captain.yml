@@ -4,18 +4,20 @@
   description: job-description-captain
   playTimeTracker: JobCaptain
   requirements:
-    - !type:DepartmentTimeRequirement
-      department: Engineering
-      time: 4h
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 4h
-    - !type:DepartmentTimeRequirement
-      department: Science
-      time: 4h
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 4h
+    # Pinwheel-stt - easy unlocks
+    # !type:DepartmentTimeRequirement
+    # department: Engineering
+    # time: 4h
+    # !type:DepartmentTimeRequirement
+    # department: Medical
+    # time: 4h
+    # !type:DepartmentTimeRequirement
+    # department: Science
+    # time: 4h
+    # !type:DepartmentTimeRequirement
+    # department: Security
+    # time: 4h
+    # Pinwheel-end - easy unlocks
     - !type:DepartmentTimeRequirement
       department: Command
       time: 4h

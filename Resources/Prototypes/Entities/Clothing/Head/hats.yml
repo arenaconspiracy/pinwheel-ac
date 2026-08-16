@@ -38,8 +38,8 @@
     sprite: Clothing/Head/Hats/beret_french.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_french.rsi
-  - type: AddAccentClothing
-    accent: FrenchAccent
+  - type: FrenchAccent
+    relayAccent: true
   - type: Tag
     tags:
     - PetWearable
@@ -187,6 +187,7 @@
     tags:
     - PetWearable
     - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
@@ -202,6 +203,7 @@
     tags:
     - PetWearable
     - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
@@ -265,6 +267,7 @@
     tags:
     - PetWearable
     - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: [ClothingHeadBase, BaseCommandContraband]
@@ -314,6 +317,7 @@
     tags:
     - PetWearable
     - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
@@ -503,9 +507,9 @@
     tags:
     - PetWearable
     - CorgiWearable
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: pirate
+  - type: ReplacementAccent
+    accent: pirate
+    relayAccent: true
 
 - type: entity
   parent: ClothingHeadBase
@@ -529,7 +533,7 @@
       HeadSide : HEAD
 
 - type: entity
-  parent: ClothingHeadHatWizardBase
+  parent: ClothingHeadBase # Pinwheel
   id: ClothingHeadHatRedwizard
   name: red wizard hat
   description: A strange-looking red hat that most certainly belongs to a powerful magic-user.
@@ -552,7 +556,6 @@
   components:
   - type: Clothing
     sprite: Clothing/Head/Hats/santahat.rsi
-  - type: Appearance
   - type: HideLayerClothing
     layers:
       Hair: HEAD
@@ -589,8 +592,8 @@
     sprite: Clothing/Head/Hats/sombrero.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/sombrero.rsi
-  - type: AddAccentClothing
-    accent: SpanishAccent
+  - type: SpanishAccent
+    relayAccent: true
   - type: Tag
     tags:
     - PetWearable
@@ -677,9 +680,8 @@
   components:
   - type: Clothing
     sprite: Clothing/Head/Hats/ushanka.rsi
-  - type: Appearance
-  - type: AddAccentClothing
-    accent: RussianAccent
+  - type: RussianAccent
+    relayAccent: true
   - type: Foldable
     canFoldInsideContainer: true
   - type: FoldableClothing
@@ -733,7 +735,7 @@
         color: "#a60b0b"
 
 - type: entity
-  parent: ClothingHeadHatWizardBase
+  parent: ClothingHeadBase # Pinwheel
   id: ClothingHeadHatVioletwizard
   name: violet wizard hat
   description: A strange-looking violet hat that most certainly belongs to a powerful magic-user.
@@ -758,12 +760,11 @@
     sprite: Clothing/Head/Hats/warden.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/warden.rsi
-  - type: StealTarget
-    stealGroup: ClothingHeadHatWarden
   - type: Tag
     tags:
     - PetWearable
     - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase
@@ -771,7 +772,6 @@
   name: witch hat
   description: A witch hat.
   components:
-  - type: WizardClothes #Yes this will count
   - type: Sprite
     sprite: Clothing/Head/Hats/witch.rsi
   - type: Clothing
@@ -803,14 +803,7 @@
       HeadSide : HEAD
 
 - type: entity
-  abstract: true
-  parent: [ ClothingHeadBase, BaseMagicalContraband ]
-  id: ClothingHeadHatWizardBase
-  components:
-  - type: WizardClothes
-
-- type: entity
-  parent: ClothingHeadHatWizardBase
+  parent: ClothingHeadBase # Pinwheel
   id: ClothingHeadHatWizard
   name: wizard hat
   description: A strange-looking blue hat that most certainly belongs to a powerful magic-user.
@@ -1052,9 +1045,9 @@
     sprite: Clothing/Head/Hats/piratetricord.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/piratetricord.rsi
-  - type: AddAccentClothing
-    accent: ReplacementAccent
-    replacement: pirate
+  - type: ReplacementAccent
+    accent: pirate
+    relayAccent: true
 
 - type: entity
   parent: ClothingHeadBase
@@ -1333,9 +1326,9 @@
       sprite: Clothing/Head/Hats/cowboyhatbrown.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/cowboyhatbrown.rsi
-    - type: AddAccentClothing
-      accent: ReplacementAccent
-      replacement: cowboy
+    - type: ReplacementAccent
+      accent: cowboy
+      relayAccent: true
     - type: Tag
       tags:
       - PetWearable
@@ -1464,9 +1457,9 @@
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
-            Ash:
-              min: 1
-              max: 1
+          Ash:
+            min: 1
+            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
@@ -1484,6 +1477,7 @@
     tags:
     - PetWearable
     - CorgiWearable
+    - WhitelistChameleon
 
 - type: entity
   parent: ClothingHeadBase

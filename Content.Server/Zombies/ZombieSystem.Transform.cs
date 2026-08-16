@@ -262,7 +262,7 @@ public sealed partial class ZombieSystem
         _damageable.SetDamageModifierSetId(target, "Zombie");
 
         // Begin Offbrand
-        var allProto = _protoManager.Index(AddOnAnyZombified);
+        var allProto = ProtoMan.Index(AddOnAnyZombified);
         EntityManager.RemoveComponents(target, allProto.Components);
         EntityManager.AddComponents(target, allProto.Components);
         // End Offbrand
@@ -280,7 +280,10 @@ public sealed partial class ZombieSystem
         _inventory.TryUnequip(target, "ears", true, true);
 
         //popup
-        _popup.PopupEntity(Loc.GetString("zombie-transform", ("target", target)), target, PopupType.LargeCaution);
+        _popup.PopupEntity(
+            Loc.GetString("zombie-transform", ("target", Identity.Entity(target, EntityManager))),
+            target,
+            PopupType.LargeCaution);
 
         //Make it sentient if it's an animal or something
         _mind.MakeSentient(target);
@@ -331,13 +334,7 @@ public sealed partial class ZombieSystem
 
         if (!HasComp<GhostRoleMobSpawnerComponent>(target) && !hasMind) //this specific component gives build test trouble so pop off, ig
         {
-            //yet more hardcoding. Visit zombie.ftl for more information.
-            var ghostRole = EnsureComp<GhostRoleComponent>(target);
-            EnsureComp<GhostTakeoverAvailableComponent>(target);
-            ghostRole.RoleName = Loc.GetString("zombie-generic");
-            ghostRole.RoleDescription = Loc.GetString("zombie-role-desc");
-            ghostRole.RoleRules = Loc.GetString("zombie-role-rules");
-            ghostRole.MindRoles.Add(MindRoleZombie);
+            MakeGhostRole(target);
         }
 
         if (TryComp<HandsComponent>(target, out var handsComp))

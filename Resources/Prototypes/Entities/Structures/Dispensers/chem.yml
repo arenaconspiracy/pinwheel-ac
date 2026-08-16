@@ -35,8 +35,6 @@
     guides:
     - Chemicals
     - OffbrandChemist # Offbrand
-  - type: StealTarget
-    stealGroup: ChemDispenser
   - type: Fixtures
     fixtures:
       fix1:
@@ -48,6 +46,7 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: AmbientMusicMarkerMedical
 
 - type: entity
   id: ChemDispenser

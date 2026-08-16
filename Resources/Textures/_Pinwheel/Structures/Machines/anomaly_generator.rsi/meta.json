@@ -1,0 +1,76 @@
+{
+  "version":1,
+  "size":{
+    "x":96,
+    "y":96
+  },
+  "license":"CC0-1.0",
+  "copyright":"Created by EmoGarbage, 'base' edited and 'tool' & 'sabotaging' authored by arenaconspiracy (github)",
+  "states":[
+    {
+      "name": "generating",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name":"base"
+    },
+    {
+      "name":"tool"
+    },
+    {
+      "name": "sabotaging",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+	]
+      ]
+    },
+    {
+      "name": "inserting",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "panel"
+    },
+    {
+      "name": "powered",
+      "delays": [
+        [
+          1.0,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.25,
+          0.5
+        ]
+      ]
+    }
+  ]
+}

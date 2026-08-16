@@ -150,58 +150,20 @@
         - !type:ReagentCondition
           reagent: Ethanol
           min: 15
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
         damage:
           types:
             Poison: 0.1
-      # dwarves take less toxin damage and heal a marginal amount of brute
-      - !type:HealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ethanol
-          min: 15
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-        damage:
-          types:
-            Poison: 0.02
-      - !type:EvenHealthChange
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ethanol
-          min: 15
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-        damage:
-          Brute: -0.1
       - !type:Vomit
         probability: 0.04
         conditions:
         - !type:ReagentCondition
           reagent: Ethanol
           min: 12
-        # dwarves immune to vomiting from alcohol
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
       - !type:Drunk
         boozePower: 2
       # Begin Offbrand
       - !type:ModifyStatusEffect
         effectProto: StatusEffectPainkillersMildEthanol
-        time: 2
-        type: Add
-      - !type:ModifyStatusEffect
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ethanol
-          min: 15
-        - !type:MetabolizerTypeCondition
-          type: [ Dwarf ]
-          inverted: true
-        effectProto: StatusEffectPainkillersMildEthanolOverdose
         time: 2
         type: Add
       # End Offbrand
@@ -1535,11 +1497,10 @@
       metabolites:
         Ethanol: 0.3
       effects:
-        - !type:GenericStatusEffect
-          key: RatvarianLanguage
-          component: RatvarianLanguage
-        - !type:SatiateThirst
-          factor: 2
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectRatvarianLanguage
+      - !type:SatiateThirst
+        factor: 2
 
 - type: reagent
   id: Silencer
@@ -2287,9 +2248,6 @@
         - !type:ReagentCondition
           reagent: BacchusBlessing
           min: 6
-        - !type:MetabolizerTypeCondition
-          type: [Dwarf]
-          inverted: true
         damage:
           types:
             Poison: 0.2 # TODO: Figure out poison amount. Ethanol does 0.1, this does 0.2 but also metabolises almost 3 to 4 times as fast as ethanol. This would be more Liver damage when that time arrives.
@@ -2298,8 +2256,6 @@
         - !type:ReagentCondition
           reagent: BacchusBlessing
           min: 6
-        - !type:MetabolizerTypeCondition
-          type: [Dwarf]
         damage:
           types:
             Poison: 0.04 # TODO: Might increase this, even though it's just double of ethanol from 0.02 to 0.04
@@ -2309,6 +2265,3 @@
         - !type:ReagentCondition
           reagent: BacchusBlessing
           min: 8
-        - !type:MetabolizerTypeCondition
-          type: [Dwarf]
-          inverted: true

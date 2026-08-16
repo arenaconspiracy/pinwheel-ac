@@ -6,14 +6,14 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 2.5h
+      time: 2h # Pinwheel - easy unlocks
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
   access:
   - Medical
   - Maintenance
-  extendedAccess:
+  #extendedAccess: # Pinwheel - gooncave eviction
   - Chemistry
   special:
   - !type:GiveItemOnHolidaySpecial

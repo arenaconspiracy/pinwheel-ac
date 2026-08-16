@@ -1,0 +1,197 @@
+## Cargo
+- type: latheRecipePack
+  id: LathePackCargoSpares
+  recipes:
+  - RecipeCargoClipboardPlastic
+  - RecipeCargoClipboardWood
+  - RecipeCargoEnvelope
+  - RecipeCargoParcelWrap
+  - RecipeCargoPen
+  - RecipeCargoUtilityKnife
+
+# nothingburger department award
+# type: latheRecipePack
+# id: LathePackCargoUtilities
+# recipes:
+# - RecipeServiceTablewareMetalSpoon
+
+- type: latheRecipePack
+  id: LathePackCargoBoards
+  recipes:
+    - RecipeBoardSharedRechargerCell
+
+## Engineering
+- type: latheRecipePack
+  id: LathePackEngineeringSpares
+  recipes:
+  - RecipeCableLv
+  - RecipeCableMv
+  - RecipeCableHv
+  - RecipeEngineeringGrenadeAir
+  - RecipeEngineeringGrenadeFoam
+  - RecipeEngineeringWeldingMask
+  - RecipeToolCrowbar
+  - RecipeToolMultitool
+  - RecipeToolScrewdriver
+  - RecipeToolWrench
+  - RecipeToolWirecutter
+
+- type: latheRecipePack
+  id: LathePackEngineeringUtilities
+  recipes:
+  - RecipeEngineeringConveyor
+  - RecipeEngineeringFloodlight
+  - RecipeEngineeringHandheldMap
+  - RecipeEngineeringWarningCone
+
+- type: latheRecipePack
+  id: LathePackEngineeringBoards
+  recipes:
+  - RecipeBoardEngineeringPowerApc
+  - RecipeBoardEngineeringPowerSubstation
+  - RecipeBoardEngineeringPowerSmes
+  - RecipeBoardEngineeringPowerSmesAdvanced
+  - RecipeBoardEngineeringIntercom
+  - RecipeBoardEngineeringStationMap
+  - RecipeBoardEngineeringAirAlarm
+  - RecipeBoardEngineeringAirlock
+  - RecipeBoardEngineeringCondenser
+  - RecipeBoardEngineeringFireAlarm
+  - RecipeBoardEngineeringFirelock
+  - RecipeBoardSharedLatheCutter
+  - RecipeBoardSharedRechargerCell
+  - RecipeBoardSharedRechargerCyborg
+
+## Medical
+- type: latheRecipePack
+  id: LathePackMedicalSpares
+  recipes:
+  - RecipeChemistryBeakerLarge
+  - RecipeChemistryBeakerSmall
+  - RecipeChemistryBottle
+  - RecipeChemistryGoggles
+  - RecipeChemistryJetInjector
+  - RecipeChemistryJug
+  - RecipeChemistryPillcan
+  - RecipeChemistrySyringe
+  - RecipeChemistryVialLarge
+  - RecipeChemistryVialSmall
+  - RecipeSurgeryCautery
+  - RecipeSurgeryDrill
+  - RecipeSurgeryHemostat
+  - RecipeSurgeryRetractor
+  - RecipeSurgerySaw
+  - RecipeSurgeryScalpel
+  - RecipeTopicalBrutepack
+  - RecipeTopicalOintment
+  - RecipeTopicalGauze
+  - RecipeTopicalTourniquet
+
+- type: latheRecipePack
+  id: LathePackMedicalUtilities
+  recipes:
+  - RecipeMedicalBodybag
+  - RecipeMedicalRollerbed
+  - RecipeMedicalRollerbedCheap
+  - RecipeMedicalRollerbedEmergency
+  - RecipeMedicalCaneOffset
+  - RecipeMedicalCaneWhite
+  - RecipeMedicalTankharness
+
+- type: latheRecipePack
+  id: LathePackMedicalBoards
+  recipes:
+  - RecipeBoardChemistryCentrifuge
+  - RecipeBoardChemistryElectrolizer
+  - RecipeBoardChemistryHotplate
+  - RecipeBoardMedicalSmartfridge
+  - RecipeBoardMedicalCrewMonitor
+
+## Science
+- type: latheRecipePack
+  id: LathePackScienceSpares
+  recipes:
+  - RecipeServiceTablewareMetalSpoon
+
+- type: latheRecipePack
+  id: LathePackScienceUtilities
+  recipes:
+  - RecipeServiceTablewareMetalSpoon
+  # Anomaly Locators (both)
+  # Microreactor Power Cell Maybe After I Nerf it
+
+- type: latheRecipePack
+  id: LathePackScienceBoards
+  recipes:
+  - RecipeBoardSharedRechargerCell
+  - RecipeBoardSharedRechargerCyborg
+
+## Security
+- type: latheRecipePack
+  id: LathePackSecuritySpares
+  recipes:
+  - RecipeSecurityGrenadeFlashbang
+  - RecipeSecurityGrenadeStinger
+  - RecipeSecurityGrenadeTeargas
+  - RecipeSecurityFlare
+  - RecipeSecurityFlash
+  - RecipeSecurityForensicPad
+  - RecipeSecurityRestraintsHandcuffs
+  - RecipeSecurityRestraintsZipties
+  - RecipeTopicalTourniquet
+
+- type: latheRecipePack
+  id: LathePackSecurityUtilities
+  recipes:
+  - RecipeSecurityTargetClown # TODO: spawning solid structures from a lathe is bad
+  - RecipeSecurityTargetHuman
+  - RecipeSecurityTargetSyndicate
+
+- type: latheRecipePack
+  id: LathePackSecurityBoards
+  recipes:
+  - RecipeBoardSecurityCameraMonitor
+  - RecipeBoardSecurityCriminalRecords
+  - RecipeBoardSharedRecharger
+
+## Service
+- type: latheRecipePack
+  id: LathePackServiceSpares
+  recipes:
+  - RecipeServiceJanitorialBucket
+  - RecipeServiceJanitorialLightreplacer
+  - RecipeServiceJanitorialMop
+  - RecipeServiceJanitorialTrashbag
+  - RecipeServiceJanitorialWirebrush
+  - RecipeServiceTablewareMetalFork
+  # RecipeServiceTablewareMetalKnife # there's none
+  - RecipeServiceTablewareMetalSpoon
+  - RecipeServiceTablewarePlasticFork
+  - RecipeServiceTablewarePlasticKnife
+  - RecipeServiceTablewarePlasticSpoon
+  - RecipeServiceDishBowl
+  - RecipeServiceDishPlate
+  - RecipeServiceDishSkewer
+
+- type: latheRecipePack
+  id: LathePackServiceUtilities
+  recipes:
+  - RecipeMedicalTankharness
+  - RecipeServiceAshtray
+  - RecipeServiceFoldingchair
+  - RecipeServiceWetfloorSign
+
+- type: latheRecipePack
+  id: LathePackServiceBoards
+  recipes:
+  - RecipeBoardChemistryGrinder
+  - RecipeBoardMedicalSmartfridge
+  - RecipeBoardServiceBiogenerator
+  - RecipeBoardServiceBoozedispenser
+  - RecipeBoardServiceGrill
+  - RecipeBoardServiceHydrotray
+  - RecipeBoardServiceNewsComputer
+  - RecipeBoardServiceMicrowave
+  - RecipeBoardServiceTelevision
+  - RecipeBoardServiceUniformprinter
+  - RecipeBoardSharedLatheCutter

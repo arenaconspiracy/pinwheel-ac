@@ -1,6 +1,9 @@
 using System.Linq;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Radio.EntitySystems; // Pinwheel - traitor sabotage
 using Content.Shared.Research.Components;
+using Content.Shared._Pinwheel.Sabotage; // Pinwheel - traitor sabotage
+using Robust.Shared.Containers; // Pinwheel - server sabotage
 
 namespace Content.Server.Research.Systems;
 
@@ -11,6 +14,10 @@ public sealed partial class ResearchSystem
         SubscribeLocalEvent<ResearchServerComponent, ComponentStartup>(OnServerStartup);
         SubscribeLocalEvent<ResearchServerComponent, ComponentShutdown>(OnServerShutdown);
         SubscribeLocalEvent<ResearchServerComponent, TechnologyDatabaseModifiedEvent>(OnServerDatabaseModified);
+        // Pinwheel-stt - traitor sabotage
+        SubscribeLocalEvent<ResearchServerComponent, SabotagableMachineOpenedEvent>(OnMachineOpened);
+        SubscribeLocalEvent<ResearchServerComponent, SabotageStopEvent>(OnSabotageStop); // technically true
+        // Pinwheel-end - traitor sabotage
     }
 
     private void OnServerStartup(EntityUid uid, ResearchServerComponent component, ComponentStartup args)
@@ -148,6 +155,28 @@ public sealed partial class ResearchSystem
         return ev.Points;
     }
 
+    // Pinwheel-stt - traitor sabotage
+    private void OnMachineOpened(Entity<ResearchServerComponent> ent, ref SabotagableMachineOpenedEvent args)
+    {
+        if (!CanRun(ent.Owner))
+            return; // cancel if unpowered
+
+        string message = Loc.GetString(ent.Comp.MessageOpen);
+        _radio.SendRadioMessage(ent, message, ent.Comp.MessageChannel, ent);
+    }
+
+    private void OnSabotageStop(Entity<ResearchServerComponent> ent, ref SabotageStopEvent args)
+    {
+        ent.Comp.Sabotaged = true;
+
+        if (!CanRun(ent.Owner))
+            return; // cancel if unpowered
+
+        string message = Loc.GetString(ent.Comp.MessageRemove);
+        _radio.SendRadioMessage(ent, message, ent.Comp.MessageChannel, ent);
+    }
+    // Pinwheel-end - traitor sabotage
+
     /// <summary>
     /// Adds a specified number of points to a server.
     /// </summary>
@@ -161,7 +190,14 @@ public sealed partial class ResearchSystem
 
         if (!Resolve(uid, ref component))
             return;
+
+        // Pinwheel-stt - server sabotage
+        if (component.Sabotaged)
+            points = points / 2;
+
         component.Points += points;
+        // Pinwheel-end - server sabotage
+
         var ev = new ResearchServerPointsChangedEvent(uid, component.Points, points);
         foreach (var client in component.Clients)
         {

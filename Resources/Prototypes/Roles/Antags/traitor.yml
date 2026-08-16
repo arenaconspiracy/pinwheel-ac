@@ -1,57 +1,6 @@
-- type: antag
-  id: Traitor
-  name: roles-antag-syndicate-agent-name
-  antagonist: true
-  setPreference: true
-  objective: roles-antag-syndicate-agent-objective
-  guides: [ Traitors ]
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 1h
-
-- type: antagSpecifier
-  abstract: true
-  parent: RestrictedAntag
-  id: BaseTraitor
-
-- type: antagSpecifier
-  parent: BaseTraitor
-  id: Traitor
-  prefRoles:
-  - Traitor
-  blacklist:
-    components:
-    - AntagImmune
-  mindRoles:
-  - MindRoleTraitor
-
-- type: antag
-  id: TraitorSleeper
-  name: roles-antag-syndicate-agent-sleeper-name
-  antagonist: true
-  setPreference: true
-  objective: roles-antag-syndicate-agent-sleeper-objective
-  guides: [ Traitors ]
-  requirements:
-  - !type:OverallPlaytimeRequirement
-    time: 1h
-
-- type: antagSpecifier
-  parent: BaseTraitor
-  id: TraitorSleeper
-  prefRoles:
-  - TraitorSleeper
-  mindRoles:
-  - MindRoleTraitorSleeper
-
-- type: antagSpecifier
-  parent: BaseTraitor
-  id: TraitorReinforcement
-  prefRoles:
-  - Traitor
-  - GenericTeamAntagonist # Matters for Antag bans.
-  mindRoles:
-  - MindRoleTraitorReinforcement
+# the antag and antagSpecifier have been moved elsewhere
+# i have no fucking idea what the rest of this was doing here, these have nothing to do with traitors
+# and i have better things to do than to move them somewhere more appropriate right now - Pinwheel
 
 # Syndicate Operative Outfit - Monkey
 - type: startingGear
@@ -82,56 +31,6 @@
     back: ClothingBackpackSyndicate
     shoes: ClothingShoesBootsSyndieFilled
     gloves: ClothingHandsGlovesColorBlack
-
-- type: startingGear
-  id: SyndicateReinforcementMedic
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitOperative
-    shoes: ClothingShoesColorRed
-    gloves: ClothingHandsGlovesLatex
-    head: ClothingHeadHatSurgcapPurple
-    id: VisitorPDA
-    belt: ClothingBeltMedicalFilled
-    back: ClothingBackpackDuffelMedical
-    ears: ClothingHeadsetMedical
-    eyes: ClothingEyesHudMedical
-    pocket1: HandheldHealthAnalyzer
-    pocket2: PillCanisterBicaridine
-  inhand:
-    - MedkitCombatFilled
-  storage:
-    back:
-    - Defibrillator
-    - CigPackSyndicate
-    - UniformScrubsColorPurple
-    - ChemistryBottleToxin
-    - WeaponPistolViper
-    - Syringe
-    - Syringe
-    
-- type: startingGear
-  id: SyndicateReinforcementSpy
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitOperative
-    back: ClothingBackpack
-    shoes: ClothingShoesColorBlack
-    gloves: ClothingHandsGlovesColorBlack
-    pocket1: WeaponPistolViper
-    pocket2: VoiceMaskImplanter
-  inhand:
-    - ClothingBackpackChameleonFillAgent
-- type: startingGear
-  id: SyndicateReinforcementThief
-  parent: SyndicateOperativeClothing
-  equipment:
-    pocket1: WeaponPistolViper
-    pocket2: MagazinePistolHighCapacity
-  inhand:
-    - ToolboxSyndicateFilled
-  storage:
-    back:
-    - SyndicateJawsOfLife
-    - CameraBug
 
 #Syndicate Operative Outfit - Basic
 - type: startingGear

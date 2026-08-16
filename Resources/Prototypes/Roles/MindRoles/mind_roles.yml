@@ -133,29 +133,7 @@
   - type: SubvertedSiliconRole
 
 # Dragon
-- type: entity
-  parent: BaseMindRoleAntag
-  id: MindRoleDragon
-  name: Dragon Role
-  components:
-  - type: MindRole
-    antagPrototype: Dragon
-    roleType: TeamAntagonist
-    subtype: role-subtype-dragon
-    exclusiveAntag: true
-  - type: DragonRole
-
-# Ninja
-- type: entity
-  parent: BaseMindRoleAntag
-  id: MindRoleNinja
-  name: Space Ninja Role
-  components:
-  - type: MindRole
-    antagPrototype: SpaceNinja
-    subtype: role-subtype-ninja
-    exclusiveAntag: true
-  - type: NinjaRole
+# gone - Pinwheel
 
 # Paradox Clone
 - type: entity
@@ -197,14 +175,6 @@
   - type: MindRole
     antagPrototype: NukeopsCommander
 
-- type: entity
-  parent: MindRoleNukeops
-  id: MindRoleLoneops
-  name: Loneops Operative Role
-  components:
-  - type: MindRole
-    roleType: SoloAntagonist
-
 # Revolutionaries
 - type: entity
   parent: BaseMindRoleAntag
@@ -228,69 +198,16 @@
     subtype: role-subtype-revolutionary
 
 # Survivors (Wizard)
-- type: entity
-  parent: BaseMindRoleAntag
-  id: MindRoleSurvivor
-  name: Survivor Role
-  components:
-  - type: MindRole
-    antagPrototype: Survivor
-    roleType: FreeAgent
-    subtype: role-subtype-survivor
-  - type: SurvivorRole
+# gone - Pinwheel
 
 # Thief
-- type: entity
-  parent: BaseMindRoleAntag
-  id: MindRoleThief
-  name: Thief Role
-  components:
-  - type: MindRole
-    antagPrototype: Thief
-    subtype: role-subtype-thief
-  - type: ThiefRole
+# gone. - Pinwheel
 
 # Traitors
-- type: entity
-  parent: BaseMindRoleAntag
-  id: MindRoleTraitor
-  name: Traitor Role
-  components:
-  - type: MindRole
-    antagPrototype: Traitor
-    exclusiveAntag: true
-    subtype: role-subtype-traitor
-  - type: TraitorRole
-
-- type: entity
-  parent: MindRoleTraitor
-  id: MindRoleTraitorSleeper
-  name: Sleeper Agent Role
-  components:
-  - type: MindRole
-    antagPrototype: TraitorSleeper
-
-- type: entity
-  parent: MindRoleTraitor
-  id: MindRoleTraitorReinforcement
-  name: Syndicate Reinforcement Role
-  components:
-  - type: MindRole
-    roleType: TeamAntagonist
-    subtype: role-subtype-traitor-reinforcement
-    antagPrototype: GenericTeamAntagonist
+# moved to it's own file. bye - Pinwheel - traitor remake
 
 # Wizards
-- type: entity
-  parent: BaseMindRoleAntag
-  id: MindRoleWizard
-  name: Wizard Role
-  components:
-  - type: MindRole
-    antagPrototype: Wizard
-    exclusiveAntag: true
-    subtype: role-subtype-wizard
-  - type: WizardRole
+# gone - Pinwheel
 
 # Xenoborgs
 - type: entity

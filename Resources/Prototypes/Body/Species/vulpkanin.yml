@@ -138,6 +138,19 @@
           32:
             sprite: Mobs/Species/Vulpkanin/displacement.rsi
             state: belt
+  # Pinwheel-stt - inhand displacements
+  - type: Hands
+    leftHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Vulpkanin/displacement.rsi
+          state: hand_l
+    rightHandDisplacement:
+      sizeMaps:
+        32:
+          sprite: _Pinwheel/Mobs/Species/Vulpkanin/displacement.rsi
+          state: hand_r
+  # Pinwheel-end - inhand displacements
 
 - type: entity
   parent:
@@ -162,12 +175,7 @@
   - type: TypingIndicator
     proto: vulpkanin
   - type: Vocal
-    sounds:
-      Male: MaleVulpkanin
-      Female: FemaleVulpkanin
-      Unsexed: MaleVulpkanin
-  - type: Damageable
-    damageModifierSet: Vulpkanin
+    emoteSounds: MaleVulpkanin
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/pierce.ogg
@@ -213,7 +221,7 @@
       state: creampie_vulpkanin
 
 - type: entity
-  parent: OrganBase
+  parent: OrganBaseOrganic
   id: OrganVulpkanin
   abstract: true
   suffix: vulpkanin
@@ -223,7 +231,7 @@
   abstract: true
   components:
   - type: Metabolizer
-    metabolizerTypes: [ Animal ]
+    metabolizerTypes: [ Carnivore ]
 
 - type: entity
   parent: OrganVulpkanin

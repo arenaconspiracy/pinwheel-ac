@@ -21,7 +21,6 @@ role-type-silicon-antagonist-color = #c832e6
 # Ideally, subtype names should be short
 role-subtype-traitor = Traitor
 role-subtype-thief = Thief
-role-subtype-ninja = Ninja
 role-subtype-nukie = Nukie
 role-subtype-traitor-reinforcement = Reinforcement
 role-subtype-revolutionary = Rev
@@ -32,7 +31,6 @@ role-subtype-dragon = Dragon
 role-subtype-survivor = Survivor
 role-subtype-subverted = Subverted
 role-subtype-paradox-clone = Paradox
-role-subtype-wizard = Wizard
 role-subtype-xenoborg = Xenoborg
 role-subtype-xenoborg-core = Xenoborg Core
 role-subtype-changeling = Changeling

@@ -51,7 +51,6 @@
     - PowerCellHigh
     - MedkitCombatFilled # End of first line
     - MedkitCombatFilled
-    - TelescopicShield
     belt:
     - Stunbaton
     - Handcuffs
@@ -316,7 +315,6 @@
     - TearGasGrenade
     - GrenadeStinger
     - MedkitCombatFilled # End of first line
-    - TelescopicShield
     - HoloprojectorSecurity
     - PowerCellHigh
     belt:
@@ -400,9 +398,6 @@
     - SmokeGrenade
     - EmpGrenade
     - HoloprojectorSecurity
-    - TelescopicShield
-    - TelescopicShield
-    - TelescopicShield
     - MedkitCombatFilled # End of first line
     - MagazinePistolSubMachineGunTopMounted
     - MagazinePistolSubMachineGunTopMounted
@@ -594,13 +589,12 @@
     suitstorage: WeaponLauncherHydra
   storage:
     back:
-    - TrashBag
     - SoapNT
     - Plunger
     - Screwdriver
-    - AdvMopItem # End of first line
+    - AdvMopItem
     - GrenadeCleanade
-    - GrenadeCleanade
+    - GrenadeCleanade # End of first line
     - GrenadeCleanade
     - GrenadeCleanade
     - GrenadeCleanade
@@ -614,6 +608,8 @@
     - WeaponPistolMk58
     - MagazinePistol
     - EmergencyMedipen
+  inhand:
+    - TrashBag
 
 - type: chameleonOutfit
   id: ERTJanitorChameleonOutfit

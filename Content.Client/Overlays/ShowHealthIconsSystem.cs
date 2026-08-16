@@ -4,7 +4,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Overlays;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
-using Robust.Shared.Prototypes;
 using Content.Shared.Damage.Components;
 using Content.Shared._Offbrand.Wounds; // Offbrand
 using Content.Shared.Mobs; // Offbrand
@@ -16,8 +15,6 @@ namespace Content.Client.Overlays;
 /// </summary>
 public sealed partial class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsComponent>
 {
-    [Dependency] private IPrototypeManager _prototypeMan = default!;
-
     [ViewVariables]
     public HashSet<string> DamageContainers = new();
 
@@ -80,7 +77,7 @@ public sealed partial class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealt
     {
         if (ent.Comp.CurrentState == MobState.Dead)
         {
-            return new() { _prototypeMan.Index(ent.Comp.DeadIcon) };
+            return new() { ProtoMan.Index(ent.Comp.DeadIcon) };
         }
 
         var current = ent.Comp.DisplayDamage;
@@ -90,13 +87,13 @@ public sealed partial class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealt
         {
             var amount = ent.Comp.CriticalDamageIcons.Count;
             var idx = Math.Clamp((int)Math.Floor(amount - (amount / max.Double()) * current.Double()), 0, amount-1);
-            return new() { _prototypeMan.Index(ent.Comp.CriticalDamageIcons[idx]) };
+            return new() { ProtoMan.Index(ent.Comp.CriticalDamageIcons[idx]) };
         }
         else
         {
             var amount = ent.Comp.AliveDamageIcons.Count;
             var idx = Math.Clamp((int)Math.Floor(amount - (amount / max.Double()) * current.Double()), 0, amount-1);
-            return new() { _prototypeMan.Index(ent.Comp.AliveDamageIcons[idx]) };
+            return new() { ProtoMan.Index(ent.Comp.AliveDamageIcons[idx]) };
         }
     }
     // End Offbrand
@@ -119,9 +116,9 @@ public sealed partial class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealt
             if (TryComp<MobStateComponent>(entity, out var state))
             {
                 // Since there is no MobState for a rotting mob, we have to deal with this case first.
-                if (HasComp<RottingComponent>(entity) && _prototypeMan.Resolve(injurableComp.RottingIcon, out var rottingIcon))
+                if (HasComp<RottingComponent>(entity) && ProtoMan.Resolve(injurableComp.RottingIcon, out var rottingIcon))
                     result.Add(rottingIcon);
-                else if (injurableComp.HealthIcons.TryGetValue(state.CurrentState, out var value) && _prototypeMan.Resolve(value, out var icon))
+                else if (injurableComp.HealthIcons.TryGetValue(state.CurrentState, out var value) && ProtoMan.Resolve(value, out var icon))
                     result.Add(icon);
             }
         }

@@ -1,9 +1,11 @@
 using Content.Server.Anomaly.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Anomaly;
+using Content.Shared.Chat; // Pinwheel - traitor sabotage
 using Content.Shared.CCVar;
 using Content.Shared.Materials;
 using Content.Shared.Radio;
+using Content.Shared._Pinwheel.Sabotage; // Pinwheel - traitor sabotage
 using Robust.Shared.Audio;
 using Content.Shared.Physics;
 using Robust.Shared.Map.Components;
@@ -20,6 +22,7 @@ namespace Content.Server.Anomaly;
 /// </summary>
 public sealed partial class AnomalySystem
 {
+    [Dependency] private SharedChatSystem _chat = default!; // Pinwheel - traitor sabotage
     [Dependency] private SharedMapSystem _mapSystem = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
@@ -31,6 +34,11 @@ public sealed partial class AnomalySystem
         SubscribeLocalEvent<AnomalyGeneratorComponent, AnomalyGeneratorGenerateButtonPressedEvent>(OnGenerateButtonPressed);
         SubscribeLocalEvent<AnomalyGeneratorComponent, PowerChangedEvent>(OnGeneratorPowerChanged);
         SubscribeLocalEvent<GeneratingAnomalyGeneratorComponent, ComponentStartup>(OnGeneratingStartup);
+        // Pinwheel-stt - traitor sabotage
+        SubscribeLocalEvent<AnomalyGeneratorComponent, SabotageStartEvent>(OnSabotageStart);
+        SubscribeLocalEvent<AnomalyGeneratorComponent, SabotageStopEvent>(OnSabotageStop);
+        SubscribeLocalEvent<AnomalyGeneratorComponent, SabotageCompleteEvent>(OnSabotageComplete);
+        // Pinwheel-end - traitor sabotage
     }
 
     private void OnGeneratorPowerChanged(EntityUid uid, AnomalyGeneratorComponent component, ref PowerChangedEvent args)
@@ -158,6 +166,48 @@ public sealed partial class AnomalySystem
         Appearance.SetData(uid, AnomalyGeneratorVisuals.Generating, true);
     }
 
+// Pinwheel-stt - traitor sabotage
+    private void OnSabotageStart(Entity<AnomalyGeneratorComponent> ent, ref SabotageStartEvent args)
+    {
+        string message = Loc.GetString(ent.Comp.MessageInsert);
+        _radio.SendRadioMessage(ent, message, ent.Comp.ScienceChannel, ent);
+    }
+
+    private void OnSabotageStop(Entity<AnomalyGeneratorComponent> ent, ref SabotageStopEvent args)
+    {
+        string message = Loc.GetString(ent.Comp.MessageRemove);
+        _radio.SendRadioMessage(ent, message, ent.Comp.ScienceChannel, ent);
+    }
+
+    private void OnSabotageComplete(Entity<AnomalyGeneratorComponent> ent, ref SabotageCompleteEvent args)
+    {
+        var xform = Transform(ent);
+
+        if (_station.GetStationInMap(xform.MapID) is not { } station ||
+            _station.GetLargestGrid(station) is not { } grid)
+        {
+            if (xform.GridUid == null)
+                return;
+            grid = xform.GridUid.Value;
+        }
+
+        for (int spawned = 1; spawned <= ent.Comp.SabotageAnomalyCount; spawned++)
+        {
+            SpawnOnRandomGridLocation(grid, ent.Comp.SpawnerPrototype);
+        }
+
+        ent.Comp.SabotageComplete = true;
+
+        string message = Loc.GetString(ent.Comp.MessageComplete);
+        Color messageColor = new Color(205, 124, 205); // science radio color
+        _chat.DispatchStationAnnouncement(ent,
+            message,
+            "Anomaly Generator", // TODO: de-hardcode this, somehow
+            announcementSound: ent.Comp.SabotageAnnouncementSound,
+            colorOverride: messageColor); // TODO: de-hardcode this too
+    }
+// Pinwheel-end - traitor sabotage
+
     private void OnGeneratingFinished(EntityUid uid, AnomalyGeneratorComponent component)
     {
         var xform = Transform(uid);
@@ -176,7 +226,7 @@ public sealed partial class AnomalySystem
         Audio.PlayPvs(component.GeneratingFinishedSound, uid);
 
         var message = Loc.GetString("anomaly-generator-announcement");
-        _radio.SendRadioMessage(uid, message, _prototype.Index<RadioChannelPrototype>(component.ScienceChannel), uid);
+        _radio.SendRadioMessage(uid, message, ProtoMan.Index<RadioChannelPrototype>(component.ScienceChannel), uid);
     }
 
     private void UpdateGenerator()

@@ -21,6 +21,7 @@
         ejectVerbText: sheath-eject-verb
         insertSound: /Audio/Items/sheath.ogg
         ejectSound: /Audio/Items/unsheath.ogg
+        ejectOnBreak: true
         whitelist:
           tags:
           - CaptainSabre
@@ -80,24 +81,6 @@
       tags:
         - ShellShotgun
     capacity: 14
-
-- type: entity
-  parent: [ ClothingBeltStorageBase, BaseMagicalContraband ]
-  id: ClothingBeltWand
-  name: wand belt
-  description: A belt designed to hold various rods of power. A veritable fanny pack of exotic magic.
-  components:
-  - type: Sprite
-    sprite: Clothing/Belt/wand.rsi
-  - type: Clothing
-    sprite: Clothing/Belt/wand.rsi
-  - type: Storage
-    grid:
-    - 0,0,15,1
-    whitelist:
-      tags:
-      - WizardWand
-      - WhitelistChameleon
 
 ## Holsters
 
