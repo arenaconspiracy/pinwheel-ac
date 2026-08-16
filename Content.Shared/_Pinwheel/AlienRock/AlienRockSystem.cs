@@ -1,6 +1,9 @@
 using Content.Shared.EntityTable;
+using Content.Shared.EntityTable.Conditions;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Shared._Pinwheel.AlienRock;
 
@@ -51,15 +54,21 @@ public sealed partial class AlienRockSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<AlienRockComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.Nodes =
-            _container.EnsureContainer<Container>(ent, AlienRockComponent.ContainerId);
+        ent.Comp.Nodes = _container.EnsureContainer<Container>(ent, AlienRockComponent.ContainerId);
 
-        var spawns = _entityTable.GetSpawns(ent.Comp.NodeTable);
+        var spawned = new HashSet<EntProtoId>();
+        var ctx = new EntityTableContext(new Dictionary<string, object>
+        {
+            { UniqueCondition.UsedSpawnsKey, spawned },
+        });
 
-        foreach (var node in spawns)
-        { // TODO: this can currently spawn duplicate nodes, which get abated at the same time, which is bad
+
+        for (int i = 0; i <= ent.Comp.NodeCount; i++)
+        {
+            var spawn = _entityTable.GetSpawns(ent.Comp.NodeTable, ctx: ctx).SingleOrDefault();
+            spawned.Add(spawn);
             PredictedTrySpawnInContainer(
-                protoName: node,
+                protoName: spawn,
                 containerUid: ent.Comp.Nodes.Owner,
                 containerId: AlienRockComponent.ContainerId,
                 uid: out _);

@@ -1,17 +1,23 @@
 - type: entityTable
   id: AlienRockNodeTable
   table: !type:GroupSelector
-    rolls: !type:ConstantNumberSelector
-      value: 6 # TODO: figure out a good number
     children:
     - id: AlienNodeDamage
+      conditions: &c [ !type:UniqueCondition ]
     - id: AlienNodeReactiveBlood # PRO-TEM: this is gaudy and sourcing new blood is inconvenient and arguably roleplay nonconductive
+      conditions: *c
     - id: AlienNodeReactiveWater
+      conditions: *c
     - id: AlienNodeToolSawing
+      conditions: *c
     - id: AlienNodeToolAnchoring # PRO-TEM: science gear shouldn't overlap w/ engineering
+      conditions: *c
     - id: AlienNodeToolPrying # PRO-TEM: ditto
+      conditions: *c
     - id: AlienNodeToolScrewing # PRO-TEM: ditto
+      conditions: *c
     - id: AlienNodeToolWelding # PRO-TEM: ditto
+      conditions: *c
 
 - type: entity
   id: AlienNodeDamage
