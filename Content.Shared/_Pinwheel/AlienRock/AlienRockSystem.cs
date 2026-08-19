@@ -63,7 +63,7 @@ public sealed partial class AlienRockSystem : EntitySystem
         });
 
 
-        for (int i = 0; i <= ent.Comp.NodeCount; i++)
+        for (int i = 0; i < ent.Comp.NodeCount; i++)
         {
             var spawn = _entityTable.GetSpawns(ent.Comp.NodeTable, ctx: ctx).SingleOrDefault();
             spawned.Add(spawn);

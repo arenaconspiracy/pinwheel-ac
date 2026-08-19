@@ -16,8 +16,8 @@
       conditions: *c
     - id: AlienNodeToolScrewing # PRO-TEM: ditto
       conditions: *c
-    - id: AlienNodeToolWelding # PRO-TEM: ditto
-      conditions: *c
+    # id: AlienNodeToolWelding # you can't weld a radioactive artifact without either getting irradiated or blinding yourself. whoops!
+    # conditions: *c
 
 - type: entity
   id: AlienNodeDamage

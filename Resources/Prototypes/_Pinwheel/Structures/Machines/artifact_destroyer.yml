@@ -1,0 +1,138 @@
+# machines
+- type: entity
+  parent: [ BaseMachinePowered, SmallConstructibleMachine]
+  id: MachineArtifactDestroyer
+  name: artifact destroyer
+  description: A fgfshdfhsdhfdshhhhhhhhh i need to write this later # TODO
+  components:
+  # visual
+  - type: Sprite
+    sprite: Structures/Machines/artifact_analyzer.rsi
+    drawdepth: HighFloorObjects
+    layers:
+    - state: icon
+    - state: unshaded
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  # physics
+  - type: Physics
+    bodyType: static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        mask:
+        - Impassable
+        - HighImpassable
+        - MidImpassable
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 190
+        mask: [ MachineMask ]
+        layer:
+        - Impassable
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+        hard: False
+  # audio
+  - type: AmbientSound
+    enabled: false
+    sound:
+      collection: ArtifactDestroyerAmbient
+  - type: AmbientOnPowered
+  # functional
+  - type: Machine
+    board: BoardArtifactDestroyer
+  - type: ApcPowerReceiver
+    powerLoad: 5000
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: BasicDevice
+  - type: DeviceList
+  - type: DeviceLinkSink
+    ports: [ ArtifactDestroyerSink ]
+  - type: ItemPlacer
+    whitelist:
+      components:
+      - AlienRock
+  - type: AlienRockDestroyer
+    destroySound:
+      collection: ArtifactDestroyerDestroy
+  - type: GuideHelp
+    guides: [ Xenoarchaeology ] # TODO: not that
+
+- type: entity
+  parent: BaseComputer
+  id: ComputerArtifactDestroyer
+  name: artifact destroyer console
+  description: ARENACONSPIRACY WRITE THIS LATER. DO NOT PUBLISH LIKE THIS # TODO
+  components:
+  # visual
+  - type: Sprite
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: computer
+    - map: [ "computerLayerKeyboard" ]
+      state: generic_keyboard
+    - map: [ "computerLayerScreen" ]
+      state: artifact
+      shader: unshaded
+    - map: [ "computerLayerKeys" ]
+      state: tech_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  # UI
+  - type: UserInterface
+    interfaces:
+      enum.AlienRockConsoleUiKey.Key:
+        type: AlienRockConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ActivatableUI
+    key: enum.AlienRockConsoleUiKey.Key
+  # functional
+  - type: Computer
+    board: BoardComputerArtifactDestroyer
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: wired
+  - type: DeviceLinkSource
+    range: 5
+    ports: [ ArtifactDestroyerSource ]
+  - type: AlienRockConsole
+  - type: GuideHelp
+    guides: [ Xenoarchaeology ]
+
+# device ports
+- type: sourcePort
+  id: ArtifactDestroyerSource
+  name: signal-port-name-artifact-analyzer-sender
+  description: signal-port-description-artifact-analyzer-sender
+  defaultLinks: [ ArtifactDestroyerSink ]
+
+- type: sinkPort
+  id: ArtifactDestroyerSink
+  name: signal-port-name-artifact-analyzer-receiver
+  description: signal-port-description-artifact-analyzer-receiver
+
+# sound collections
+- type: soundCollection
+  id: ArtifactDestroyerAmbient
+  files: [ /Audio/Machines/scan_loop.ogg ]
+
+- type: soundCollection
+  id: ArtifactDestroyerDestroy
+  files: [ /Audio/Effects/radpulse11.ogg ] # TODO: placeholder

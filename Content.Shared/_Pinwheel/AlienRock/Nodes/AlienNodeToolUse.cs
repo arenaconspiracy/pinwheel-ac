@@ -29,6 +29,9 @@ public sealed partial class AlienNodeToolUseSystem : AlienNodeBaseSystem
     private void OnToolUseComplete(Entity<AlienNodeToolUseComponent> node,
         ref AlienRockRelayedEvent<AlienNodeToolUseDoAfterEvent> rel)
     {
+        if (rel.Args.Cancelled)
+            return;
+
         if (rel.Args.Node == GetNetEntity(node))
             NodeRemove(node.Owner);
     }

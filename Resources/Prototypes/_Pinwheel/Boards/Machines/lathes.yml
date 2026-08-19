@@ -14,60 +14,60 @@
   id: BoardLatheCargo
   name: cargo techfab machine board
   components:
-    - type: Sprite
-      state: supply
-    - type: MachineBoard
-      prototype: MachineLatheCargo
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: MachineLatheCargo
 
 - type: entity
   parent: BaseBoardLathe
   id: BoardLatheEngineering
   name: engineering techfab machine board
   components:
-    - type: Sprite
-      state: engineering
-    - type: MachineBoard
-      prototype: MachineLatheEngineering
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: MachineLatheEngineering
 
 - type: entity
   parent: BaseBoardLathe
   id: BoardLatheMedical
   name: medical techfab machine board
   components:
-    - type: Sprite
-      state: medical
-    - type: MachineBoard
-      prototype: MachineLatheMedical
+  - type: Sprite
+    state: medical
+  - type: MachineBoard
+    prototype: MachineLatheMedical
 
 - type: entity
   parent: BaseBoardLathe
   id: BoardLatheScience
   name: science techfab machine board
   components:
-    - type: Sprite
-      state: science
-    - type: MachineBoard
-      prototype: MachineLatheScience
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: MachineLatheScience
 
 - type: entity
   parent: BaseBoardLathe
   id: BoardLatheSecurity
   name: security techfab machine board
   components:
-    - type: Sprite
-      state: security
-    - type: MachineBoard
-      prototype: MachineLatheSecurity
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: MachineLatheSecurity
 
 - type: entity
   parent: BaseBoardLathe
   id: BoardLatheService
   name: service techfab machine board
   components:
-    - type: Sprite
-      state: service
-    - type: MachineBoard
-      prototype: MachineLatheService
+  - type: Sprite
+    state: service
+  - type: MachineBoard
+    prototype: MachineLatheService
 
 # Specifics
 - type: entity
