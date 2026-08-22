@@ -51,7 +51,6 @@
     - PowerCellHigh
     - MedkitCombatFilled # End of first line
     - MedkitCombatFilled
-    - TelescopicShield
     belt:
     - Stunbaton
     - Handcuffs
@@ -316,7 +315,6 @@
     - TearGasGrenade
     - GrenadeStinger
     - MedkitCombatFilled # End of first line
-    - TelescopicShield
     - HoloprojectorSecurity
     - PowerCellHigh
     belt:
@@ -400,9 +398,6 @@
     - SmokeGrenade
     - EmpGrenade
     - HoloprojectorSecurity
-    - TelescopicShield
-    - TelescopicShield
-    - TelescopicShield
     - MedkitCombatFilled # End of first line
     - MagazinePistolSubMachineGunTopMounted
     - MagazinePistolSubMachineGunTopMounted

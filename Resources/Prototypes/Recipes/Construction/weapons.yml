@@ -78,21 +78,11 @@
 
 - type: construction
   parent: BaseWeapon
-  id: WoodenBuckler
-  graph: WoodenBuckler
-  targetNode: woodenBuckler
-
-- type: construction
-  parent: BaseWeapon
   id: CardShield
   graph: CardShield
   targetNode: cardShield
-
-- type: construction
-  parent: BaseWeapon
-  id: MakeshiftShield
-  graph: MakeshiftShield
-  targetNode: makeshiftShield
+  category: construction-category-weapons
+  objectType: Item
 
 - type: construction
   parent: BaseWeapon
