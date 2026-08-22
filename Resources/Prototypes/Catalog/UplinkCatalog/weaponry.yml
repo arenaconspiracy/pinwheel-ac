@@ -127,7 +127,7 @@
   id: UplinkEshield
   name: uplink-eshield-name
   description: uplink-eshield-desc
-  icon: { sprite: /Textures/Objects/Weapons/Melee/e_shield.rsi, state: eshield-on }
+  icon: { sprite: _Pinwheel/Weapons/Melee/Shields/syndicate_energy.rsi, state: eshield-on }
   productEntity: EnergyShield
   discountCategory: veryRareDiscounts
   discountDownTo:

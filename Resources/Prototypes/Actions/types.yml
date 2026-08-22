@@ -285,8 +285,8 @@
   description: Raise or lower your shield.
   components:
   - type: Action
-    icon: { sprite: Objects/Weapons/Melee/shields.rsi, state: teleriot-icon }
-    iconOn: { sprite: Objects/Weapons/Melee/shields.rsi, state: teleriot-on }
+    icon: { sprite: _Pinwheel/Weapons/Melee/Shields/syndicate_energy.rsi, state: eshield-on }
+    iconOn: { sprite: _Pinwheel/Weapons/Melee/Shields/syndicate_energy.rsi, state: eshield-icon }
 
 - type: entity
   parent: BaseMentalAction
