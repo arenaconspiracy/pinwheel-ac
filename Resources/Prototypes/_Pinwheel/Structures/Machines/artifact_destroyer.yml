@@ -119,14 +119,14 @@
 # device ports
 - type: sourcePort
   id: ArtifactDestroyerSource
-  name: signal-port-name-artifact-analyzer-sender
-  description: signal-port-description-artifact-analyzer-sender
+  name: signal-port-name-artifact-destroyer-source
+  description: signal-port-desc-artifact-destroyer-source
   defaultLinks: [ ArtifactDestroyerSink ]
 
 - type: sinkPort
   id: ArtifactDestroyerSink
-  name: signal-port-name-artifact-analyzer-receiver
-  description: signal-port-description-artifact-analyzer-receiver
+  name: signal-port-name-artifact-destroyer-sink
+  description: signal-port-desc-artifact-destroyer-sink
 
 # sound collections
 - type: soundCollection

@@ -18,7 +18,13 @@ public sealed partial class AlienRockDestroyerSystem : SharedAlienRockDestroyerS
         if (!TryGetArtifactFromConsole(ent, out var artifact))
             return;
 
-        _audio.PlayPvs(destroyer.Value.Comp.DestroySound, destroyer.Value.Owner);
+        _audio.PlayPvs(
+            destroyer.Value.Comp.DestroySound,
+            destroyer.Value.Owner);
+        TrySpawnNextTo(
+            destroyer.Value.Comp.DestroyEffect,
+            destroyer.Value.Owner,
+            out EntityUid? _);
         PredictedQueueDel(artifact.Value.Owner);
     }
 }

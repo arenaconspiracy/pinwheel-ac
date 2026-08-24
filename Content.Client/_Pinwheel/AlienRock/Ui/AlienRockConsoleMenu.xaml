@@ -12,12 +12,31 @@
         <Label Name="ArtifactLabel"
             Text="{Loc 'alienrock-console-info-no-artifact'}"
             HorizontalExpand="True"
-            VerticalExpand="False"
+            VerticalExpand="True"
+            MaxHeight="35"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"/>
+        <PanelContainer Name="BackPanel"
+            HorizontalAlignment="Center"
+            HorizontalExpand="False"
+            VerticalExpand="False"
+            MinSize="150 150"
+            Margin="20 20"
+            StyleClasses="BackgroundPanelDark">
+            <BoxContainer MinSize="128 128">
+                <SpriteView Name="ArtifactView"
+                    Scale="4 4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    HorizontalExpand="True"
+                    VerticalExpand="True"/>
+            </BoxContainer>
+        </PanelContainer>
         <Button Name="DestroyButton"
             Text="{Loc 'alienrock-console-destroy-button'}"
-            HorizontalExpand="True" MinHeight="35"
+            HorizontalExpand="True"
+            VerticalExpand="True"
+            MaxHeight="35"
             StyleClasses="OpenLeft OpenRight"/>
     </BoxContainer>
 </controls:FancyWindow>

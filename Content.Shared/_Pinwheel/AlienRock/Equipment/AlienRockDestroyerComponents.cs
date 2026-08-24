@@ -50,6 +50,12 @@ public sealed partial class AlienRockDestroyerComponent : Component
     public SoundSpecifier? DestroySound = new SoundCollectionSpecifier();
 
     /// <summary>
+    /// Effect to spawn in place of an artifact when destroying them
+    /// </summary>
+    [DataField]
+    public EntProtoId DestroyEffect = "EffectEmpPulse";
+
+    /// <summary>
     /// The machine linking port for linking the analyzer with the console
     /// </summary>
     [DataField]

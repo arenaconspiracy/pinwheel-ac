@@ -60,6 +60,7 @@ public sealed partial class AlienRockConsoleMenu : FancyWindow
     {
         _destroyer.TryGetArtifactFromConsole(ent, out var arti);
 
+        ArtifactView.SetEntity(arti);
         DestroyButton.Disabled = arti == null;
 
         if (!_destroyer.TryGetDestroyer(ent, out _))
