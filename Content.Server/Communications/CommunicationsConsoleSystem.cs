@@ -1,14 +1,13 @@
 using Content.Server.Administration.Logs;
-using Content.Server.AlertLevel;
 using Content.Server.Chat.Systems;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.Popups;
 using Content.Server.RoundEnd;
 using Content.Server.Screens.Components;
-using Content.Server.Shuttles.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.AlertLevel;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Communications;
@@ -19,6 +18,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Communications
 {
@@ -28,7 +28,6 @@ namespace Content.Server.Communications
         [Dependency] private AlertLevelSystem _alertLevelSystem = default!;
         [Dependency] private ChatSystem _chatSystem = default!;
         [Dependency] private DeviceNetworkSystem _deviceNetworkSystem = default!;
-        // [Dependency] private EmergencyShuttleSystem _emergency = default!; // Pinwheel - rigid evac
         [Dependency] private PopupSystem _popupSystem = default!;
         [Dependency] private RoundEndSystem _roundEndSystem = default!;
         [Dependency] private StationSystem _stationSystem = default!;
@@ -44,14 +43,12 @@ namespace Content.Server.Communications
             // All events that refresh the BUI
             SubscribeLocalEvent<AlertLevelChangedEvent>(OnAlertLevelChanged);
             SubscribeLocalEvent<RoundEndSystemChangedEvent>(_ => OnGenericBroadcastEvent());
-            SubscribeLocalEvent<AlertLevelDelayFinishedEvent>(_ => OnGenericBroadcastEvent());
+            SubscribeLocalEvent<AlertLevelDelayFinishedEvent>((ref AlertLevelDelayFinishedEvent ev) => OnGenericBroadcastEvent());
 
             // Messages from the BUI
             SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleSelectAlertLevelMessage>(OnSelectAlertLevelMessage);
             SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleAnnounceMessage>(OnAnnounceMessage);
             SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleBroadcastMessage>(OnBroadcastMessage);
-            // SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleCallEmergencyShuttleMessage>(OnCallShuttleMessage); // Pinwheel - rigid evac
-            // SubscribeLocalEvent<CommunicationsConsoleComponent, CommunicationsConsoleRecallEmergencyShuttleMessage>(OnRecallShuttleMessage); // Pinwheel - rigid evac
 
             // On console init, set cooldown
             SubscribeLocalEvent<CommunicationsConsoleComponent, MapInitEvent>(OnCommunicationsConsoleMapInit);
@@ -104,7 +101,7 @@ namespace Content.Server.Communications
         /// Updates all comms consoles belonging to the station that the alert level was set on
         /// </summary>
         /// <param name="args">Alert level changed event arguments</param>
-        private void OnAlertLevelChanged(AlertLevelChangedEvent args)
+        private void OnAlertLevelChanged(ref AlertLevelChangedEvent args)
         {
             var query = EntityQueryEnumerator<CommunicationsConsoleComponent>();
             while (query.MoveNext(out var uid, out var comp))
@@ -132,40 +129,9 @@ namespace Content.Server.Communications
         /// </summary>
         public void UpdateCommsConsoleInterface(EntityUid uid, CommunicationsConsoleComponent comp)
         {
-            var stationUid = _stationSystem.GetOwningStation(uid);
-            List<string>? levels = null;
-            string currentLevel = default!;
-            float currentDelay = 0;
-
-            if (stationUid != null)
-            {
-                if (TryComp(stationUid.Value, out AlertLevelComponent? alertComp) &&
-                    alertComp.AlertLevels != null)
-                {
-                    if (alertComp.IsSelectable)
-                    {
-                        levels = new();
-                        foreach (var (id, detail) in alertComp.AlertLevels.Levels)
-                        {
-                            if (detail.Selectable)
-                            {
-                                levels.Add(id);
-                            }
-                        }
-                    }
-
-                    currentLevel = alertComp.CurrentLevel;
-                    currentDelay = _alertLevelSystem.GetAlertLevelDelay(stationUid.Value, alertComp);
-                }
-            }
-
+            // TODO: Use component states and predict the UI
             _uiSystem.SetUiState(uid, CommunicationsConsoleUiKey.Key, new CommunicationsConsoleInterfaceState(
-                CanAnnounce(comp),
-                // CanCallOrRecall(comp), // Pinwheel - rigid evac
-                levels,
-                currentLevel,
-                currentDelay,
-                _roundEndSystem.ExpectedCountdownEnd
+                CanAnnounce(comp)
             ));
         }
 
@@ -183,33 +149,6 @@ namespace Content.Server.Communications
             return true;
         }
 
-        /* // Pinwheel - rigid evac
-        private bool CanCallOrRecall(CommunicationsConsoleComponent comp)
-        {
-            // Defer to what the round end system thinks we should be able to do.
-            if (_emergency.EmergencyShuttleArrived || !_roundEndSystem.CanCallOrRecall())
-                return false;
-
-            // Ensure that we can communicate with the shuttle (either call or recall)
-            if (!comp.CanShuttle)
-                return false;
-
-            // Calling shuttle checks
-            if (_roundEndSystem.ExpectedCountdownEnd is null)
-                return true;
-
-            // Recalling shuttle checks
-            var recallThreshold = _cfg.GetCVar(CCVars.EmergencyRecallTurningPoint);
-
-            // shouldn't really be happening if we got here
-            if (_roundEndSystem.ShuttleTimeLeft is not { } left
-                || _roundEndSystem.ExpectedShuttleLength is not { } expected)
-                return false;
-
-            return !(left.TotalSeconds / expected.TotalSeconds < recallThreshold);
-        }
-        */ // Pinwheel - rigid evac
-
         private void OnSelectAlertLevelMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleSelectAlertLevelMessage message)
         {
             if (message.Actor is not { Valid: true } mob)
@@ -224,7 +163,7 @@ namespace Content.Server.Communications
             var stationUid = _stationSystem.GetOwningStation(uid);
             if (stationUid != null)
             {
-                _alertLevelSystem.SetLevel(stationUid.Value, message.Level, true, true);
+                _alertLevelSystem.SetLevel(stationUid.Value, message.Level);
             }
         }
 
@@ -274,7 +213,6 @@ namespace Content.Server.Communications
             _chatSystem.DispatchStationAnnouncement(uid, msg, title, colorOverride: comp.Color);
 
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following station announcement: {msg}");
-
         }
 
         private void OnBroadcastMessage(EntityUid uid, CommunicationsConsoleComponent component, CommunicationsConsoleBroadcastMessage message)
@@ -291,50 +229,6 @@ namespace Content.Server.Communications
 
             _adminLogger.Add(LogType.DeviceNetwork, LogImpact.Low, $"{ToPrettyString(message.Actor):player} has sent the following broadcast: {message.Message:msg}");
         }
-
-        /* // Pinwheel - rigid evac
-        private void OnCallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleCallEmergencyShuttleMessage message)
-        {
-            if (!CanCallOrRecall(comp))
-                return;
-
-            var mob = message.Actor;
-
-            if (!CanUse(mob, uid))
-            {
-                _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
-                return;
-            }
-
-            var ev = new CommunicationConsoleCallShuttleAttemptEvent(uid, comp, mob);
-            RaiseLocalEvent(ref ev);
-            if (ev.Cancelled)
-            {
-                _popupSystem.PopupEntity(ev.Reason ?? Loc.GetString("comms-console-shuttle-unavailable"), uid, message.Actor);
-                return;
-            }
-
-            _roundEndSystem.RequestRoundEnd(mob, uid);
-            _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(mob):player} has called the shuttle.");
-        }
-
-        private void OnRecallShuttleMessage(EntityUid uid, CommunicationsConsoleComponent comp, CommunicationsConsoleRecallEmergencyShuttleMessage message)
-        {
-            if (!CanCallOrRecall(comp))
-                return;
-
-            var mob = message.Actor;
-
-            if (!CanUse(mob, uid))
-            {
-                _popupSystem.PopupEntity(Loc.GetString("comms-console-permission-denied"), uid, message.Actor);
-                return;
-            }
-
-            _roundEndSystem.CancelRoundEndCountdown(mob, uid);
-            _adminLogger.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(message.Actor):player} has recalled the shuttle.");
-        }
-        */ // Pinwheel - rigid evac
     }
 
     /// <summary>
@@ -347,18 +241,5 @@ namespace Content.Server.Communications
         public CommunicationsConsoleComponent Component = Component;
         public EntityUid? Sender = Sender;
         public string Text = Text;
-    }
-
-    /// <summary>
-    /// Raised on shuttle call attempt. Can be cancelled
-    /// </summary>
-    [ByRefEvent]
-    public record struct CommunicationConsoleCallShuttleAttemptEvent(EntityUid Uid, CommunicationsConsoleComponent Component, EntityUid? Sender)
-    {
-        public bool Cancelled = false;
-        public EntityUid Uid = Uid;
-        public CommunicationsConsoleComponent Component = Component;
-        public EntityUid? Sender = Sender;
-        public string? Reason;
     }
 }
