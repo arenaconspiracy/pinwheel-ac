@@ -26,7 +26,6 @@
     graph: LightFixture
     node: bulbLight
   - type: Sprite
-    offset: 0, 1
     sprite: Structures/Wallmounts/Lighting/strobe_light.rsi
     drawdepth: WallMountedItems
     layers:
@@ -42,7 +41,7 @@
     energy: 5
     radius: 10
     softness: 1
-    offset: "0, 0.25"
+    offset: "0, 0.35"
   - type: RotatingLight
   - type: Physics
     bodyType: Static

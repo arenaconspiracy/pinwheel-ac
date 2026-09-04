@@ -86,6 +86,11 @@
 
 - type: construction
   parent: Girder
+  id: PlasticWall
+  targetNode: plasticWall
+
+- type: construction
+  parent: Girder
   id: PlasmaWall
   targetNode: plasmaWall
 
@@ -166,6 +171,17 @@
   parent: BaseWindow
   id: TintedWindow
   targetNode: tintedWindow
+
+- type: construction
+  parent: BaseWindow
+  id: ClockworkWindow
+  targetNode: clockworkWindow
+
+- type: construction
+  parent: BaseWindowDiagonal
+  id: ClockworkWindowDiagonal
+  name: construction-recipe-clockwork-window-diagonal
+  targetNode: clockworkWindowDiagonal
 
 - type: construction
   parent: BaseWindow
@@ -253,6 +269,11 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+
+- type: construction
+  parent: WindowDirectional
+  id: WindowClockworkDirectional
+  targetNode: windowClockworkDirectional
 
 - type: construction
   parent: WindowDirectional
@@ -348,6 +369,17 @@
     - Lattice
     - Plating
 
+- type: construction
+  parent: BaseStructureFullTile
+  id: FloorBananium
+  graph: FloorBananium
+  targetNode: BananiumFloor
+  conditions:
+  - !type:TileNotBlocked
+    failIfSpace: false
+  - !type:TileType
+    targets:
+    - Plating
 # endregion Floors
 
 # region Barricades
@@ -491,6 +523,19 @@
   targetNode: glassAirlock
 
 - type: construction
+  parent: BaseStructureFullTile
+  id: PinionAirlock
+  name: construction-recipe-pinion-airlock
+  graph: PinionAirlock
+  targetNode: airlock
+
+- type: construction
+  parent: PinionAirlock
+  id: PinionAirlockGlass
+  name: construction-recipe-pinion-airlock-glass
+  targetNode: glassAirlock
+
+- type: construction
   parent: BaseStructureFullTileDirectional
   id: AirlockShuttle
   graph: AirlockShuttle
@@ -547,34 +592,44 @@
 # region Material Doors
 - type: construction
   parent: BaseStructureFullTileDirectional
-  id: SilverDoor
+  id: MetalDoor
   graph: DoorGraph
-  targetNode: silverDoor
+  targetNode: metalDoor
 
 - type: construction
-  parent: SilverDoor
+  parent: MetalDoor
   id: WoodDoor
   targetNode: woodDoor
 
 - type: construction
-  parent: SilverDoor
+  parent: MetalDoor
   id: PlasmaDoor
   targetNode: plasmaDoor
 
 - type: construction
-  parent: SilverDoor
+  parent: MetalDoor
   id: GoldDoor
   targetNode: goldDoor
 
 - type: construction
-  parent: SilverDoor
+  parent: MetalDoor
+  id: SilverDoor
+  targetNode: silverDoor
+
+- type: construction
+  parent: MetalDoor
   id: PaperDoor
   targetNode: paperDoor
 
 - type: construction
-  parent: SilverDoor
+  parent: MetalDoor
   id: CardDoor
   targetNode: cardDoor
+
+- type: construction
+  parent: MetalDoor
+  id: BananiumDoor
+  targetNode: bananiumDoor
 # endregion Material Doors
 
 # region Plastic Flaps
@@ -624,9 +679,9 @@
 
 - type: construction
   parent: BaseStructureFullTileDirectional
-  id: EnergyGate
-  graph: EnergyGate
-  targetNode: energyGate
+  id: Turnstile
+  graph: Turnstile
+  targetNode: turnstile
 
 - type: construction
   parent: BaseStructureFullTileDirectional

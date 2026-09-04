@@ -339,7 +339,7 @@
   components:
   - type: Action
   - type: Sprite
-    sprite: _Pinwheel/Onjects/Weapons/Melee/Shields/syndicate_energy.rsi
+    sprite: _Pinwheel/Weapons/Melee/Shields/syndicate_energy.rsi
     layers:
     - state: eshield-icon
       map: ["enum.ActionVisuals.Icon"]

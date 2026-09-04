@@ -18,7 +18,7 @@
     index: 0
     base: stone
   - type: Icon
-    state: full
+    state: rock
   - type: Sprite
     drawdepth: Walls
   - type: MiningScannerViewable
@@ -63,8 +63,8 @@
   components:
   - type: Sprite
     layers:
-    - state: gibtonite_inactive
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       visible: false
       map: [ "enum.MiningScannerVisualLayers.Overlay", "gib" ]
   - type: Appearance
@@ -73,11 +73,11 @@
       enum.Trigger.TriggerVisuals.VisualState:
         "gib":
           Primed:
-            state: gibtonite_active
+            state: rock
             shader: unshaded
             visible: true
           Unprimed:
-            state: gibtonite_inactive
+            state: rock
             visible: false
   - type: TimerTrigger
     examinable: false
@@ -128,8 +128,8 @@
     currentOre: OreCoal
   - type: Sprite
     layers:
-    - state: rock_coal
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -143,8 +143,8 @@
     currentOre: OreGold
   - type: Sprite
     layers:
-    - state: rock_gold
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -158,8 +158,8 @@
     currentOre: OreDiamond
   - type: Sprite
     layers:
-    - state: rock_diamond
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -173,8 +173,8 @@
     currentOre: OrePlasma
   - type: Sprite
     layers:
-    - state: rock_phoron
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -188,8 +188,8 @@
     currentOre: OreSpaceQuartz
   - type: Sprite
     layers:
-    - state: rock_quartz
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -203,8 +203,8 @@
     currentOre: OreSilver
   - type: Sprite
     layers:
-    - state: rock_silver
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -218,8 +218,8 @@
     currentOre: OreSteel
   - type: Sprite
     layers:
-    - state: rock_tin
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -233,8 +233,8 @@
     currentOre: OreUranium
   - type: Sprite
     layers:
-    - state: rock_uranium
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -248,8 +248,8 @@
     currentOre: OreSalt
   - type: Sprite
     layers:
-    - state: rock_salt
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -263,8 +263,8 @@
     currentOre: OreArtifactFragment
   - type: Sprite
     layers:
-    - state: rock_artifact_fragment
-      sprite: Structures/Walls/stone-ore.rsi
+    - state: rock
+      sprite: Structures/Walls/rock.rsi
       map: [ "enum.MiningScannerVisualLayers.Overlay" ]
 
 - type: entity
@@ -288,10 +288,10 @@
   description: A rocky asteroid.
   components:
   - type: Icon
-    sprite: Structures/Walls/stone.rsi
-    state: full
+    sprite: Structures/Walls/rock.rsi
+    state: rock
   - type: Sprite
-    sprite: Structures/Walls/stone.rsi
+    sprite: Structures/Walls/rock.rsi
 
 - type: entity
   parent: [ BaseAsteroidRockVisuals, BaseAsteroidRock, BaseAsteroidDestructible ]
@@ -404,10 +404,10 @@
   description: A rocky asteroid.
   components:
   - type: Icon
-    sprite: Structures/Walls/stone-ironrock.rsi
-    state: full
+    sprite: Structures/Walls/rock.rsi
+    state: rock
   - type: Sprite
-    sprite: Structures/Walls/stone-ironrock.rsi
+    sprite: Structures/Walls/rock.rsi
 
 - type: entity
   parent: [ BaseIronRockVisuals, BaseAsteroidRock, BaseAsteroidDestructible ]
@@ -492,11 +492,11 @@
     index: 0
     base: stone
   - type: Icon
-    sprite: Structures/Walls/stone-dirt.rsi
-    state: full
+    sprite: Structures/Walls/rock.rsi
+    state: rock
   - type: MiningScannerViewable
   - type: Sprite
-    sprite: Structures/Walls/stone-dirt.rsi
+    sprite: Structures/Walls/rock.rsi
 
 # Ore veins
 - type: entity
@@ -618,10 +618,10 @@
   name: snowdrift
   components:
   - type: Icon
-    sprite: Structures/Walls/stone-snow.rsi
-    state: full
+    sprite: Structures/Walls/rock.rsi
+    state: rock
   - type: Sprite
-    sprite: Structures/Walls/stone-snow.rsi
+    sprite: Structures/Walls/rock.rsi
 
 - type: entity
   parent: [ BaseVeinCoal, WallRockSnow ]
@@ -672,10 +672,10 @@
   name: sandstone
   components:
   - type: Icon
-    sprite: Structures/Walls/stone-sand.rsi
-    state: full
+    sprite: Structures/Walls/rock.rsi
+    state: rock
   - type: Sprite
-    sprite: Structures/Walls/stone-sand.rsi
+    sprite: Structures/Walls/rock.rsi
 
 - type: entity
   parent: [ BaseVeinCoal, WallRockSand ]
@@ -726,10 +726,10 @@
   parent: WallRock
   components:
   - type: Icon
-    sprite: Structures/Walls/stone-chromite.rsi
-    state: full
+    sprite: Structures/Walls/rock.rsi
+    state: rock
   - type: Sprite
-    sprite: Structures/Walls/stone-chromite.rsi
+    sprite: Structures/Walls/rock.rsi
 
 - type: entity
   parent: [ BaseVeinCoal, WallRockChromite ]

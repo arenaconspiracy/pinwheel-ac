@@ -844,42 +844,7 @@ CratePartsT3: null
 CratePartsT3T4: null
 CratePartsT4: null
 
-# 2026-07-16
-WallNecropolis: WallSolid
-WallVaultAlien: WallSolid
-WallVaultRock: WallSolid
-WallVaultSandstone: WallSolid
-WallSandstone: WallSolid
-WallDiamond: WallReinforced
-WallCult: WallBrick
-WallClown: WallGold
-WallClock: WallBrass
-WallPlastic: WallSolid
-ClockworkGrille: Grille
-ClockworkGrilleBroken: GrilleBroken
-ClockworkGrilleDiagonal: GrilleDiagonal
-ClockworkWindow: Window
-ClockworkWindowDiagonal: WindowDiagonal
-WindowClockworkDirectional: WindowDirectional
-WindoorClockwork: Windoor
-WindoorAssemblyClockwork: WindoorAssembly
-PinionAirlock: Airlock
-PinionAirlockGlass: AirlockGlass
-PinionAirlockAssembly: AirlockAssembly
-BananiumDoor: GoldDoor
-EncrustedIronstoneDoor: SilverDoor
-IronstoneDoor: SilverDoor
-WallSnowCobblebrick: WallBrick
-WallSandCobblebrick: WallBrick
-WallChromiteCobblebrick: WallBrick
-WallAndesiteCobblebrick: WallBrick
-WallIronsandCobblebrick: WallBrick
-WallCobblebrick: WallConcrete
-WallAsteroidCobblebrick: WallConcrete
-WallBasaltCobblebrick: WallConcrete
-WallIce: WallRockSnow
-
-#2026-07-17
+#2027-07-17
 WeaponRifleM90GrenadeLauncher: null
 
 # 2026-07-18
@@ -987,9 +952,9 @@ IronsandStepConcaveCorner: null
 IronsandStep: null
 
 # 2026-07-27
-TurnstileGenpopEnter: EnergyGateGenpopEnter
-TurnstileGenpopLeave: EnergyGateGenpopLeave
-Turnstile: EnergyGate
+#TurnstileGenpopEnter: EnergyGateGenpopEnter
+#TurnstileGenpopLeave: EnergyGateGenpopLeave
+#Turnstile: EnergyGate
 MetalDoor: SilverDoor
 MiningWindow: ReinforcedWindow
 MiningWindowDiagonal: ReinforcedWindowDiagonal
@@ -1052,7 +1017,7 @@ FloorChromiteChasm: FloorChasmEntity
 
 # 2026-08-06
 FloorTileItemHydro: null
-WallRiveted: WallMarble
+#WallRiveted: WallMarble
 WallSpawnAsteroidBananium: null
 WallSpawnAsteroidBananiumCrab: null
 

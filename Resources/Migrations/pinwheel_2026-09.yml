@@ -1,0 +1,30 @@
+# This is a basic dictionary that maps old entity prototype ids to new ids. This only works for entity prototypes, and
+# is intended to allow maps to load without having to manually edit them. An empty or "null" string results in the
+# entity getting deleted.
+
+# e.g., you can swap all walls with windows and delete all tables by adding lines like:
+#
+# Window: WallSolid
+# WallSolid: Window
+# Table: null
+
+# 2026-09-05
+IronstoneDoor: null
+EncrustedIronstoneDoor: null
+
+EnergyGate: Turnstile
+EnergyGateAirtight: Turnstile # why is this even a thing????
+EnergyGateGenpopEnter: TurnstileGenpopEnter
+EnergyGateGenpopLeave: TurnstileGenpopLeave
+
+ClockworkGrille: Grille
+ClockworkGrilleDiagonal: GrilleDiagonal
+
+WallBrass: WallSolid
+WallCult: WallSolid # it doesn't matter whether these are meant to be stronger than solid walls or not
+WallClock: WallSolid # because they're unused
+WallClown: WallSolid
+WallDiamond: WallSolid
+WallIce: WallSolid
+WallMarble: WallRiveted # this is actually undoing upstream migrations so it's specified
+WallSandstone: WallSolid # i didn't actually have to remove this one but i did not care enough to fix it
