@@ -110,19 +110,6 @@
             - tool: Welding
               doAfter: 20
 
-        - to: bananiumWall
-          completed:
-            - !type:SnapToGrid
-              southRotation: true
-          conditions:
-            - !type:EntityAnchored {}
-          steps:
-            - material: Bananium
-              amount: 2
-              doAfter: 2
-            - tool: Welding
-              doAfter: 20
-
         - to: meatWall
           completed:
             - !type:SnapToGrid
