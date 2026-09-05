@@ -12,7 +12,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
-using Content.Shared.Interaction.Components; // Pinwheel - smartequip recurse stop
 
 namespace Content.Shared.Interaction;
 
@@ -114,9 +113,7 @@ public sealed partial class SmartEquipSystem : EntitySystem
         //    - without hand item: fail
         // 2) has an item, and that item is a storage item
         //    - with hand item: try to put it in storage
-        //    - without hand item:
-        //      A) if item has NoSmartEquipRecurseComponent - try to pick up it
-        //      B) try to take the last stored item and put it in our hands
+        //    - without hand item: try to take the last stored item and put it in our hands
         // 3) has an item, and that item is an item slots holder
         //    - without hand item: get the highest priority item slot with an item and try to eject it
         //    - with hand item: if AllowSmartEquip is enabled, get the highest priority item slot with a valid whitelist
@@ -148,16 +145,6 @@ public sealed partial class SmartEquipSystem : EntitySystem
         }
 
         // case 2 (storage item):
-        // variant A
-        if (HasComp<NoSmartEquipRecurseComponent>(slotItem) && handItem == null
-            && _inventory.CanUnequip(uid, equipmentSlot, out var _))
-        {
-            if (_inventory.TryUnequip(uid, equipmentSlot, inventory: inventory, predicted: true, checkDoafter: true)
-                && _hands.TryPickup(uid, slotItem, handsComp: hands))
-                return;
-        }
-
-        // variant B
         if (TryComp<StorageComponent>(slotItem, out var storage))
         {
             switch (handItem)
