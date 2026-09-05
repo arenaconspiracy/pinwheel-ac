@@ -141,9 +141,9 @@
       params:
         volume: 5
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    sprite: _Pinwheel/Projectiles/disabler_practice.rsi
     layers:
-    - state: omnilaser
+    - state: bullet
       shader: unshaded
   - type: Physics
   - type: Fixtures
@@ -162,7 +162,7 @@
   - type: StaminaDamageOnCollide
     damage: 1
   - type: Projectile
-    impactEffect: BulletImpactEffectDisabler
+    impactEffect: BulletImpactEffectDisablerPractice
     damage:
       types:
         Heat: 0
