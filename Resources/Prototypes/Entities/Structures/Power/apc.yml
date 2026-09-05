@@ -33,6 +33,10 @@
     - state: display-charging
       shader: unshaded
       map: ["enum.ApcVisualLayers.ChargeState"]
+    - state: channel-on
+      shader: unshaded
+      map: ["enum.ApcVisualLayers.Equipment"]
+      visible: false
   - type: Appearance
   - type: ApcVisuals
   - type: Battery
