@@ -17,6 +17,8 @@ EnergyGateAirtight: Turnstile # why is this even a thing????
 EnergyGateGenpopEnter: TurnstileGenpopEnter
 EnergyGateGenpopLeave: TurnstileGenpopLeave
 
+ButtonFrameWhite: ButtonFrameExit # are you fucking kidding me
+
 ClockworkGrille: Grille
 ClockworkGrilleDiagonal: GrilleDiagonal
 
@@ -24,6 +26,7 @@ WallBrass: WallSolid
 WallCult: WallSolid # it doesn't matter whether these are meant to be stronger than solid walls or not
 WallClock: WallSolid # because they're unused
 WallClown: WallSolid
+WallConcrete: WallSolid
 WallDiamond: WallSolid
 WallIce: WallSolid
 WallMarble: WallRiveted # this is actually undoing upstream migrations so it's specified

@@ -299,31 +299,31 @@
 # type: tileAlias
 # id: FloorTechMaint
 # target: FloorTechMaint2
-#
-# type: tileAlias
-# id: FloorXenoborg
-# target: FloorExoBorg
-#
-# type: tileAlias
-# id: FloorXeno
-# target: FloorExoViscera
-#
-# type: tileAlias
-# id: FloorXenoSteel
-# target: FloorExoHull
-#
-# type: tileAlias
-# id: FloorXenoSteelCorner
-# target: FloorExoCornerSW
-#
-# type: tileAlias
-# id: FloorXenoMaint
-# target: FloorExoTechmaint
-#
-# type: tileAlias
-# id: FloorDarkSquiggly
-# target: FloorExoHorizontal
-#
+
+- type: tileAlias
+  id: FloorExoBorg
+  target: FloorXenoborg
+
+- type: tileAlias
+  id: FloorExoViscera
+  target: FloorXeno
+
+- type: tileAlias
+  id: FloorExoHull
+  target: FloorXenoSteel
+
+- type: tileAlias
+  id: FloorExoCornerSW
+  target: FloorXenoSteelCorner
+
+- type: tileAlias
+  id: FloorExoTechmaint
+  target: FloorXenoMaint
+
+- type: tileAlias
+  id: FloorExoHorizontal
+  target: FloorDarkSquiggly
+
 # type: tileAlias
 # id: FloorAsphalt
 # target: FloorConcrete
