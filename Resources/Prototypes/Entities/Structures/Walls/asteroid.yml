@@ -11,12 +11,6 @@
   components:
   - type: Transform
     noRot: true
-  - type: IconSmooth
-    key: stone
-    additionalKeys:
-    - doors
-    index: 0
-    base: stone
   - type: Icon
     state: rock
   - type: Sprite
@@ -487,10 +481,6 @@
         damage: 150
       behaviors:
       - *SoundStoneBreak
-  - type: IconSmooth
-    key: stone
-    index: 0
-    base: stone
   - type: Icon
     sprite: Structures/Walls/rock.rsi
     state: rock
