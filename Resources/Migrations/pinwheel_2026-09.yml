@@ -22,6 +22,8 @@ ButtonFrameWhite: ButtonFrameExit # are you fucking kidding me
 ClockworkGrille: Grille
 ClockworkGrilleDiagonal: GrilleDiagonal
 
+StatueOrnateClown: null
+
 WallBrass: WallSolid
 WallCult: WallSolid # it doesn't matter whether these are meant to be stronger than solid walls or not
 WallClock: WallSolid # because they're unused
