@@ -92,6 +92,8 @@
   name: wooden support
   description: Increases your confidence that a rock won't fall on your head.
   components:
+  - type: Sprite
+    state: support
   - type: Fixtures
     fixtures:
       fix1:
