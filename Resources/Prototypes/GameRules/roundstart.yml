@@ -30,6 +30,8 @@
     rules:
     - id: SubXenoborgs
       prob: 0.05
+    - id: Changeling
+      prob: 0.25
 
 - type: entity
   parent: BaseGameRule
@@ -131,7 +133,11 @@
   components:
   - type: ChangelingRule
   - type: GameRule
-    minPlayers: 25
+    minPlayers: 20
+    delay:
+      min: 240
+      max: 420
+    cancelPresetOnTooFewPlayers: false
   - type: AntagSelection
     agentName: changeling-round-end-agent-name
     antags:
@@ -150,6 +156,8 @@
     - groups: ChangelingObjectiveGroupKillDummy
       maxPicks: 1
     maxDifficulty: 8
+  - type: DynamicRuleCost
+    cost: 75
 
 - type: entity
   id: Revolutionary

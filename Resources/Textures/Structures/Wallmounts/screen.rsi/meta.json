@@ -9,6 +9,9 @@
     "states": [
       {
         "name": "screen"
+      },
+      {
+        "name": "outer_frame"
       }
     ]
 }

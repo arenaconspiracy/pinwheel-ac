@@ -510,7 +510,6 @@
   - type: Tag
     tags:
     - Trash
-    - HappyHonk
     - BoxCardboard
   - type: EntityTableContainerFill
     containers:
