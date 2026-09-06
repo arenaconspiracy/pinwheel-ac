@@ -68,7 +68,6 @@
   - type: Appearance
   - type: StaticPrice
     price: 500
-  - type: NoSmartEquipRecurse # Pinwheel - smartequip recurse stop
 
 - type: entity
   name: viper

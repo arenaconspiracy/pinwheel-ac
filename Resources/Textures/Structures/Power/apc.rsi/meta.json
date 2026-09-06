@@ -27,11 +27,15 @@
       "directions": 4
     },
     {
-      "name": "lock0-locked",
+      "name": "channel-disconnected",
       "directions": 4
     },
     {
-      "name": "lock1-locked",
+      "name": "channel-on",
+      "directions": 4
+    },
+    {
+      "name": "channel-tripped",
       "directions": 4
     },
     {
@@ -112,6 +116,28 @@
     },
     {
       "name": "display-full",
+      "directions": 4,
+      "delays": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "display-tripped",
       "directions": 4,
       "delays": [
         [

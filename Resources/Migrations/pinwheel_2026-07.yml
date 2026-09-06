@@ -73,11 +73,12 @@ AmmoTechFab: null
 Autolathe: null
 AutolatheHyperConvection: null
 Biofabricator: null
+CircuitImprinter: null
+CircuitImprinterHyperConvection: null
 OreProcessor: null
 OreProcessorIndustrial: null
 ProtolatheHyperConvection: null
-CircuitImprinter: null
-CircuitImprinterHyperConvection: null
+Sheetifier: null
 MachineFlatpacker: null
 
 AutolatheMachineCircuitboard: null

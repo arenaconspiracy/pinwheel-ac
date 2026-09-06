@@ -60,7 +60,7 @@
     storedRotation: -90
   - type: PointLight
     enabled: false
-    mask: /Textures/Effects/LightMasks/cone.png
+    lightMask: ConeSingle
     autoRot: true
     radius: 6
     netsync: false
@@ -72,7 +72,6 @@
     quickEquip: false
     slots:
       - Belt
-  - type: NoSmartEquipRecurse # Pinwheel - smartequip recurse stop
 
 - type: entity
   name: seclite
