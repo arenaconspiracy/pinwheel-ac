@@ -60,7 +60,6 @@ petting-failure-scurret = You reach out to pet {THE($target)}, but {SUBJECT($tar
 
 ## Petting silicons
 
-petting-success-honkbot = You pet {THE($target)} on {POSS-ADJ($target)} slippery metal head.
 petting-success-mimebot = You pet {THE($target)} on {POSS-ADJ($target)} cold metal head.
 petting-success-cleanbot = You pet {THE($target)} on {POSS-ADJ($target)} damp metal head.
 petting-success-medibot = You pet {THE($target)} on {POSS-ADJ($target)} sterile metal head.
@@ -76,7 +75,6 @@ petting-success-derelict-cyborg = You pet {THE($target)} on {POSS-ADJ($target)} 
 petting-success-recycler = You pet {THE($target)} on {POSS-ADJ($target)} mildly threatening steel exterior.
 petting-success-station-ai = You pet {THE($target)} on {POSS-ADJ($target)} cold, square screen.
 
-petting-failure-honkbot = You reach out to pet {THE($target)}, but {SUBJECT($target)} {CONJUGATE-BASIC($target, "honk", "honks")} in refusal!
 petting-failure-cleanbot = You reach out to pet {THE($target)}, but {SUBJECT($target)} {CONJUGATE-BE($target)} busy mopping!
 petting-failure-mimebot = You reach out to pet {THE($target)}, but {SUBJECT($target)} {CONJUGATE-BE($target)} busy miming!
 petting-failure-medibot = You reach out to pet {THE($target)}, but {POSS-ADJ($target)} syringe nearly stabs your hand!
