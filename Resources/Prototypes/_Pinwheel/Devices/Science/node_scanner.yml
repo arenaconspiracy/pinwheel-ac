@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseItem
+  id: DeviceAlienScanner
+  name: alien scanner
+  description: A handheld device capable of interpreting and visualizing the nodes of an alien artifact.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Xenoarchaeology/node_scanner.rsi
+    state: icon
+  - type: AlienRockScanner
+  - type: UseDelay
+    delay: 1
+  - type: UserInterface
+    interfaces:
+      enum.AlienRockScannerUiKey.Key:
+        type: AlienRockScannerBoundUserInterface
+  - type: ActivatableUI
+    key: enum.AlienRockScannerUiKey.Key
+    singleUser: true
