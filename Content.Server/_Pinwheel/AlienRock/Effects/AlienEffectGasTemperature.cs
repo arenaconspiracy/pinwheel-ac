@@ -4,7 +4,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
-namespace Content.Server._Pinwheel.AlienRock;
+namespace Content.Server._Pinwheel.AlienRock.Effects;
 
 [RegisterComponent]
 public sealed partial class AlienEffectGasTemperatureComponent : Component
@@ -22,7 +22,7 @@ public sealed partial class AlienEffectGasTemperatureComponent : Component
     public float Strength = 20;
 }
 
-public sealed partial class AlienEffectGasTemperatureSystem : AlienNodeBaseSystem
+public sealed partial class AlienEffectGasTemperatureSystem : EntitySystem
 {
     [Dependency] private AtmosphereSystem _atmosphere = default!;
     [Dependency] private SharedContainerSystem _container = default!;

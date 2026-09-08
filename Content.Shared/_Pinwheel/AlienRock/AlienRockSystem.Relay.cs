@@ -3,6 +3,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Tools;
 using Content.Shared.Interaction;
+using Content.Shared._Pinwheel.AlienRock.Nodes; // for the tooluse event
 
 namespace Content.Shared._Pinwheel.AlienRock;
 

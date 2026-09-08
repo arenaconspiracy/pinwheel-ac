@@ -1,28 +1,29 @@
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Placeable;
+using Content.Shared._Pinwheel.AlienRock;
 using Content.Shared.Power.EntitySystems;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Content.Shared._Pinwheel.AlienRock;
+namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 
 /// <summary>
 /// Manages linking and controlling the console & destroyer, and destruction
 /// </summary>
-public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
+public abstract partial class SharedAlienDestroyerSystem : EntitySystem
 {
     [Dependency] private SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
 
     [SubscribeLocalEvent]
-    private void OnItemPlaced(Entity<AlienRockDestroyerComponent> ent, ref ItemPlacedEvent args)
+    private void OnItemPlaced(Entity<AlienDestroyerComponent> ent, ref ItemPlacedEvent args)
     {
         ent.Comp.CurrentArtifact = args.OtherEntity;
         Dirty(ent);
     }
 
     [SubscribeLocalEvent]
-    private void OnItemRemoved(Entity<AlienRockDestroyerComponent> ent, ref ItemRemovedEvent args)
+    private void OnItemRemoved(Entity<AlienDestroyerComponent> ent, ref ItemRemovedEvent args)
     {
         if (args.OtherEntity != ent.Comp.CurrentArtifact)
             return;
@@ -32,7 +33,7 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnConsoleMapInit(Entity<AlienRockConsoleComponent> ent, ref MapInitEvent args)
+    private void OnConsoleMapInit(Entity<AlienDestroyerConsoleComponent> ent, ref MapInitEvent args)
     {
         if (!TryComp<DeviceLinkSourceComponent>(ent, out var source))
             return;
@@ -41,7 +42,7 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
 
         foreach (var sink in linkedEntities)
         {
-            if (!TryComp<AlienRockDestroyerComponent>(sink, out var destroyer))
+            if (!TryComp<AlienDestroyerComponent>(sink, out var destroyer))
                 continue;
 
             ent.Comp.Destroyer = sink;
@@ -53,9 +54,9 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnNewLinkConsole(Entity<AlienRockConsoleComponent> ent, ref NewLinkEvent args)
+    private void OnNewLinkConsole(Entity<AlienDestroyerConsoleComponent> ent, ref NewLinkEvent args)
     {
-        if (args.SourcePort != ent.Comp.LinkingPort || !HasComp<AlienRockDestroyerComponent>(args.Sink))
+        if (args.SourcePort != ent.Comp.LinkingPort || !HasComp<AlienDestroyerComponent>(args.Sink))
             return;
 
         ent.Comp.Destroyer = args.Sink;
@@ -63,9 +64,9 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnNewLinkDestroyer(Entity<AlienRockDestroyerComponent> ent, ref NewLinkEvent args)
+    private void OnNewLinkDestroyer(Entity<AlienDestroyerComponent> ent, ref NewLinkEvent args)
     {
-        if (args.SinkPort != ent.Comp.LinkingPort || !HasComp<AlienRockConsoleComponent>(args.Source))
+        if (args.SinkPort != ent.Comp.LinkingPort || !HasComp<AlienDestroyerConsoleComponent>(args.Source))
             return;
 
         ent.Comp.Console = args.Source;
@@ -73,21 +74,21 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnLinkAttemptConsole(Entity<AlienRockConsoleComponent> ent, ref LinkAttemptEvent args)
+    private void OnLinkAttemptConsole(Entity<AlienDestroyerConsoleComponent> ent, ref LinkAttemptEvent args)
     {
         if (ent.Comp.Destroyer != null)
             args.Cancel(); // can only link to one device at a time
     }
 
     [SubscribeLocalEvent]
-    private void OnLinkAttemptDestroyer(Entity<AlienRockDestroyerComponent> ent, ref LinkAttemptEvent args)
+    private void OnLinkAttemptDestroyer(Entity<AlienDestroyerComponent> ent, ref LinkAttemptEvent args)
     {
         if (ent.Comp.Console != null)
             args.Cancel(); // can only link to one device at a time
     }
 
     [SubscribeLocalEvent]
-    private void OnPortDisconnectedConsole(Entity<AlienRockConsoleComponent> ent, ref PortDisconnectedEvent args)
+    private void OnPortDisconnectedConsole(Entity<AlienDestroyerConsoleComponent> ent, ref PortDisconnectedEvent args)
     {
         if (args.Port != ent.Comp.LinkingPort || ent.Comp.Destroyer == null)
             return;
@@ -97,7 +98,7 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnPortDisconnectedDestroyer(Entity<AlienRockDestroyerComponent> ent, ref PortDisconnectedEvent args)
+    private void OnPortDisconnectedDestroyer(Entity<AlienDestroyerComponent> ent, ref PortDisconnectedEvent args)
     {
         if (args.Port != ent.Comp.LinkingPort || ent.Comp.Console == null)
             return;
@@ -106,8 +107,8 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
         Dirty(ent);
     }
 
-    public bool TryGetDestroyer(Entity<AlienRockConsoleComponent> ent,
-    [NotNullWhen(true)] out Entity<AlienRockDestroyerComponent>? destroyer)
+    public bool TryGetDestroyer(Entity<AlienDestroyerConsoleComponent> ent,
+    [NotNullWhen(true)] out Entity<AlienDestroyerComponent>? destroyer)
     {
         destroyer = null;
 
@@ -115,7 +116,7 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
         if (!_powerReceiver.IsPowered(consoleEnt))
             return false;
 
-        if (!TryComp<AlienRockDestroyerComponent>(ent.Comp.Destroyer, out var destroyerComp))
+        if (!TryComp<AlienDestroyerComponent>(ent.Comp.Destroyer, out var destroyerComp))
             return false;
 
         if (!_powerReceiver.IsPowered(ent.Comp.Destroyer.Value))
@@ -125,7 +126,7 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
         return true;
     }
 
-    public bool TryGetArtifactFromConsole(Entity<AlienRockConsoleComponent> ent,
+    public bool TryGetArtifactFromConsole(Entity<AlienDestroyerConsoleComponent> ent,
         [NotNullWhen(true)] out Entity<AlienRockComponent>? artifact)
     {
         artifact = null;
@@ -140,12 +141,12 @@ public abstract partial class SharedAlienRockDestroyerSystem : EntitySystem
         return true;
     }
 
-    public bool TryGetConsole(Entity<AlienRockDestroyerComponent> ent,
-        [NotNullWhen(true)] out Entity<AlienRockConsoleComponent>? console)
+    public bool TryGetConsole(Entity<AlienDestroyerComponent> ent,
+        [NotNullWhen(true)] out Entity<AlienDestroyerConsoleComponent>? console)
     {
         console = null;
 
-        if (!TryComp<AlienRockConsoleComponent>(ent.Comp.Console, out var consoleComp))
+        if (!TryComp<AlienDestroyerConsoleComponent>(ent.Comp.Console, out var consoleComp))
             return false;
 
         console = (ent.Comp.Console.Value, consoleComp);

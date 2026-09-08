@@ -1,4 +1,4 @@
-using Content.Shared._Pinwheel.AlienRock;
+using Content.Shared._Pinwheel.AlienRock.Equipment;
 using Robust.Client.UserInterface;
 
 namespace Content.Client._Pinwheel.AlienRock.Ui;
@@ -6,17 +6,17 @@ namespace Content.Client._Pinwheel.AlienRock.Ui;
 /// <summary>
 /// BUI for the artifact destroyer console
 /// </summary>
-public sealed class AlienRockConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class AlienDestroyerConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
-    private AlienRockConsoleMenu? _consoleMenu;
+    private AlienDestroyerConsoleMenu? _consoleMenu;
 
     /// <inheritdoc />
     protected override void Open()
     {
         base.Open();
 
-        _consoleMenu = this.CreateWindow<AlienRockConsoleMenu>();
+        _consoleMenu = this.CreateWindow<AlienDestroyerConsoleMenu>();
         _consoleMenu.SetOwner(Owner);
 
         _consoleMenu.OnClose += Close;
@@ -24,14 +24,14 @@ public sealed class AlienRockConsoleBoundUserInterface(EntityUid owner, Enum uiK
 
         _consoleMenu.OnDestroyButtonPressed += () =>
         {
-            SendMessage(new AlienRockConsoleButtonPressedMessage());
+            SendMessage(new AlienDestroyerConsoleButtonPressedMessage());
         };
     }
 
     /// <summary>
     /// Update UI state based on corresponding component.
     /// </summary>
-    public void Update(Entity<AlienRockConsoleComponent> ent)
+    public void Update(Entity<AlienDestroyerConsoleComponent> ent)
     {
         _consoleMenu?.Update(ent);
     }

@@ -1,13 +1,13 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Pinwheel.AlienRock;
+namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 
 /// <summary>
 /// Handheld tool displaying the nodes present on an artifact
 /// </summary>
 [RegisterComponent]
-public sealed partial class AlienRockScannerComponent : Component
+public sealed partial class AlienScannerComponent : Component
 {
     /// <summary>
     /// Maximum range, in tiles, to display nodes on the artifact
@@ -23,11 +23,11 @@ public sealed partial class AlienRockScannerComponent : Component
 }
 
 /// <summary>
-/// Marker component holding data for an active <see cref="AlienRockScannerComponent"/>
+/// Marker component holding data for an active <see cref="AlienScannerComponent"/>
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 [AutoGenerateComponentState(true), AutoGenerateComponentPause]
-public sealed partial class AlienRockScannerConnectedComponent : Component
+public sealed partial class AlienScannerConnectedComponent : Component
 {
     /// <summary>
     /// Rock the scanner is currently scanning
@@ -49,7 +49,7 @@ public sealed partial class AlienRockScannerConnectedComponent : Component
 }
 
 [Serializable, NetSerializable]
-public enum AlienRockScannerUiKey : byte
+public enum AlienScannerUiKey : byte
 {
     Key
 }

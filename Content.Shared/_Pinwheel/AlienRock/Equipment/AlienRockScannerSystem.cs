@@ -1,20 +1,21 @@
 using Content.Shared.Verbs;
 using Content.Shared.Timing;
 using Content.Shared.Interaction;
+using Content.Shared._Pinwheel.AlienRock;
 
-namespace Content.Shared._Pinwheel.AlienRock;
+namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 
 /// <summary>
 /// Handheld tool displaying the nodes present on an artifact
 /// </summary>
-public sealed partial class AlienRockScannerSystem : EntitySystem
+public sealed partial class AlienScannerSystem : EntitySystem
 {
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
 
     [SubscribeLocalEvent]
     private void OnBeforeRangedInteract(
-        Entity<AlienRockScannerComponent> ent,
+        Entity<AlienScannerComponent> ent,
         ref BeforeRangedInteractEvent args)
     {
         if (args.Handled
@@ -28,7 +29,7 @@ public sealed partial class AlienRockScannerSystem : EntitySystem
 
     [SubscribeLocalEvent]
     private void AddScanVerb(
-        Entity<AlienRockScannerComponent> ent,
+        Entity<AlienScannerComponent> ent,
         ref GetVerbsEvent<UtilityVerb> args)
     {
         if (!args.CanAccess)
@@ -50,7 +51,7 @@ public sealed partial class AlienRockScannerSystem : EntitySystem
     }
 
     private void Attach(
-        Entity<AlienRockScannerComponent> ent,
+        Entity<AlienScannerComponent> ent,
         Entity<AlienRockComponent> rock,
         EntityUid actor
     )
@@ -59,13 +60,13 @@ public sealed partial class AlienRockScannerSystem : EntitySystem
             && !_useDelay.TryResetDelay((ent, useDelay), true))
             return;
 
-        var connected = EnsureComp<AlienRockScannerConnectedComponent>(ent);
+        var connected = EnsureComp<AlienScannerConnectedComponent>(ent);
         if (connected.AttachedTo != rock.Owner)
         {
             connected.AttachedTo = rock.Owner;
             Dirty(ent, connected);
         }
 
-        _ui.TryOpenUi((ent, null), AlienRockScannerUiKey.Key, actor, predicted: true);
+        _ui.TryOpenUi((ent, null), AlienScannerUiKey.Key, actor, predicted: true);
     }
 }

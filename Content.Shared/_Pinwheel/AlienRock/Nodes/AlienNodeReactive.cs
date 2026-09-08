@@ -2,10 +2,11 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Content.Shared._Pinwheel.AlienRock;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Pinwheel.AlienRock;
+namespace Content.Shared._Pinwheel.AlienRock.Nodes;
 
 [RegisterComponent]
 public sealed partial class AlienNodeReactiveComponent : Component
@@ -35,7 +36,7 @@ public sealed partial class AlienNodeReactiveComponent : Component
 
 }
 
-public sealed partial class AlienNodeReactiveSystem : AlienNodeBaseSystem
+public sealed partial class AlienNodeReactiveSystem : EntitySystem
 {
     [SubscribeLocalEvent]
     private void OnReaction(Entity<AlienNodeReactiveComponent> node,
@@ -53,7 +54,7 @@ public sealed partial class AlienNodeReactiveSystem : AlienNodeBaseSystem
         if (node.Comp.ReactiveGroups?.Count > 0 && !ReagentHaveReactiveGroup(rel.Args, node.Comp))
             return;
 
-        NodeRemove(node.Owner);
+        PredictedQueueDel(node.Owner);
     }
 
     private static bool ReagentHaveReactiveGroup(ReactionEntityEvent args, AlienNodeReactiveComponent comp)

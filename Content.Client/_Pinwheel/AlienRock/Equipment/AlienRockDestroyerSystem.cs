@@ -1,23 +1,23 @@
 using Content.Client._Pinwheel.AlienRock.Ui;
-using Content.Shared._Pinwheel.AlienRock;
+using Content.Shared._Pinwheel.AlienRock.Equipment;
 using Robust.Client.GameObjects;
 
-namespace Content.Client._Pinwheel.AlienRock;
+namespace Content.Client._Pinwheel.AlienRock.Equipment;
 
 /// <inheritdoc />
-public sealed partial class AlienRockDestroyerSystem : SharedAlienRockDestroyerSystem
+public sealed partial class AlienDestroyerSystem : SharedAlienDestroyerSystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
 
     [SubscribeLocalEvent]
-    private void OnConsoleAfterAutoHandleState(Entity<AlienRockConsoleComponent> ent,
+    private void OnConsoleAfterAutoHandleState(Entity<AlienDestroyerConsoleComponent> ent,
         ref AfterAutoHandleStateEvent args)
     {
         UpdateBuiIfCanGetAnalysisConsoleUi(ent);
     }
 
     [SubscribeLocalEvent]
-    private void OnDestroyerAfterAutoHandleState(Entity<AlienRockDestroyerComponent> ent,
+    private void OnDestroyerAfterAutoHandleState(Entity<AlienDestroyerComponent> ent,
         ref AfterAutoHandleStateEvent args)
     {
         if (!TryGetConsole(ent, out var console))
@@ -26,11 +26,11 @@ public sealed partial class AlienRockDestroyerSystem : SharedAlienRockDestroyerS
         UpdateBuiIfCanGetAnalysisConsoleUi(console.Value);
     }
 
-    private void UpdateBuiIfCanGetAnalysisConsoleUi(Entity<AlienRockConsoleComponent> ent)
+    private void UpdateBuiIfCanGetAnalysisConsoleUi(Entity<AlienDestroyerConsoleComponent> ent)
     {
-        if (_ui.TryGetOpenUi<AlienRockConsoleBoundUserInterface>(
+        if (_ui.TryGetOpenUi<AlienDestroyerConsoleBoundUserInterface>(
             ent.Owner,
-            AlienRockConsoleUiKey.Key, out var bui))
+            AlienDestroyerConsoleUiKey.Key, out var bui))
             bui.Update(ent);
     }
 }

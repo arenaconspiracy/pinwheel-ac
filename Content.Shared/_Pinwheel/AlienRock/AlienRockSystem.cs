@@ -80,7 +80,7 @@ public sealed partial class AlienRockSystem : EntitySystem
 
     [SubscribeLocalEvent]
     private void OnEntRemovedFromContainer(Entity<AlienRockComponent> ent,
-        ref EntRemovedFromContainerMessage args)
+        ref EntRemovedFromContainerMessage args) // picked up when nodes get deleted
     {
         AdjustLight(ent);
         AdjustAnchor(ent);

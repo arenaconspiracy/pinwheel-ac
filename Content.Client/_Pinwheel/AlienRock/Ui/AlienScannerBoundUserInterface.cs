@@ -5,17 +5,17 @@ namespace Content.Client._Pinwheel.AlienRock.Ui;
 /// <summary>
 /// BUI for hand-held xeno artifact scanner,  server-provided UI updates.
 /// </summary>
-public sealed class AlienRockScannerBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class AlienScannerBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
-    private AlienRockScanner? _display;
+    private AlienScannerDisplay? _display;
 
     /// <inheritdoc />
     protected override void Open()
     {
         base.Open();
 
-        _display = this.CreateWindow<AlienRockScanner>();
+        _display = this.CreateWindow<AlienScannerDisplay>();
         _display.SetOwner(Owner);
     }
 

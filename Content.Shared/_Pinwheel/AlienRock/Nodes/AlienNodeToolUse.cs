@@ -3,10 +3,11 @@ using Content.Shared.Tools;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Interaction;
+using Content.Shared._Pinwheel.AlienRock;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Pinwheel.AlienRock;
+namespace Content.Shared._Pinwheel.AlienRock.Nodes;
 
 [RegisterComponent]
 public sealed partial class AlienNodeToolUseComponent : Component
@@ -21,7 +22,7 @@ public sealed partial class AlienNodeToolUseComponent : Component
     public int Fuel = 0;
 }
 
-public sealed partial class AlienNodeToolUseSystem : AlienNodeBaseSystem
+public sealed partial class AlienNodeToolUseSystem : EntitySystem
 {
     [Dependency] private SharedToolSystem _tool = default!;
 
@@ -33,7 +34,7 @@ public sealed partial class AlienNodeToolUseSystem : AlienNodeBaseSystem
             return;
 
         if (rel.Args.Node == GetNetEntity(node))
-            NodeRemove(node.Owner);
+            PredictedQueueDel(node.Owner);
     }
 
     [SubscribeLocalEvent]

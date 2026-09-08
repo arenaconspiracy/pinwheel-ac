@@ -1,16 +1,17 @@
 using Content.Shared.Radiation.Components;
 using Content.Shared.Radiation.Systems;
+using Content.Shared._Pinwheel.AlienRock;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Pinwheel.AlienRock;
+namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 
 [RegisterComponent]
 public sealed partial class AlienEffectRadiationComponent : Component
 {}
 
-public sealed partial class AlienEffectRadiationSystem : AlienNodeBaseSystem
+public sealed partial class AlienEffectRadiationSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;

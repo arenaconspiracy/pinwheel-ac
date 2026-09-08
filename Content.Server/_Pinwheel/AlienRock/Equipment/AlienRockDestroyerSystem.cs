@@ -1,16 +1,17 @@
 using Content.Shared._Pinwheel.AlienRock;
+using Content.Shared._Pinwheel.AlienRock.Equipment;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Server._Pinwheel.AlienRock;
+namespace Content.Server._Pinwheel.AlienRock.Equipment;
 
 /// <inheritdoc />
-public sealed partial class AlienRockDestroyerSystem : SharedAlienRockDestroyerSystem
+public sealed partial class AlienDestroyerSystem : SharedAlienDestroyerSystem
 {
     [Dependency] private SharedAudioSystem _audio = default!;
 
     [SubscribeLocalEvent]
-    private void OnExtractButtonPressed(Entity<AlienRockConsoleComponent> ent,
-        ref AlienRockConsoleButtonPressedMessage args)
+    private void OnExtractButtonPressed(Entity<AlienDestroyerConsoleComponent> ent,
+        ref AlienDestroyerConsoleButtonPressedMessage args)
     {
         if (!TryGetDestroyer(ent, out var destroyer))
             return;

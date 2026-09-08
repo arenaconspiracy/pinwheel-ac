@@ -7,13 +7,13 @@
   - type: Sprite
     sprite: Objects/Specific/Xenoarchaeology/node_scanner.rsi
     state: icon
-  - type: AlienRockScanner
+  - type: AlienScanner
   - type: UseDelay
     delay: 1
   - type: UserInterface
     interfaces:
-      enum.AlienRockScannerUiKey.Key:
-        type: AlienRockScannerBoundUserInterface
+      enum.AlienScannerUiKey.Key:
+        type: AlienScannerBoundUserInterface
   - type: ActivatableUI
-    key: enum.AlienRockScannerUiKey.Key
+    key: enum.AlienScannerUiKey.Key
     singleUser: true

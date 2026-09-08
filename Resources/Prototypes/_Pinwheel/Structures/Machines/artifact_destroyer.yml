@@ -68,7 +68,7 @@
     whitelist:
       components:
       - AlienRock
-  - type: AlienRockDestroyer
+  - type: AlienDestroyer
     destroySound:
       collection: ArtifactDestroyerDestroy
   - type: GuideHelp
@@ -97,12 +97,12 @@
   # UI
   - type: UserInterface
     interfaces:
-      enum.AlienRockConsoleUiKey.Key:
-        type: AlienRockConsoleBoundUserInterface
+      enum.AlienDestroyerConsoleUiKey.Key:
+        type: AlienDestroyerConsoleBoundUserInterface
       enum.WiresUiKey.Key:
         type: WiresBoundUserInterface
   - type: ActivatableUI
-    key: enum.AlienRockConsoleUiKey.Key
+    key: enum.AlienDestroyerConsoleUiKey.Key
   # functional
   - type: Computer
     board: BoardComputerArtifactDestroyer
@@ -112,7 +112,7 @@
   - type: DeviceLinkSource
     range: 5
     ports: [ ArtifactDestroyerSource ]
-  - type: AlienRockConsole
+  - type: AlienDestroyerConsole
   - type: GuideHelp
     guides: [ Xenoarchaeology ]
 

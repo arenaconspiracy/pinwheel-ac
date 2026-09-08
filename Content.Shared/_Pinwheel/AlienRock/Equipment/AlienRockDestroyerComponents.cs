@@ -4,13 +4,13 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Pinwheel.AlienRock;
+namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 
 /// <summary>
 /// Console used for abating artifacts
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class AlienRockConsoleComponent : Component
+public sealed partial class AlienDestroyerConsoleComponent : Component
 {
     /// <summary>
     /// The destroyer we are linked to, if any
@@ -29,7 +29,7 @@ public sealed partial class AlienRockConsoleComponent : Component
 /// Machine used for abating artifacts
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-public sealed partial class AlienRockDestroyerComponent : Component
+public sealed partial class AlienDestroyerComponent : Component
 {
     /// <summary>
     /// The current artifact placed on this analyzer, if any
@@ -63,10 +63,10 @@ public sealed partial class AlienRockDestroyerComponent : Component
 }
 
 [Serializable, NetSerializable]
-public enum AlienRockConsoleUiKey : byte
+public enum AlienDestroyerConsoleUiKey : byte
 {
     Key
 }
 
 [Serializable, NetSerializable]
-public sealed class AlienRockConsoleButtonPressedMessage : BoundUserInterfaceMessage;
+public sealed class AlienDestroyerConsoleButtonPressedMessage : BoundUserInterfaceMessage;
