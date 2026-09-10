@@ -16,7 +16,7 @@ public sealed partial class AlienScannerComponent : Component
     public int Range = 5;
 
     /// <summary>
-    /// update rate used by the UI controller
+    /// Update rate of the UI controller
     /// </summary>
     [DataField]
     public TimeSpan UiUpdateRate = TimeSpan.FromSeconds(1);
@@ -33,13 +33,13 @@ public sealed partial class AlienScannerConnectedComponent : Component
     /// Rock the scanner is currently scanning
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid AttachedTo;
+    public EntityUid Attached;
 
     /// <summary>
-    /// TBA
+    /// Update rate of checking range from attached artifact
     /// </summary>
     [DataField]
-    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(1);
+    public TimeSpan UpdateRate = TimeSpan.FromSeconds(1);
 
     /// <summary>
     /// Next UI update time

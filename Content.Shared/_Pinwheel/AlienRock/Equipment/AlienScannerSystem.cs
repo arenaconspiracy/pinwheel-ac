@@ -2,6 +2,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Timing;
 using Content.Shared.Interaction;
 using Content.Shared._Pinwheel.AlienRock;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 
@@ -10,8 +11,32 @@ namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 /// </summary>
 public sealed partial class AlienScannerSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
+
+    public override void Update(float frameTime)
+    {
+        var scannerQuery = EntityQueryEnumerator<
+            AlienScannerComponent,
+            AlienScannerConnectedComponent>();
+        while (scannerQuery.MoveNext(out var uid, out var scan, out var con))
+        {
+            if (con.UpdateNext > _timing.CurTime)
+                continue;
+
+            con.UpdateNext = _timing.CurTime + con.UpdateRate;
+
+            var xform1 = Transform(uid);
+            var xform2 = Transform(con.Attached);
+            if (!_transform.InRange(xform1.Coordinates, xform2.Coordinates, scan.Range))
+            {
+                //scanner is too far, disconnect
+                RemCompDeferred(uid, con);
+            }
+        }
+    }
 
     [SubscribeLocalEvent]
     private void OnBeforeRangedInteract(
@@ -21,8 +46,10 @@ public sealed partial class AlienScannerSystem : EntitySystem
         if (args.Handled
             || !args.CanReach
             || args.Target is not { } target
-            || !HasComp<AlienRockComponent>(target))
+            || !TryComp<AlienRockComponent>(target, out var rock))
             return;
+
+        Attach(ent, (target, rock), args.User);
 
         args.Handled = true;
     }
@@ -61,9 +88,9 @@ public sealed partial class AlienScannerSystem : EntitySystem
             return;
 
         var connected = EnsureComp<AlienScannerConnectedComponent>(ent);
-        if (connected.AttachedTo != rock.Owner)
+        if (connected.Attached != rock.Owner)
         {
-            connected.AttachedTo = rock.Owner;
+            connected.Attached = rock.Owner;
             Dirty(ent, connected);
         }
 

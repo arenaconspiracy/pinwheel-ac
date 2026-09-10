@@ -21,3 +21,4 @@ MachineArtifactAnalyzer: MachineArtifactDestroyer
 ArtifactAnalyzerMachineCircuitboard: BoardArtifactDestroyer
 ComputerAnalysisConsole: ComputerArtifactDestroyer
 AnalysisComputerCircuitboard: BoardComputerArtifactDestroyer
+NodeScanner: DeviceAlienScanner
