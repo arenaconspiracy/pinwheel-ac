@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseItem
   id: FloorTileItemBase
-  description: These could work as a pretty decent throwing weapon.
+  description: Floor tiles used for decoration.
   abstract: true
   components:
   - type: Sprite
