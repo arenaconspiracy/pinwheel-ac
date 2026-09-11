@@ -26,7 +26,8 @@
 - type: entity
   parent: ClothingHeadset
   id: ClothingHeadsetGrey
-  name: passenger headset
+  name: spare headset # Pinwheel
+  description: A generic headset without departmental livery. # Pinwheel
   components:
   - type: Sprite
     sprite: Clothing/Ears/Headsets/base.rsi
