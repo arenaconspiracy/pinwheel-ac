@@ -36,5 +36,6 @@ WallSandstone: WallSolid # i didn't actually have to remove this one but i did n
 
 # 2026-09-11
 BoxEncryptionKeyPassenger: null
+EncryptionKeyCommon: null
 IntercomCommon: Intercom
 TelecomServerFilledCommon: TelecomServer
