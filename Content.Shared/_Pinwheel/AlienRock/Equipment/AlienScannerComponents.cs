@@ -20,6 +20,12 @@ public sealed partial class AlienScannerComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan UiUpdateRate = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    /// How long it takes to scan an artifact
+    /// </summary>
+    [DataField]
+    public TimeSpan DoAfterLength = TimeSpan.FromSeconds(6);
 }
 
 /// <summary>

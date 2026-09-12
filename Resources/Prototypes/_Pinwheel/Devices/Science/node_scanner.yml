@@ -7,9 +7,6 @@
   - type: Sprite
     sprite: Objects/Specific/Xenoarchaeology/node_scanner.rsi
     state: icon
-  - type: AlienScanner
-  - type: UseDelay
-    delay: 1
   - type: UserInterface
     interfaces:
       enum.AlienScannerUiKey.Key:
@@ -17,3 +14,4 @@
   - type: ActivatableUI
     key: enum.AlienScannerUiKey.Key
     singleUser: true
+  - type: AlienScanner # TODO: give this use sounds and shit

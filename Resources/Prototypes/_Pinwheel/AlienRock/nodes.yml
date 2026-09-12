@@ -4,20 +4,23 @@
     children:
     - id: AlienNodeDamage
       conditions: &c [ !type:UniqueCondition ]
-    - id: AlienNodeReactiveBlood # PRO-TEM: this is gaudy and sourcing new blood is inconvenient and arguably roleplay nonconductive
+    - id: AlienNodeReactiveBlood # TEMP: this is gaudy and sourcing new blood is inconvenient and arguably roleplay nonconductive
       conditions: *c
     - id: AlienNodeReactiveWater
       conditions: *c
     - id: AlienNodeToolSawing
       conditions: *c
-    - id: AlienNodeToolAnchoring # PRO-TEM: science gear shouldn't overlap w/ engineering
+    - id: AlienNodeToolAnchoring # TEMP: science gear shouldn't overlap w/ engineering
       conditions: *c
-    - id: AlienNodeToolPrying # PRO-TEM: ditto
+    - id: AlienNodeToolPrying # TEMP: ditto
       conditions: *c
-    - id: AlienNodeToolScrewing # PRO-TEM: ditto
+    - id: AlienNodeToolScrewing # TEMP: ditto
       conditions: *c
     # id: AlienNodeToolWelding # you can't weld a radioactive artifact without either getting irradiated or blinding yourself. whoops!
     # conditions: *c
+
+## names are used in debug views, descriptions are used in the node scanner
+# that said literally all of these need better, more thematic descriptions
 
 - type: entity
   id: AlienNodeDamage
@@ -31,7 +34,7 @@
   id: AlienNodeReactiveBlood
   categories: [ HideSpawnMenu ]
   name: reactive, blood
-  description: blood reaction # this needs a better name
+  description: blood absorption
   components:
   - type: AlienNodeReactive
     reagents:
@@ -48,7 +51,7 @@
   id: AlienNodeReactiveWater
   categories: [ HideSpawnMenu ]
   name: reactive, water
-  description: water reaction # hydrophobia?
+  description: water absorption
   components:
   - type: AlienNodeReactive
     reagents:
@@ -59,7 +62,7 @@
   id: AlienNodeToolSawing
   categories: [ HideSpawnMenu ]
   name: tool use, sawing
-  description: sample text
+  description: sawing
   components:
   - type: AlienNodeToolUse
     quality: Sawing
@@ -68,7 +71,7 @@
   id: AlienNodeToolAnchoring
   categories: [ HideSpawnMenu ]
   name: tool use, anchoring
-  description: sample text
+  description: anchoring
   components:
   - type: AlienNodeToolUse
     quality: Anchoring
@@ -77,7 +80,7 @@
   id: AlienNodeToolPrying
   categories: [ HideSpawnMenu ]
   name: tool use, prying
-  description: sample text
+  description: prying 
   components:
   - type: AlienNodeToolUse
     quality: Prying
@@ -86,17 +89,7 @@
   id: AlienNodeToolScrewing
   categories: [ HideSpawnMenu ]
   name: tool use, screwing
-  description: sample text
+  description: screwing
   components:
   - type: AlienNodeToolUse
     quality: Screwing
-
-- type: entity
-  id: AlienNodeToolWelding
-  categories: [ HideSpawnMenu ]
-  name: tool use, welding
-  description: sample text
-  components:
-  - type: AlienNodeToolUse
-    quality: Welding
-    fuel: 10

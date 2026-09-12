@@ -67,7 +67,7 @@ public sealed partial class AlienScannerDisplay : FancyWindow
         {
             var node = _ent.GetNetEntity(uid);
             _ent.TryGetEntityData(node, out var _, out var nodeMeta);
-            _nodeNames.Add(nodeMeta!.EntityName);
+            _nodeNames.Add(nodeMeta!.EntityDescription);
         }
 
         SetText(true, _nodeNames);
@@ -80,35 +80,35 @@ public sealed partial class AlienScannerDisplay : FancyWindow
         bool connected,
         List<string> nodes)
     {
-        NodeScannerState.Text = connected
+        ScannerStateLabel.Text = connected
             ? Loc.GetString("node-scanner-artifact-connected")
             : Loc.GetString("node-scanner-artifact-non-connected");
 
-        ActiveNodesList.Children.Clear();
+        NodesList.Children.Clear();
 
         if (nodes.Count > 0)
         {
             // show list of triggered nodes instead of 'no data' placeholder
-            NoActiveNodeDataLabel.Visible = false;
-            ActiveNodesList.Visible = true;
+            NodesClearedLabel.Visible = false;
+            NodesList.Visible = true;
 
             foreach (var node in nodes)
             {
                 var nodeLabel = new Button
-                {
+                { // using buttons for this is stupid but i cba making it look good because i don't know UI
                     Text = node,
                     Margin = new Thickness(15, 5, 0, 0),
                     MaxHeight = 40,
-                    Disabled = true
+                    Disabled = true,
                 };
-                ActiveNodesList.Children.Add(nodeLabel);
+                NodesList.Children.Add(nodeLabel);
             }
         }
         else
         {
             // clear list of activated nodes (done previously), show 'no data' placeholder
-            NoActiveNodeDataLabel.Visible = true;
-            ActiveNodesList.Visible = false;
+            NodesClearedLabel.Visible = true;
+            NodesList.Visible = false;
         }
     }
 }

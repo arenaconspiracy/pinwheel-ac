@@ -1,8 +1,8 @@
-using Content.Shared.Verbs;
-using Content.Shared.Timing;
+using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared._Pinwheel.AlienRock;
 using Robust.Shared.Timing;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 
@@ -11,10 +11,10 @@ namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 /// </summary>
 public sealed partial class AlienScannerSystem : EntitySystem
 {
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private UseDelaySystem _useDelay = default!;
 
     public override void Update(float frameTime)
     {
@@ -38,6 +38,24 @@ public sealed partial class AlienScannerSystem : EntitySystem
         }
     }
 
+    private void Attach(
+        Entity<AlienScannerComponent> ent,
+        Entity<AlienRockComponent?> rock,
+        EntityUid actor)
+    {
+        if (!Resolve(rock.Owner, ref rock.Comp))
+            throw new Exception($"Entity {rock.Owner} has no {typeof(AlienRockComponent)}. How did you even scan it");
+
+        var connected = EnsureComp<AlienScannerConnectedComponent>(ent);
+        if (connected.Attached != rock.Owner)
+        {
+            connected.Attached = rock.Owner;
+            Dirty(ent, connected);
+        }
+
+        _ui.TryOpenUi((ent, null), AlienScannerUiKey.Key, actor, predicted: true);
+    }
+
     [SubscribeLocalEvent]
     private void OnBeforeRangedInteract(
         Entity<AlienScannerComponent> ent,
@@ -49,51 +67,42 @@ public sealed partial class AlienScannerSystem : EntitySystem
             || !TryComp<AlienRockComponent>(target, out var rock))
             return;
 
-        Attach(ent, (target, rock), args.User);
+        var doAfter = new DoAfterArgs(
+            EntityManager,
+            args.User,
+            ent.Comp.DoAfterLength,
+            new AlienScannerDoAfterEvent(),
+            ent.Owner,
+            used: args.Used,
+            target: args.Target)
+            {
+                BreakOnHandChange = false,
+                BreakOnDropItem = true,
+                BreakOnMove = true,
+                BreakOnWeightlessMove = true,
+                NeedHand = true,
+                RequireCanInteract = true
+            };
+
+        _doAfter.TryStartDoAfter(doAfter);
 
         args.Handled = true;
     }
 
     [SubscribeLocalEvent]
-    private void AddScanVerb(
+    private void OnDoAfter(
         Entity<AlienScannerComponent> ent,
-        ref GetVerbsEvent<UtilityVerb> args)
+        ref AlienScannerDoAfterEvent args)
     {
-        if (!args.CanAccess)
+        if (args.Cancelled)
             return;
 
-        if (!TryComp<AlienRockComponent>(args.Target, out var rock))
+        if (args.Target is null)
             return;
 
-        var target = new EntityUid((int)args.Target); // can't pass ref to Attach() below otherwise
-        var actor = new EntityUid((int)args.User);
-
-        var verb = new UtilityVerb
-        {
-            Act = () => Attach((ent), (target, rock), actor),
-            Text = Loc.GetString("node-scan-tooltip")
-        };
-
-        args.Verbs.Add(verb);
-    }
-
-    private void Attach(
-        Entity<AlienScannerComponent> ent,
-        Entity<AlienRockComponent> rock,
-        EntityUid actor
-    )
-    {
-        if (TryComp(ent, out UseDelayComponent? useDelay)
-            && !_useDelay.TryResetDelay((ent, useDelay), true))
-            return;
-
-        var connected = EnsureComp<AlienScannerConnectedComponent>(ent);
-        if (connected.Attached != rock.Owner)
-        {
-            connected.Attached = rock.Owner;
-            Dirty(ent, connected);
-        }
-
-        _ui.TryOpenUi((ent, null), AlienScannerUiKey.Key, actor, predicted: true);
+        Attach(ent, args.Target.Value, args.User);
     }
 }
+
+[Serializable, NetSerializable]
+public sealed partial class AlienScannerDoAfterEvent : SimpleDoAfterEvent;
