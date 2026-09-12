@@ -30,7 +30,7 @@ public sealed partial class AlienEffectGasTemperatureSystem : EntitySystem
 
     private void AdjustStrength(Entity<AlienEffectGasTemperatureComponent> ent)
     {
-        if (!_container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes))
+        if (!_container.TryGetContainer(ent.Owner, nameof(AlienRockComponent), out var nodes))
             return;
 
         // BAD: MAGIC NUMBER

@@ -18,7 +18,7 @@ public sealed partial class AlienEffectRadiationSystem : EntitySystem
 
     private void AdjustRadiation(Entity<AlienEffectRadiationComponent> ent)
     {
-        if (!_container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes))
+        if (!_container.TryGetContainer(ent.Owner, nameof(AlienRockComponent), out var nodes))
             return;
 
         if (!TryComp(ent.Owner, out RadiationSourceComponent? radiation))

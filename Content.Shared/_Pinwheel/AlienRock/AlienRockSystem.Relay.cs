@@ -34,7 +34,7 @@ public sealed partial class AlienRockSystem
     {
         var ev = new AlienRockRelayedEvent<T>(args, ent.Owner);
 
-        _container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes);
+        _container.TryGetContainer(ent.Owner, nameof(AlienRockComponent), out var nodes);
 
         // clone the list so the foreach doesn't get modified while enumerating
         var nodesCopy = new List<EntityUid>(nodes!.ContainedEntities);

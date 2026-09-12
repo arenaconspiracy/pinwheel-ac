@@ -28,7 +28,7 @@ public sealed partial class AlienRockSystem : EntitySystem
     {
         var xform = Transform(ent);
 
-        if (!_container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes))
+        if (!_container.TryGetContainer(ent.Owner, nameof(AlienRockComponent), out var nodes))
             return;
 
         if (nodes.Count == 0)
@@ -42,7 +42,7 @@ public sealed partial class AlienRockSystem : EntitySystem
 
     private void AdjustLight(Entity<AlienRockComponent> ent)
     {
-        if (!_container.TryGetContainer(ent.Owner, AlienRockComponent.ContainerId, out var nodes))
+        if (!_container.TryGetContainer(ent.Owner, nameof(AlienRockComponent), out var nodes))
             return;
 
         // BAD: magic numbers city
@@ -52,16 +52,22 @@ public sealed partial class AlienRockSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnComponentInit(Entity<AlienRockComponent> ent, ref ComponentInit args)
+    {
+        ent.Comp.Nodes = _container.EnsureContainer<Container>(ent, nameof(AlienRockComponent));
+    }
+
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<AlienRockComponent> ent, ref MapInitEvent args)
     {
-        ent.Comp.Nodes = _container.EnsureContainer<Container>(ent, AlienRockComponent.ContainerId);
+        if (ent.Comp.Nodes is null)
+            return;
 
         var spawned = new HashSet<EntProtoId>();
         var ctx = new EntityTableContext(new Dictionary<string, object>
         {
             { UniqueCondition.UsedSpawnsKey, spawned },
         });
-
 
         for (int i = 0; i < ent.Comp.NodeCount; i++)
         {
@@ -70,12 +76,13 @@ public sealed partial class AlienRockSystem : EntitySystem
             PredictedTrySpawnInContainer(
                 protoName: spawn,
                 containerUid: ent.Comp.Nodes.Owner,
-                containerId: AlienRockComponent.ContainerId,
+                containerId: nameof(AlienRockComponent),
                 uid: out _);
         }
 
         AdjustLight(ent);
         AdjustAnchor(ent);
+        Dirty(ent);
     }
 
     [SubscribeLocalEvent]
