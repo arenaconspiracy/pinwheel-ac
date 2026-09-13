@@ -26,7 +26,7 @@ public sealed partial class AlienScannerComponent : Component
 /// Marker component holding data for an active <see cref="AlienScannerComponent"/>
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState(true), AutoGenerateComponentPause]
+[AutoGenerateComponentState(true)]
 public sealed partial class AlienScannerConnectedComponent : Component
 {
     /// <summary>
@@ -58,7 +58,7 @@ public sealed partial class AlienScannerConnectedComponent : Component
 /// Marker component applied to scanned artifacts to clean up <see cref="AlienScannerConnectedComponent"/> on deletion
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState(true), AutoGenerateComponentPause]
+[AutoGenerateComponentState(true)]
 public sealed partial class AlienRockScannedComponent : Component
 {
     /// <summary>
