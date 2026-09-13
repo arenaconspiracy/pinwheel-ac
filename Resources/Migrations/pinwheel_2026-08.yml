@@ -22,3 +22,15 @@ ArtifactAnalyzerMachineCircuitboard: BoardArtifactDestroyer
 ComputerAnalysisConsole: ComputerArtifactDestroyer
 AnalysisComputerCircuitboard: BoardComputerArtifactDestroyer
 NodeScanner: DeviceAlienScanner
+
+CrateArtifactContainer: null
+ArtifactFragment1: null
+
+#AsteroidRockArtifactFragment: AsteroidRock
+#IronRockArtifactFragment: IronRock
+#WallRockArtifactFragment: WallRock
+#WallRockBasaltArtifactFragment: WallRockBasalt
+#WallRockSnowArtifactFragment: WallRockSnow
+#WallRockSandArtifactFragment: WallRockSand
+#WallRockChromiteArtifactFragment: WallRockChromite
+#WallRockAndesiteArtifactFragment: WallRockAndesite

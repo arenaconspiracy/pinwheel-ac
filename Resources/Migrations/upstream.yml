@@ -603,11 +603,11 @@ MailEvilLizardSpam: MailSpamLetter
 MailParentsNeedMoneySpam: MailSpamLetter
 
 # 2025-04-15
-SimpleXenoArtifact: ComplexXenoArtifact
-MediumXenoArtifact: ComplexXenoArtifact
-SimpleXenoArtifactItem: ComplexXenoArtifactItem
-MediumXenoArtifactItem: ComplexXenoArtifactItem
-VariedXenoArtifactItem: ComplexXenoArtifactItem
+#SimpleXenoArtifact: ComplexXenoArtifact
+#MediumXenoArtifact: ComplexXenoArtifact
+#SimpleXenoArtifactItem: ComplexXenoArtifactItem
+#MediumXenoArtifactItem: ComplexXenoArtifactItem
+#VariedXenoArtifactItem: ComplexXenoArtifactItem
 
 # 2025-04-19
 ClothingOuterHardsuitSyndicate: ClothingOuterEVASuitSyndicate
@@ -988,7 +988,7 @@ WallRockBasaltSilver: WallRockSilver
 WallRockBasaltBananium: WallRock
 WallRockBasaltTin: WallRockTin
 WallRockBasaltUranium: WallRockUranium
-WallRockBasaltArtifactFragment: WallRockArtifactFragment
+WallRockBasaltArtifactFragment: WallRock # Pinwheel
 WallRockBasaltSalt: WallRockSalt
 WallRockAndesite: WallRock
 WallRockAndesiteCoal: WallRockCoal
@@ -1000,7 +1000,7 @@ WallRockAndesiteSilver: WallRockSilver
 WallRockAndesiteBananium: WallRock
 WallRockAndesiteTin: WallRockTin
 WallRockAndesiteUranium: WallRockUranium
-WallRockAndesiteArtifactFragment: WallRockArtifactFragment
+WallRockAndesiteArtifactFragment: WallRock # Pinwheel
 WallRockAndesiteSalt: WallRockSalt
 #FloorTileItemTechmaint: FloorTileItemSteelMaint
 #FloorTileItemXeno: FloorTileItemExoViscera

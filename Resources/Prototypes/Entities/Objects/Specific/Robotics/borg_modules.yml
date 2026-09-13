@@ -1036,7 +1036,7 @@
     - state: icon-artifacts
   - type: ItemBorgModule
     hands:
-    - item: NodeScanner
+    - item: DeviceAlienScanner
     - item: SprayBottle
     - item: GasAnalyzer
     - item: BorgDropper

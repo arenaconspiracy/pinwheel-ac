@@ -82,7 +82,6 @@ public sealed partial class AlienRockSystem : EntitySystem
 
         AdjustLight(ent);
         AdjustAnchor(ent);
-        Dirty(ent);
     }
 
     [SubscribeLocalEvent]
