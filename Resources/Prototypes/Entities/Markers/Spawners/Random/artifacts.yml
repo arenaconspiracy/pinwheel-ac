@@ -16,7 +16,7 @@
   - type: Sprite
     layers:
     - state: red
-    - sprite: Objects/Specific/Xenoarchaeology/xeno_artifacts.rsi
+    - sprite: _Pinwheel/AlienRock/artifacts.rsi
       state: ano01
   - type: EntityTableSpawner
     table: !type:NestedSelector
