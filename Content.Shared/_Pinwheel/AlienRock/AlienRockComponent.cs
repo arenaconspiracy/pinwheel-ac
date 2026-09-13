@@ -26,8 +26,6 @@ public sealed partial class AlienRockComponent : Component
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public int NodeCount = 6;
 
-    public const string ContainerId = "nodes";
-
     /// <summary>
     /// Container holding nodes
     /// </summary>
