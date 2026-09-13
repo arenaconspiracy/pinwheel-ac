@@ -1,8 +1,8 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    Title="{Loc 'node-scan-display-title'}"
-    MinSize="350 200"
-    SetSize="350 200"
+    Title="{Loc 'alienrock-scanner-menu-title'}"
+    MinSize="400 200"
+    SetSize="400 200"
     Resizable="False"
     >
     <BoxContainer Orientation="Vertical" >
@@ -10,7 +10,10 @@
             <Label Name="ScannerStateLabel" HorizontalAlignment="Center" StyleClasses="Highlight" Margin="4 0 0 4" />
         </controls:StripeBack>
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
-            <Label Name="NodesClearedLabel" Text="{Loc 'node-scan-no-data'}" Margin="45 25 0 0" MinHeight="47" />
+            <Label Name="NodesClearedLabel"
+                HorizontalAlignment="Center"
+                HorizontalExpand="True"
+                Text="{Loc 'alienrock-scanner-info-empty'}" />
             <GridContainer Name="NodesList"
                 HorizontalAlignment="Center"
                 HorizontalExpand="True"

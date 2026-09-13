@@ -81,8 +81,8 @@ public sealed partial class AlienScannerDisplay : FancyWindow
         List<string> nodes)
     {
         ScannerStateLabel.Text = connected
-            ? Loc.GetString("node-scanner-artifact-connected")
-            : Loc.GetString("node-scanner-artifact-non-connected");
+            ? Loc.GetString("alienrock-scanner-info-connected")
+            : Loc.GetString("alienrock-scanner-info-disconnected");
 
         NodesList.Children.Clear();
 

@@ -10,10 +10,10 @@ namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 public sealed partial class AlienScannerComponent : Component
 {
     /// <summary>
-    /// Maximum range, in tiles, to display nodes on the artifact
+    /// Maximum range from the artifact, in tiles, before we disconnect
     /// </summary>
     [DataField]
-    public int Range = 5;
+    public int Range = 3;
 
     /// <summary>
     /// Update rate of the UI controller
@@ -52,6 +52,20 @@ public sealed partial class AlienScannerConnectedComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan UpdateNext = TimeSpan.Zero;
+}
+
+/// <summary>
+/// Marker component applied to scanned artifacts to clean up <see cref="AlienScannerConnectedComponent"/> on deletion
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(true), AutoGenerateComponentPause]
+public sealed partial class AlienRockScannedComponent : Component
+{
+    /// <summary>
+    /// Scanner the rock is being scanned by
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid Attached;
 }
 
 [Serializable, NetSerializable]

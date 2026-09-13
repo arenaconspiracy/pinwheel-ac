@@ -46,18 +46,25 @@ public sealed partial class AlienScannerSystem : EntitySystem
         if (!Resolve(rock.Owner, ref rock.Comp))
             throw new Exception($"Entity {rock.Owner} has no {typeof(AlienRockComponent)}. How did you even scan it");
 
-        var connected = EnsureComp<AlienScannerConnectedComponent>(ent);
-        if (connected.Attached != rock.Owner)
+        var scanner = EnsureComp<AlienScannerConnectedComponent>(ent);
+        if (scanner.Attached != rock.Owner)
         {
-            connected.Attached = rock.Owner;
-            Dirty(ent, connected);
+            scanner.Attached = rock.Owner;
+            Dirty(ent, scanner);
+        }
+
+        var scanned = EnsureComp<AlienRockScannedComponent>(rock);
+        if (scanned.Attached != ent.Owner)
+        {
+            scanned.Attached = ent.Owner;
+            Dirty(rock, scanned);
         }
 
         _ui.TryOpenUi((ent, null), AlienScannerUiKey.Key, actor, predicted: true);
     }
 
     [SubscribeLocalEvent]
-    private void OnBeforeRangedInteract(
+    private void OnScannerBeforeRangedInteract(
         Entity<AlienScannerComponent> ent,
         ref BeforeRangedInteractEvent args)
     {
@@ -90,7 +97,7 @@ public sealed partial class AlienScannerSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnDoAfter(
+    private void OnScannerDoAfter(
         Entity<AlienScannerComponent> ent,
         ref AlienScannerDoAfterEvent args)
     {
@@ -101,6 +108,14 @@ public sealed partial class AlienScannerSystem : EntitySystem
             return;
 
         Attach(ent, args.Target.Value, args.User);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRockScannedShutdown(
+        Entity<AlienRockScannedComponent> ent,
+        ref ComponentShutdown args)
+    {
+        RemCompDeferred<AlienScannerConnectedComponent>(ent.Comp.Attached);
     }
 }
 
