@@ -1,8 +1,8 @@
 - type: entity
   parent: BaseItem
   id: DeviceAlienScanner
-  name: alien scanner
-  description: A handheld device capable of interpreting and visualizing the nodes of an alien artifact.
+  name: node scanner
+  description: A handheld device capable of interpreting minute energy vibrations in an alien rock and visualizing them as nodes.
   components:
   - type: Sprite
     sprite: Objects/Specific/Xenoarchaeology/node_scanner.rsi

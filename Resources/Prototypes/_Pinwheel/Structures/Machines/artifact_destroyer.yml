@@ -3,7 +3,7 @@
   parent: [ BaseMachinePowered, SmallConstructibleMachine]
   id: MachineArtifactDestroyer
   name: artifact destroyer
-  description: A fgfshdfhsdhfdshhhhhhhhh i need to write this later # TODO
+  description: After nine years of studies, NanoTrasen scientists came out with this sophisticated energy projector that can rend alien rocks to base particles. You just need to get them there...
   components:
   # visual
   - type: Sprite
@@ -78,7 +78,7 @@
   parent: BaseComputer
   id: ComputerArtifactDestroyer
   name: artifact destroyer console
-  description: ARENACONSPIRACY WRITE THIS LATER. DO NOT PUBLISH LIKE THIS # TODO
+  description: A remote interface for the artifact destroyer linked through the device network. Just push the big button when it lights up.
   components:
   # visual
   - type: Sprite
@@ -114,7 +114,7 @@
     ports: [ ArtifactDestroyerSource ]
   - type: AlienDestroyerConsole
   - type: GuideHelp
-    guides: [ Xenoarchaeology ]
+    guides: [ Xenoarchaeology ] # TODO: i seriously need to rewrite the guidebook
 
 # device ports
 - type: sourcePort

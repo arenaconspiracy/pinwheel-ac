@@ -3,8 +3,8 @@
   parent: BaseStructure
   id: BaseAlienRock
   categories: [ DoNotMap ]
-  name: alien artifact
-  description: sample text
+  name: alien rock
+  description: A malicious rocky structure of ambiguous origin. Standing near it is probably not healthy.
   components:
   # visual
   - type: Sprite
