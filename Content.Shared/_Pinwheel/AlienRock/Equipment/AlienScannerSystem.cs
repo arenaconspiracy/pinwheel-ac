@@ -18,22 +18,23 @@ public sealed partial class AlienScannerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var scannerQuery = EntityQueryEnumerator<
-            AlienScannerComponent,
-            AlienScannerConnectedComponent>();
-        while (scannerQuery.MoveNext(out var uid, out var scan, out var con))
+        var scannerQuery = EntityQueryEnumerator<AlienScannerConnectedComponent>();
+        while (scannerQuery.MoveNext(out var uid, out var scan))
         {
-            if (con.UpdateNext > _timing.CurTime)
+            if (scan.UpdateNext > _timing.CurTime)
                 continue;
 
-            con.UpdateNext = _timing.CurTime + con.UpdateRate;
+            if (!TryComp<AlienRockScannedComponent>(scan.Attached, out var rock))
+                throw new Exception($"Entity {scan.Attached} did not have expected {typeof(AlienRockScannedComponent)}");
+
+            scan.UpdateNext = _timing.CurTime + scan.UpdateRate;
 
             var xform1 = Transform(uid);
-            var xform2 = Transform(con.Attached);
+            var xform2 = Transform(scan.Attached);
             if (!_transform.InRange(xform1.Coordinates, xform2.Coordinates, scan.Range))
             {
-                //scanner is too far, disconnect
-                RemCompDeferred(uid, con);
+                RemCompDeferred(uid, scan);
+                RemCompDeferred(scan.Attached, rock);
             }
         }
     }
@@ -108,6 +109,14 @@ public sealed partial class AlienScannerSystem : EntitySystem
             return;
 
         Attach(ent, args.Target.Value, args.User);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnScannerConnectedShutdown(
+        Entity<AlienScannerConnectedComponent> ent,
+        ref ComponentShutdown args)
+    {
+        RemCompDeferred<AlienRockScannedComponent>(ent.Comp.Attached);
     }
 
     [SubscribeLocalEvent]

@@ -10,12 +10,6 @@ namespace Content.Shared._Pinwheel.AlienRock.Equipment;
 public sealed partial class AlienScannerComponent : Component
 {
     /// <summary>
-    /// Maximum range from the artifact, in tiles, before we disconnect
-    /// </summary>
-    [DataField]
-    public int Range = 3;
-
-    /// <summary>
     /// Update rate of the UI controller
     /// </summary>
     [DataField]
@@ -40,6 +34,12 @@ public sealed partial class AlienScannerConnectedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid Attached;
+
+    /// <summary>
+    /// Maximum range from the artifact, in tiles, before we disconnect
+    /// </summary>
+    [DataField]
+    public int Range = 3;
 
     /// <summary>
     /// Update rate of checking range from attached artifact
