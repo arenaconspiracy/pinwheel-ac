@@ -24,13 +24,5 @@ AnalysisComputerCircuitboard: BoardComputerArtifactDestroyer
 NodeScanner: DeviceAlienScanner
 
 CrateArtifactContainer: null
+HandheldArtifactContainer: null
 ArtifactFragment1: null
-
-#AsteroidRockArtifactFragment: AsteroidRock
-#IronRockArtifactFragment: IronRock
-#WallRockArtifactFragment: WallRock
-#WallRockBasaltArtifactFragment: WallRockBasalt
-#WallRockSnowArtifactFragment: WallRockSnow
-#WallRockSandArtifactFragment: WallRockSand
-#WallRockChromiteArtifactFragment: WallRockChromite
-#WallRockAndesiteArtifactFragment: WallRockAndesite
