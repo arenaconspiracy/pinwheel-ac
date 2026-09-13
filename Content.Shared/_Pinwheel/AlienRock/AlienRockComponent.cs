@@ -5,7 +5,8 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._Pinwheel.AlienRock;
 
 /// <summary>
-/// TBA
+/// Fills a container with node entities, and relays events to them.
+/// Anchors & unanchors self based on presence of nodes.
 /// </summary>
 [RegisterComponent]
 public sealed partial class AlienRockComponent : Component

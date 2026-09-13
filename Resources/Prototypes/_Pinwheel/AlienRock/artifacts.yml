@@ -41,6 +41,10 @@
   - type: AlienRock
     nodeTable: !type:NestedSelector
       tableId: AlienRockNodeTable
+    nodes: # needs to be defined here so UnitializedSaveTest doesn't flip out at the serialized state changing
+      ents: []
+      showEnts: False
+      occludes: True
   - type: Damageable
   - type: Injurable
   - type: Reactive
