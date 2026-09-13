@@ -47,6 +47,8 @@
         - LowImpassable
         - BulletImpassable
         hard: False
+  - type: Anchorable
+    flags: [ Anchorable ]
   # audio
   - type: AmbientSound
     enabled: false
