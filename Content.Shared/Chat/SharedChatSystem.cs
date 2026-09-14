@@ -163,7 +163,7 @@ public abstract partial class SharedChatSystem : EntitySystem
 
             output = SanitizeMessageCapital(input[1..].TrimStart());
             if (ev.Channel != null)
-                ProtoMan.TryIndex(ev.Channel, out channel);
+                ProtoMan.Resolve(ev.Channel, out channel);
             return true;
         }
         // Pinwheel-end
@@ -189,7 +189,7 @@ public abstract partial class SharedChatSystem : EntitySystem
             RaiseLocalEvent(source, ev);
 
             if (ev.Channel != null)
-                ProtoMan.TryIndex(ev.Channel, out channel);
+                ProtoMan.Resolve(ev.Channel, out channel);
             return true;
         }
 
