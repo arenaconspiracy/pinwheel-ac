@@ -1,7 +1,6 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
     xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:ui="clr-namespace:Content.Client._Pinwheel.AlienRock.Ui"
     Title="{Loc 'alienrock-console-menu-title'}"
     MinSize="400 350"

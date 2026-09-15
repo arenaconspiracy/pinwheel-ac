@@ -9,11 +9,19 @@ public sealed partial class AlienDestroyerSystem : SharedAlienDestroyerSystem
 {
     [Dependency] private UserInterfaceSystem _ui = default!;
 
+    private void UpdateBuiIfCanGetConsoleUi(Entity<AlienDestroyerConsoleComponent> ent)
+    {
+        if (_ui.TryGetOpenUi<AlienDestroyerConsoleBoundUserInterface>(
+            ent.Owner,
+            AlienDestroyerConsoleUiKey.Key, out var bui))
+            bui.Update(ent);
+    }
+
     [SubscribeLocalEvent]
     private void OnConsoleAfterAutoHandleState(Entity<AlienDestroyerConsoleComponent> ent,
         ref AfterAutoHandleStateEvent args)
     {
-        UpdateBuiIfCanGetAnalysisConsoleUi(ent);
+        UpdateBuiIfCanGetConsoleUi(ent);
     }
 
     [SubscribeLocalEvent]
@@ -23,14 +31,6 @@ public sealed partial class AlienDestroyerSystem : SharedAlienDestroyerSystem
         if (!TryGetConsole(ent, out var console))
             return;
 
-        UpdateBuiIfCanGetAnalysisConsoleUi(console.Value);
-    }
-
-    private void UpdateBuiIfCanGetAnalysisConsoleUi(Entity<AlienDestroyerConsoleComponent> ent)
-    {
-        if (_ui.TryGetOpenUi<AlienDestroyerConsoleBoundUserInterface>(
-            ent.Owner,
-            AlienDestroyerConsoleUiKey.Key, out var bui))
-            bui.Update(ent);
+        UpdateBuiIfCanGetConsoleUi(console.Value);
     }
 }

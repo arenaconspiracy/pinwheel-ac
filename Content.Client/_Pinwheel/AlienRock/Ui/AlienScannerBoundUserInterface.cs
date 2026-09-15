@@ -3,7 +3,7 @@ using Robust.Client.UserInterface;
 namespace Content.Client._Pinwheel.AlienRock.Ui;
 
 /// <summary>
-/// BUI for hand-held xeno artifact scanner,  server-provided UI updates.
+/// BUI for handheld artifact scanner
 /// </summary>
 public sealed class AlienScannerBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {

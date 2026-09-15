@@ -33,7 +33,6 @@ public sealed partial class AlienNodeReactiveComponent : Component
     /// </summary>
     [DataField]
     public FixedPoint2 MinQuantity = 5f;
-
 }
 
 public sealed partial class AlienNodeReactiveSystem : EntitySystem

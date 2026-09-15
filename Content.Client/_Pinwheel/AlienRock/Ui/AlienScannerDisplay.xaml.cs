@@ -73,9 +73,6 @@ public sealed partial class AlienScannerDisplay : FancyWindow
         SetText(true, _nodeNames);
     }
 
-    /// <summary>
-    /// Updates labels with scanned artifact data and list of triggered nodes from component.
-    /// </summary>
     private void SetText(
         bool connected,
         List<string> nodes)

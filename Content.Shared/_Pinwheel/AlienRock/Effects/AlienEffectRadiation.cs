@@ -22,17 +22,13 @@ public sealed partial class AlienEffectRadiationSystem : EntitySystem
             return;
 
         if (!TryComp(ent.Owner, out RadiationSourceComponent? radiation))
-        {
-            Log.Error($"{ToPrettyString(ent)} has no RadiationEmitterComponent");
-            return;
-        }
+            throw new Exception($"{ToPrettyString(ent)} has no RadiationEmitterComponent");
 
         // BAD: magic numbers city
         // WORSE: DIFFERENT MAGIC NUMBERS FROM FUCKING AlienRockSystem
         var intensity = (1 + (nodes.Count / 1.5));
 
         _radiation.SetIntensity((ent.Owner, radiation), (float)intensity);
-
     }
 
     [SubscribeLocalEvent]
