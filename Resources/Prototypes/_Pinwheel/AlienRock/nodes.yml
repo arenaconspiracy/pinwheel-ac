@@ -1,0 +1,95 @@
+- type: entityTable
+  id: AlienRockNodeTable
+  table: !type:GroupSelector
+    children:
+    - id: AlienNodeDamage
+      conditions: &c [ !type:UniqueCondition ]
+    - id: AlienNodeReactiveBlood # TEMP: this is gaudy and sourcing new blood is inconvenient and arguably roleplay nonconductive
+      conditions: *c
+    - id: AlienNodeReactiveWater
+      conditions: *c
+    - id: AlienNodeToolSawing
+      conditions: *c
+    - id: AlienNodeToolAnchoring # TEMP: science gear shouldn't overlap w/ engineering
+      conditions: *c
+    - id: AlienNodeToolPrying # TEMP: ditto
+      conditions: *c
+    - id: AlienNodeToolScrewing # TEMP: ditto
+      conditions: *c
+    # id: AlienNodeToolWelding # you can't weld a radioactive artifact without either getting irradiated or blinding yourself. whoops!
+    # conditions: *c
+
+## names are used in debug views, descriptions are used in the node scanner
+# that said literally all of these need better, more thematic descriptions
+
+- type: entity
+  id: AlienNodeDamage
+  categories: [ HideSpawnMenu ]
+  name: damage
+  description: corporeal damage
+  components:
+  - type: AlienNodeDamage
+
+- type: entity
+  id: AlienNodeReactiveBlood
+  categories: [ HideSpawnMenu ]
+  name: reactive, blood
+  description: blood absorption
+  components:
+  - type: AlienNodeReactive
+    reagents:
+    - AmmoniaBlood
+    - Blood
+    - CopperBlood
+    - InsectBlood
+    - Sap
+    - Slime
+    - SulfurBlood
+    - ZombieBlood
+
+- type: entity
+  id: AlienNodeReactiveWater
+  categories: [ HideSpawnMenu ]
+  name: reactive, water
+  description: water absorption
+  components:
+  - type: AlienNodeReactive
+    reagents:
+    - Water
+    - Holywater # why is it capitalized like this
+
+- type: entity
+  id: AlienNodeToolSawing
+  categories: [ HideSpawnMenu ]
+  name: tool use, sawing
+  description: sawing
+  components:
+  - type: AlienNodeToolUse
+    quality: Sawing
+
+- type: entity
+  id: AlienNodeToolAnchoring
+  categories: [ HideSpawnMenu ]
+  name: tool use, anchoring
+  description: anchoring
+  components:
+  - type: AlienNodeToolUse
+    quality: Anchoring
+
+- type: entity
+  id: AlienNodeToolPrying
+  categories: [ HideSpawnMenu ]
+  name: tool use, prying
+  description: prying 
+  components:
+  - type: AlienNodeToolUse
+    quality: Prying
+
+- type: entity
+  id: AlienNodeToolScrewing
+  categories: [ HideSpawnMenu ]
+  name: tool use, screwing
+  description: screwing
+  components:
+  - type: AlienNodeToolUse
+    quality: Screwing

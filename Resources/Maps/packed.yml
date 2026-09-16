@@ -43526,13 +43526,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 62.5,25.5
-    - type: AnalysisConsole
-      analyzerEntity: 5444
-    - type: DeviceLinkSource
-      linkedPorts:
-        5444:
-        - - ArtifactAnalyzerSender
-          - ArtifactAnalyzerReceiver
 - proto: ComputerAtmosMonitoring
   entities:
   - uid: 15222

@@ -1,0 +1,91 @@
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: BaseAlienRock
+  categories: [ DoNotMap ]
+  name: alien rock
+  description: A malicious rocky structure of ambiguous origin. Standing near it is probably not healthy.
+  components:
+  # visual
+  - type: Sprite
+    sprite: _Pinwheel/AlienRock/artifacts.rsi
+    noRot: true
+    layers:
+    - state: radiation
+  - type: PointLight
+    radius: 6 # set dynamically based on the number of nodes
+    energy: 3
+    falloff: 5
+  - type: InteractionOutline
+  # physics
+  - type: Physics
+    bodyType: Dynamic
+  - type: Transform
+    noRot: true
+    anchored: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        density: 75
+        mask: [ MachineMask ]
+        layer: [ Opaque ]
+  - type: Anchorable
+    flags: [ None ]
+  # function
+  - type: ContainerContainer
+    containers:
+      AlienRockComponent: !type:Container
+  - type: AlienRock
+    nodeTable: !type:NestedSelector
+      tableId: AlienRockNodeTable
+    nodes: # needs to be defined here so UnitializedSaveTest doesn't flip out at the serialized state changing
+      ents: []
+      showEnts: False
+      occludes: True
+  - type: Damageable
+  - type: Injurable
+  - type: Reactive
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockMundane # rock with no passive ill effects, never to be seen during a real round
+  suffix: Debug
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockFire
+  components:
+  - type: Sprite
+    layers:
+    - state: fire
+  - type: PointLight
+    color: "#F80"
+  - type: AlienEffectGasTemperature
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockIce
+  components:
+  - type: Sprite
+    layers:
+    - state: ice
+  - type: PointLight
+    color: "#2Af"
+  - type: AlienEffectGasTemperature
+    heating: false
+
+- type: entity
+  parent: BaseAlienRock
+  id: AlienRockRadiation
+  components:
+  - type: Sprite
+    layers:
+    - state: radiation
+  - type: PointLight
+    color: "#2f2"
+  - type: RadiationSource
+    slope: 0.8 # intensity is dynamic
+  - type: AlienEffectRadiation

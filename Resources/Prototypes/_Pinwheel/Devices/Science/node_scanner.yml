@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseItem
+  id: DeviceAlienScanner
+  name: node scanner
+  description: A handheld device capable of interpreting minute energy vibrations in an alien rock and visualizing them as nodes.
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Xenoarchaeology/node_scanner.rsi
+    state: icon
+  - type: UserInterface
+    interfaces:
+      enum.AlienScannerUiKey.Key:
+        type: AlienScannerBoundUserInterface
+  - type: ActivatableUI
+    key: enum.AlienScannerUiKey.Key
+    singleUser: true
+  - type: AlienScanner # TODO: give this use sounds and shit

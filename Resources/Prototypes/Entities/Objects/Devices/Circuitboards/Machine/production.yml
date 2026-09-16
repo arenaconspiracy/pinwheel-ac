@@ -1,18 +1,4 @@
 ﻿- type: entity
-  id: ArtifactAnalyzerMachineCircuitboard
-  parent: BaseMachineCircuitboard
-  name: artifact analyzer machine board
-  description: A machine printed circuit board for an artifact analyzer.
-  components:
-    - type: Sprite
-      state: science
-    - type: MachineBoard
-      prototype: MachineArtifactAnalyzer
-      stackRequirements:
-        Manipulator: 1
-        Glass: 5
-
-- type: entity
   id: ArtifactCrusherMachineCircuitboard
   parent: BaseMachineCircuitboard
   name: artifact crusher machine board

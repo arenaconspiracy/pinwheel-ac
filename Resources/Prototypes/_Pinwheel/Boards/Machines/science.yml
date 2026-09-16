@@ -1,0 +1,27 @@
+- type: entity
+  abstract: true
+  parent: BaseMachineCircuitboard
+  id: BaseBoardScience
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    stackRequirements: # TODO: this is nonsense
+      Glass: 5
+      Steel: 5
+
+- type: entity
+  parent: BaseBoardScience
+  id: BoardArtifactDestroyer
+  name: artifact destroyer machine board
+  components:
+  - type: MachineBoard
+    prototype: MachineArtifactDestroyer
+
+- type: entity
+  parent: BaseComputerCircuitboard # TODO: Pinwheel needs a BaseBoardComputer sometime down the line
+  id: BoardComputerArtifactDestroyer
+  name: artifact destroyer computer board
+  components:
+  - type: ComputerBoard
+    prototype: ComputerArtifactDestroyer

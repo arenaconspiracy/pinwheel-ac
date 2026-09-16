@@ -69,11 +69,6 @@
   description: signal-port-description-med-scanner-sender
   defaultLinks: [ MedicalScannerReceiver ]
 
-- type: sourcePort
-  id: ArtifactAnalyzerSender
-  name: signal-port-name-artifact-analyzer-sender
-  description: signal-port-description-artifact-analyzer-sender
-  defaultLinks: [ ArtifactAnalyzerReceiver ]
 
 - type: sourcePort
   id: TargetSource

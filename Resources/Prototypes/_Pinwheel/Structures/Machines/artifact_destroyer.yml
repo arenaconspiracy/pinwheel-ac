@@ -1,0 +1,140 @@
+# machines
+- type: entity
+  parent: [ BaseMachinePowered, SmallConstructibleMachine]
+  id: MachineArtifactDestroyer
+  name: artifact destroyer
+  description: After nine years of studies, NanoTrasen scientists came out with this sophisticated energy projector that can rend alien rocks to base particles. You just need to get them there...
+  components:
+  # visual
+  - type: Sprite
+    sprite: Structures/Machines/artifact_analyzer.rsi
+    drawdepth: HighFloorObjects
+    layers:
+    - state: icon
+    - state: unshaded
+      shader: unshaded
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  # physics
+  - type: Physics
+    bodyType: static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        mask:
+        - Impassable
+        - HighImpassable
+        - MidImpassable
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        density: 190
+        mask: [ MachineMask ]
+        layer:
+        - Impassable
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+        hard: False
+  - type: Anchorable
+    flags: [ Anchorable ]
+  # audio
+  - type: AmbientSound
+    enabled: false
+    sound:
+      collection: ArtifactDestroyerAmbient
+  - type: AmbientOnPowered
+  # functional
+  - type: Machine
+    board: BoardArtifactDestroyer
+  - type: ApcPowerReceiver
+    powerLoad: 5000
+  - type: DeviceNetwork
+    deviceNetId: Wired
+    receiveFrequencyId: BasicDevice
+  - type: DeviceList
+  - type: DeviceLinkSink
+    ports: [ ArtifactDestroyerSink ]
+  - type: ItemPlacer
+    whitelist:
+      components:
+      - AlienRock
+  - type: AlienDestroyer
+    destroySound:
+      collection: ArtifactDestroyerDestroy
+  - type: GuideHelp
+    guides: [ Xenoarchaeology ] # TODO: not that
+
+- type: entity
+  parent: BaseComputer
+  id: ComputerArtifactDestroyer
+  name: artifact destroyer console
+  description: A remote interface for the artifact destroyer linked through the device network. Just push the big button when it lights up.
+  components:
+  # visual
+  - type: Sprite
+    layers:
+    - map: [ "computerLayerBody" ]
+      state: computer
+    - map: [ "computerLayerKeyboard" ]
+      state: generic_keyboard
+    - map: [ "computerLayerScreen" ]
+      state: artifact
+      shader: unshaded
+    - map: [ "computerLayerKeys" ]
+      state: tech_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  # UI
+  - type: UserInterface
+    interfaces:
+      enum.AlienDestroyerConsoleUiKey.Key:
+        type: AlienDestroyerConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: ActivatableUI
+    key: enum.AlienDestroyerConsoleUiKey.Key
+  # functional
+  - type: Computer
+    board: BoardComputerArtifactDestroyer
+  - type: DeviceList
+  - type: DeviceNetwork
+    deviceNetId: wired
+  - type: DeviceLinkSource
+    range: 5
+    ports: [ ArtifactDestroyerSource ]
+  - type: AlienDestroyerConsole
+  - type: GuideHelp
+    guides: [ Xenoarchaeology ] # TODO: i seriously need to rewrite the guidebook
+
+# device ports
+- type: sourcePort
+  id: ArtifactDestroyerSource
+  name: signal-port-name-artifact-destroyer-source
+  description: signal-port-desc-artifact-destroyer-source
+  defaultLinks: [ ArtifactDestroyerSink ]
+
+- type: sinkPort
+  id: ArtifactDestroyerSink
+  name: signal-port-name-artifact-destroyer-sink
+  description: signal-port-desc-artifact-destroyer-sink
+
+# sound collections
+- type: soundCollection
+  id: ArtifactDestroyerAmbient
+  files: [ /Audio/Machines/scan_loop.ogg ]
+
+- type: soundCollection
+  id: ArtifactDestroyerDestroy
+  files: [ /Audio/Effects/radpulse11.ogg ] # TODO: placeholder

@@ -1,0 +1,23 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    Title="{Loc 'alienrock-scanner-menu-title'}"
+    MinSize="400 200"
+    SetSize="400 200"
+    Resizable="False"
+    >
+    <BoxContainer Orientation="Vertical" >
+        <controls:StripeBack>
+            <Label Name="ScannerStateLabel" HorizontalAlignment="Center" StyleClasses="Highlight" Margin="4 0 0 4" />
+        </controls:StripeBack>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+            <Label Name="NodesClearedLabel"
+                HorizontalAlignment="Center"
+                HorizontalExpand="True"
+                Text="{Loc 'alienrock-scanner-info-empty'}" />
+            <GridContainer Name="NodesList"
+                HorizontalAlignment="Center"
+                HorizontalExpand="True"
+                Columns="2" Rows="3" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

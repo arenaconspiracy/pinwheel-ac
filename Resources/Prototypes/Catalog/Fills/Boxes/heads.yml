@@ -115,7 +115,7 @@
         children:
         - id: CargoRequestScienceComputerCircuitboard
         - id: RoboticsConsoleCircuitboard
-        - id: AnalysisComputerCircuitboard #Because sometimes round start artis just fucking explode on the pad.
-        - id: ArtifactAnalyzerMachineCircuitboard
         - id: StationAiFixerCircuitboard
+        - id: BoardArtifactDestroyer # Pinwheel
+        - id: BoardComputerArtifactDestroyer # Pinwheel
         - id: BoardLatheScience # Pinwheel

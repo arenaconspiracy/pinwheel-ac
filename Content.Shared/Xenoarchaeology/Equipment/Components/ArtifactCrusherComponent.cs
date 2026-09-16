@@ -66,7 +66,7 @@ public sealed partial class ArtifactCrusherComponent : Component
     /// The material for the fragments.
     /// </summary>
     [DataField]
-    public ProtoId<StackPrototype> FragmentStackProtoId = "ArtifactFragment";
+    public ProtoId<StackPrototype> FragmentStackProtoId = "Steel"; // removed artifact fragments lmao - Pinwheel
 
     /// <summary>
     /// A container used to hold fragments and gibs from crushing.

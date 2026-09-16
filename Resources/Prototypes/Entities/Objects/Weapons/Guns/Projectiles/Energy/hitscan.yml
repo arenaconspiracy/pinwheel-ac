@@ -41,8 +41,8 @@
   id: LaserHitscanBase
   name: basic laser ray
   categories: [ HideSpawnMenu ]
-  components:
-  - type: LaserProjectile
+#  components:
+# - type: LaserProjectile # this was used exclusively by xenoarch for something stupid. i don't know why this needs a separate base - Pinwheel
 
 - type: entity
   parent: LaserHitscanBase

@@ -14,7 +14,7 @@
   - type: RandomSpawner
     rarePrototypes:
     - AnomalyScanner
-    - NodeScanner
+    - DeviceAlienScanner
     - Multitool
     - Igniter
     rareChance: 0.1
@@ -40,7 +40,7 @@
       weight: 90
       children:
       - id: AnomalyScanner
-      - id: NodeScanner
+      - id: DeviceAlienScanner
       - id: NetworkConfigurator
       - id: Wirecutter
       - id: Screwdriver
