@@ -1,0 +1,77 @@
+- type: entity
+  parent: BaseClothingBackpack
+  id: ClothingBackpackClown
+  name: giggles von honkerton
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Backpacks/clown.rsi
+    state: icon
+  - type: Storage
+    storageOpenSound: &ClownOpen
+      collection: BikeHorn
+      params:
+        variation: 0.125
+    storageInsertSound: &ClownInsert
+      collection: FootstepClown
+      params:
+        variation: 0.125
+
+- type: entity
+  parent: BaseClothingBackpack
+  id: ClothingBackpackClownSatchel
+  name: giggles von honkerton Jr.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Satchels/clown.rsi
+    state: icon
+  - type: Storage
+    storageOpenSound: *ClownOpen
+    storageInsertSound: *ClownInsert
+
+- type: entity
+  parent: ClothingBackpackClown
+  id: ClothingBackpackCluwne
+  name: jiggles von jonkerton
+  suffix: unremovable
+  description: This goes on your back and you can't take it off.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Backpacks/cluwne.rsi
+  - type: Unremoveable
+    deleteOnDrop: false
+
+- type: entity
+  parent: BaseClothingBackpack
+  id: ClothingBackpackHydroponics
+  name: hydroponics backpack
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Backpacks/hydroponics.rsi
+    state: icon
+
+- type: entity
+  parent: BaseClothingBackpack
+  id: ClothingBackpackHydroponicsSatchel
+  name: hydroponics satchel
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Satchels/hydroponics.rsi
+    state: icon
+
+- type: entity
+  parent: BaseClothingBackpack
+  id: ClothingBackpackMime
+  name: mime backpack
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Backpacks/mime.rsi
+    state: icon
+
+- type: entity
+  parent: BaseClothingBackpack
+  id: ClothingBackpackMimeSatchel
+  name: mime satchel
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Satchels/mime.rsi
+    state: icon

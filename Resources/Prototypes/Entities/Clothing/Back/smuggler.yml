@@ -29,7 +29,7 @@
     bodyType: Static
 
 - type: entity
-  parent: [ BaseSubfloorAnchorStorageAnchored, ClothingBackpackSatchel, BaseMinorContraband ]
+  parent: [ BaseSubfloorAnchorStorageAnchored, BaseClothingBackpack, BaseMinorContraband ]
   id: ClothingBackpackSatchelSmuggler
   name: smuggler's satchel
   suffix: Empty
@@ -40,7 +40,7 @@
     state: icon
 
 - type: entity
-  parent: [ BaseSubfloorAnchorStorage, ClothingBackpackSatchel, BaseMinorContraband ]
+  parent: [ BaseSubfloorAnchorStorage, BaseClothingBackpack, BaseMinorContraband ]
   id: ClothingBackpackSatchelSmugglerUnanchored
   name: smuggler's satchel
   suffix: Empty, Unanchored
@@ -49,6 +49,8 @@
   - type: Sprite
     sprite: Clothing/Back/Satchels/smuggler.rsi
     state: icon
+  - type: Tag
+    tags: [ Backpack ]
 
 - type: entity
   parent: [ BaseSubfloorAnchorStorageAnchored, BriefcaseSyndie, BaseMinorContraband ]
@@ -65,18 +67,6 @@
             range: 1, 11
 
 - type: entity
-  parent: [ BaseSubfloorAnchorStorageAnchored, ClothingBackpackDuffelClown, BaseMinorContraband ]
-  id: ClothingBackpackDuffelClownSmuggler
-  name: smuggler's clown duffel bag
-  suffix: Smuggler, Do Not Map
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:NestedSelector
-        tableId: RandomCapGunTable
-        rolls: 4, 7
-
-- type: entity
   parent: ClothingBackpackSatchelSmuggler
   id: ClothingBackpackSatchelSmugglerFilled
   suffix: Smuggler, Do Not Map
@@ -88,6 +78,8 @@
     containers:
       storagebase: !type:NestedSelector
         tableId: FillSmugglerBackpack
+  - type: Tag
+    tags: [ Backpack ]
 
 - type: entity
   parent: MarkerBase
