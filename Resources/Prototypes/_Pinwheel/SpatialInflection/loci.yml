@@ -1,0 +1,57 @@
+- type: entity
+  abstract: true
+  id: BaseInflectionLocus
+  categories: [ DoNotMap ]
+  name: spatial inflection locus
+  description: An anomalous bend in the geometry of space in local reality. It might turn inside out any moment now.
+  components:
+  # visual
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: Structures/Specific/anomaly.rsi # TMP
+    state: anom1
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Clickable
+  # physics
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    bodyStatus: InAir
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 50
+        mask: [ FlyingMobMask ]
+        layer: [ FlyingMobLayer ]
+  # audio
+  - type: EmitSoundOnSpawn # TMP - i hate hate hate this component it needs to superdie codebase-wide
+    sound:
+      collection: LocusSpawn
+  # function
+  - type: Damageable
+  - type: InflectionLocus
+
+- type: entity
+  parent: BaseInflectionLocus
+  id: InflectionLocusDebug
+  categories: [ Debug ]
+  components:
+  - type: InflectionLocus
+    criticalMax: 60s
+    criticalMin: 10s
+
+- type: soundCollection
+  id: LocusAmbient
+  files:
+  - /Audio/Ambience/anomaly_drone.ogg # TMP
+
+- type: soundCollection
+  id: LocusSpawn
+  files:
+  - /Audio/Effects/teleport_arrival.ogg # TMP

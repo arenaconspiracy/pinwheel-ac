@@ -1,0 +1,91 @@
+- type: entity
+  abstract: true
+  parent: BaseBullet
+  id: BaseProjectileParticleCluster
+  name: boson cluster
+  categories: [ HideSpawnMenu]
+  components:
+  # visual
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi # i'd mark this as temporary but like. it's a circle.
+    layers:
+    - state: magicm_red
+      shader: unshaded
+  # physics
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape: !type:PhysShapeCircle
+          radius: 0.2
+        hard: false
+        mask: [ Opaque ]
+  # function
+  - type: Ammo # technically only here for the visual aspect
+    muzzleFlash: null
+  - type: Projectile
+    damage:
+      types:
+        Heat: 5
+  - type: InflectionParticle
+    particleType: ParticleDelta
+  - type: TimedDespawn
+    lifetime: 3 # this is a float and not a TimeSpan i'm going to die here
+  - type: Reflective
+    reflective: [ Energy ]
+
+- type: entity
+  parent: BaseProjectileParticleCluster
+  id: ProjectileParticleClusterDelta
+  components:
+  - type: Sprite
+    layers:
+    - state: magicm_red
+      shader: unshaded
+  - type: InflectionParticle
+    particleType: ParticleDelta
+
+- type: entity
+  parent: BaseProjectileParticleCluster
+  id: ProjectileParticleClusterEpsilon
+  components:
+  - type: Sprite
+    layers:
+    - state: magicm_cyan
+      shader: unshaded
+  - type: InflectionParticle
+    particleType: ParticleEpsilon
+
+- type: entity
+  parent: BaseProjectileParticleCluster
+  id: ProjectileParticleClusterSigma
+  components:
+  - type: Sprite
+    layers:
+    - state: magicm
+      shader: unshaded
+  - type: InflectionParticle
+    particleType: ParticleSigma
+
+- type: entity
+  parent: BaseProjectileParticleCluster
+  id: ProjectileParticleClusterZeta
+  components:
+  - type: Sprite
+    layers:
+    - state: magicm_yellow
+      shader: unshaded
+  - type: InflectionParticle
+    particleType: ParticleZeta
+
+- type: Tag
+  id: ParticleDelta
+
+- type: Tag
+  id: ParticleEpsilon
+
+- type: Tag
+  id: ParticleSigma
+
+- type: Tag
+  id: ParticleZeta

@@ -4,7 +4,7 @@
   id: BaseAlienRock
   categories: [ DoNotMap ]
   name: alien rock
-  description: A malicious rocky structure of ambiguous origin. Standing near it is probably not healthy.
+  description: A malicious rocky structure of ambiguous origin. You don't want to be in the same room as this thing.
   components:
   # visual
   - type: Sprite
