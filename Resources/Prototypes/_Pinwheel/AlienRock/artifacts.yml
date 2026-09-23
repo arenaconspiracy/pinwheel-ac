@@ -38,7 +38,7 @@
   - type: AmbientSound
     enabled: true
     range: 7
-    volume: -7
+    volume: -5
     sound:
       collection: AlienRockAmbient
   # function
