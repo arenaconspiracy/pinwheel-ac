@@ -1,10 +1,10 @@
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Pinwheel.Locus;
+namespace Content.Shared._Pinwheel.SpatialInflection;
 
 /// <summary>
-/// Particle projectile used to abate spatial inflection loci <see cref="InflectionLocusComponent"/>
+/// Projectile used to abate spatial inflection loci <see cref="InflectionLocusComponent"/>
 /// </summary>
 [RegisterComponent]
 public sealed partial class InflectionParticleComponent : Component

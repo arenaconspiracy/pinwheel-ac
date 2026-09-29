@@ -3,13 +3,13 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Pinwheel.Locus;
+namespace Content.Shared._Pinwheel.SpatialInflection;
 
 /// <summary>
 /// TBA
 /// </summary>
-[RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class InflectionLocusComponent : Component
 {
     /// <summary>
@@ -68,5 +68,13 @@ public sealed partial class InflectionLocusComponent : Component
     /// Is this locus currently going critical
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public bool Critical = false;
+    public LocusState State = LocusState.Live;
+}
+
+[Serializable, NetSerializable]
+public enum LocusState : byte
+{
+    Live,
+    Abated,
+    Critical,
 }

@@ -43,8 +43,8 @@
   categories: [ Debug ]
   components:
   - type: InflectionLocus
-    criticalMax: 60s
-    criticalMin: 10s
+    criticalMax: 3m
+    criticalMin: 1m
 
 - type: soundCollection
   id: LocusAmbient
