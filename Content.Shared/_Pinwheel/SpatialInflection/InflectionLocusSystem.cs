@@ -1,5 +1,6 @@
 using Content.Shared.Random.Helpers;
 using Content.Shared.Tag;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Serialization;
@@ -11,6 +12,7 @@ namespace Content.Shared._Pinwheel.SpatialInflection;
 /// </summary>
 public sealed partial class InflectionLocusSystem : EntitySystem
 {
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     public override void Update(float frameTime)
@@ -80,6 +82,8 @@ public sealed partial class InflectionLocusSystem : EntitySystem
         }
 
         Dirty(ent); // we probably want to dirty this whether or not it's predicted? but i rather it be predicted
+
+        _audio.PlayPredicted(ent.Comp.SoundSpawn, ent, null);
     }
 
     [SubscribeLocalEvent]

@@ -9,7 +9,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Effects
-    sprite: Structures/Specific/anomaly.rsi # TMP
+    sprite: Structures/Specific/anomaly.rsi # PLACEHOLDER
     state: anom1
   - type: Appearance
   - type: InteractionOutline
@@ -29,13 +29,11 @@
         density: 50
         mask: [ FlyingMobMask ]
         layer: [ FlyingMobLayer ]
-  # audio
-  - type: EmitSoundOnSpawn # TMP - i hate hate hate this component it needs to superdie codebase-wide
-    sound:
-      collection: LocusSpawn
   # function
   - type: Damageable
   - type: InflectionLocus
+    soundSpawn:
+      collection: LocusSpawn
 
 - type: entity
   parent: BaseInflectionLocus
@@ -49,9 +47,9 @@
 - type: soundCollection
   id: LocusAmbient
   files:
-  - /Audio/Ambience/anomaly_drone.ogg # TMP
+  - /Audio/Ambience/anomaly_drone.ogg # PLACEHOLDER
 
 - type: soundCollection
   id: LocusSpawn
   files:
-  - /Audio/Effects/teleport_arrival.ogg # TMP
+  - /Audio/Effects/teleport_arrival.ogg # PLACEHOLDER

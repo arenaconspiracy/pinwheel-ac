@@ -1,4 +1,5 @@
 using Content.Shared.Tag;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -69,6 +70,12 @@ public sealed partial class InflectionLocusComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadOnly)]
     public LocusState State = LocusState.Live;
+
+    /// <summary>
+    /// Sound played at mapinit
+    /// </summary>
+    [DataField, ViewVariables(VVAccess.ReadOnly)]
+    public SoundSpecifier? SoundSpawn;
 }
 
 [Serializable, NetSerializable]
